@@ -2,7 +2,7 @@
 const splideOptions = {
     rewind: true,
     autoplay: true,
-    interval: 50000,
+    interval: 3000,
     lazyLoad: true,
     fixedHeight: '100vh',
     cover: true
