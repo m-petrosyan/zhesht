@@ -2,8 +2,6 @@
 import Carousel from "@/Components/Gallery/Carousel.vue";
 import DateCountDown from "@/Components/Ui/DateCountDown.vue";
 import GuestLayout from "@/Layouts/GuestLayout.vue";
-
-defineOptions({layout: GuestLayout})
 </script>
 
 <template>
