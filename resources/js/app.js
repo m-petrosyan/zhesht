@@ -17,6 +17,18 @@ import VueSplide from '@splidejs/vue-splide';
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/service-worker.js')
+            .then(registration => {
+                console.log('Service Worker registered with scope:', registration.scope);
+            })
+            .catch(err => {
+                console.error('Service Worker registration failed:', err);
+            });
+    });
+}
+
 createInertiaApp({
     title: (title) => `${title ? title + ' - ' + appName : appName}`,
     resolve: (name) =>
