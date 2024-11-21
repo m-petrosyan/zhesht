@@ -30,20 +30,5 @@
             "type": "image/png",
             "form_factor": "narrow"
         }
-    ],
-    "shortcuts": [
-        {
-            "name": "ZheshtEvents",
-            "short_name": "Zhesht",
-            "description": "View upcoming events",
-            "url": "/",
-            "icons": [
-                {
-                    "src": "/images/icons/events-icon.png",
-                    "sizes": "96x96",
-                    "type": "image/png"
-                }
-            ]
-        }
     ]
 }
