@@ -2,7 +2,7 @@
     "name": "ZheshtEvents",
     "short_name": "ZheshtEvents",
     "description": "Metal upcoming events",
-    "start_url": "https://zhesht.mpetrosyan.com/",
+    "start_url": "https://zhesht.mpetrosyan.com",
     "display": "standalone",
     "background_color": "#ffffff",
     "theme_color": "#000000",
