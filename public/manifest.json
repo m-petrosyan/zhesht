@@ -1,7 +1,7 @@
 {
     "name": "ZheshtEvents",
     "short_name": "ZheshtEvents",
-    "start_url": "http://zhesht-events.loc?source=pwa",
+    "start_url": "https://zhesht.mpetrosyan.com?source=pwa",
     "display": "standalone",
     "background_color": "#ffffff",
     "theme_color": "#000000",
