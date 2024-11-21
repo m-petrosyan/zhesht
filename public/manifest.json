@@ -1,7 +1,7 @@
 {
     "name": "ZheshtEvents",
     "short_name": "ZheshtEvents",
-    "start_url": "https://zhesht.mpetrosyan.com?source=pwa",
+    "start_url": "https://zhesht.mpetrosyan.com",
     "display": "standalone",
     "background_color": "#000000",
     "theme_color": "#000000",
@@ -29,6 +29,21 @@
             "sizes": "375x667",
             "type": "image/png",
             "form_factor": "narrow"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "ZheshtEvents",
+            "short_name": "Zhesht",
+            "description": "View upcoming events",
+            "url": "/",
+            "icons": [
+                {
+                    "src": "/images/icons/events-icon.png",
+                    "sizes": "96x96",
+                    "type": "image/png"
+                }
+            ]
         }
     ]
 }
