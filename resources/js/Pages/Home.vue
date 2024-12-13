@@ -22,7 +22,7 @@ import GuestLayout from "@/Layouts/GuestLayout.vue";
                                  class="event-image mx-auto relative w-52 h-52 bg-cover bg-no-repeat bg-center z-10"/>
                         </div>
                         <div class="lg:w-1/2">
-                            <h2 class="text-3xl font-bold sm:mt-14 md:text-start text-center">Marduk</h2>
+                            <h2 class="text-3xl font-bold md:mt-14 md:text-start text-center">Marduk</h2>
                         </div>
                     </div>
                     <div class="lg:w-3/5 w-full flex flex-col gap-y-5">
@@ -61,7 +61,7 @@ import GuestLayout from "@/Layouts/GuestLayout.vue";
                                  class="event-image mx-auto relative w-52 h-52 bg-cover bg-no-repeat bg-center z-10"/>
                         </div>
                         <div class="lg:w-1/2">
-                            <h2 class="text-3xl font-bold sm:mt-14 md:text-start text-center">Boris
+                            <h2 class="text-3xl font-bold md:mt-14 md:text-start text-center">Boris
                                 Grebenshikov</h2>
                         </div>
                     </div>
