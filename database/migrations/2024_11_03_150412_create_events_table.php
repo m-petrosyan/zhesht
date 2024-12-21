@@ -17,7 +17,7 @@ return new class extends Migration {
             $table->text('content');
             $table->date('date_time')->nullable();
             $table->smallInteger('status')->unsigned()->default(EventStatusEnum::ACTIVE->value);
-            $table->integer('slider_order')->default(0)->after('id');
+            $table->smallInteger('slider_order')->unsigned()->default(0);
             $table->timestamps();
         });
     }
