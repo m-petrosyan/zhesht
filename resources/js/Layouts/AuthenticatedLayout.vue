@@ -43,6 +43,11 @@ defineProps({
                                 <NavLink
                                     :href="route('settings.create')"
                                     :active="route().current('settings.create')">
+                                    Gallery
+                                </NavLink>
+                                <NavLink
+                                    :href="route('settings.create')"
+                                    :active="route().current('settings.create')">
                                     Settings
                                 </NavLink>
                             </div>

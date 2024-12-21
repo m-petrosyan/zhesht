@@ -1,10 +1,10 @@
 <template>
     <AuthenticatedLayout title="Dashboard">
-        <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8 text-white">
             <form @submit.prevent="submit" class="space-y-6">
                 <!-- Title Input -->
                 <div>
-                    <label class="block text-sm font-medium text-gray-700">
+                    <label class="block text-sm font-medium ">
                         Event Title
                     </label>
                     <input
@@ -21,7 +21,7 @@
                 <!-- Date and Time -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                        <label class="block text-sm font-medium text-gray-700">
+                        <label class="block text-sm font-medium ">
                             Start Date & Time
                         </label>
                         <input
@@ -31,21 +31,7 @@
                         >
                     </div>
                     <div>
-                        <label class="block text-sm font-medium text-gray-700">
-                            End Date & Time
-                        </label>
-                        <input
-                            v-model="form.end_date"
-                            type="datetime-local"
-                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
-                        >
-                    </div>
-                </div>
-
-                <!-- Location and Venue -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700">
+                        <label class="block text-sm font-medium ">
                             Location
                         </label>
                         <input
@@ -54,33 +40,11 @@
                             class="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
                         >
                     </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700">
-                            Venue
-                        </label>
-                        <input
-                            v-model="form.venue"
-                            type="text"
-                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
-                        >
-                    </div>
                 </div>
 
-                <!-- Max Participants -->
-                <div>
-                    <label class="block text-sm font-medium text-gray-700">
-                        Maximum Participants
-                    </label>
-                    <input
-                        v-model.number="form.max_participants"
-                        type="number"
-                        min="1"
-                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
-                    >
-                </div>
 
                 <div>
-                    <label class="block text-sm font-medium text-gray-700">
+                    <label class="block text-sm font-medium ">
                         Event Banner
                     </label>
                     <input
@@ -92,7 +56,7 @@
                 </div>
 
                 <div>
-                    <label class="block text-sm font-medium text-gray-700">
+                    <label class="block text-sm font-medium ">
                         Event Description
                     </label>
                     <QuillUploadEditor
