@@ -2,10 +2,15 @@
 const splideOptions = {
     rewind: true,
     autoplay: true,
-    interval: 3000,
+    interval: 5000,
     lazyLoad: true,
     fixedHeight: '100vh',
-    cover: true
+    cover: true,
+    breakpoints: {
+        768: {
+            // padding: '4rem'
+        },
+    },
 }
 </script>
 
@@ -13,13 +18,15 @@ const splideOptions = {
     <Splide :options="splideOptions" aria-label="Gallery">
         <SplideSlide>
             <img
-                src="https://optim.tildacdn.net/tild3962-3133-4738-b262-353261306262/-/format/webp/King-Gizzard--the-Li.jpg"
-                alt="Sample 1">
-            <div class="info h-1/3 absolute bottom-0 w-full">
-                <div class="mt-20  text-white text-center">
-                    <h3 class="text-6xl">King Gizzard & the Lizard Wizard</h3>
-                    <p>8, 9, 10 June 2025 — Plovdiv, Bulgaria</p>
-                    <button>Tickers</button>
+                src="/images/marduk.jpg"
+                alt="Marduk">
+            <div class="info flex flex-col justify-center h-3/6 absolute bottom-0 w-full">
+                <div class="text-white text-center">
+                    <h3 class="text-6xl">Marduk</h3>
+                    <p>January 31 — Kazakhstan, Almaty</p>
+                    <p>February 2 — Tbilisi, Georgia</p>
+                    <p>February 4 — Yerevan, Armenia</p>
+                    <button class="text-white border border-white mt-4 py-2 px-5 rounded-3xl text-lg">Tickets</button>
                 </div>
             </div>
         </SplideSlide>
@@ -27,8 +34,8 @@ const splideOptions = {
             <img
                 src="https://optim.tildacdn.net/tild3431-6462-4533-a337-333361383137/-/format/webp/BG.jpg"
                 alt="Sample 1">
-            <div class="info h-1/3 absolute bottom-0 w-full">
-                <div class="mt-10 text-white text-center">
+            <div class="info flex flex-col justify-center h-3/6 absolute bottom-0 w-full">
+                <div class="text-white text-center">
                     <h3 class="text-6xl">King Gizzard & the Lizard Wizard</h3>
                     <p>8, 9, 10 June 2025 — Plovdiv, Bulgaria</p>
                     <button>Tickers</button>

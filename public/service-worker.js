@@ -8,10 +8,22 @@ const urlsToCache = [
 self.addEventListener('install', event => {
     event.waitUntil(
         caches.open(CACHE_NAME).then(cache => {
-            return cache.addAll(urlsToCache);
+            return Promise.all(
+                urlsToCache.map(url => {
+                    return fetch(url).then(response => {
+                        if (!response.ok) {
+                            throw new Error(`Failed to fetch ${url}`);
+                        }
+                        return cache.put(url, response);
+                    }).catch(err => {
+                        console.error('Caching failed:', err);
+                    });
+                })
+            );
         })
     );
 });
+
 
 self.addEventListener('fetch', event => {
     event.respondWith(
