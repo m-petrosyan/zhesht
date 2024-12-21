@@ -1,110 +1,24 @@
-<template>
-    <AuthenticatedLayout title="Dashboard">
-        <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8 text-white">
-            <form @submit.prevent="submit" class="space-y-6">
-                <!-- Title Input -->
-                <div>
-                    <label class="block text-sm font-medium ">
-                        Event Title
-                    </label>
-                    <input
-                        v-model="form.title"
-                        type="text"
-                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
-                        :class="{ 'border-red-500': form.errors.title }"
-                    >
-                    <div v-if="form.errors.title" class="text-red-500 text-sm mt-1">
-                        {{ form.errors.title }}
-                    </div>
-                </div>
-
-                <!-- Date and Time -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-sm font-medium ">
-                            Start Date & Time
-                        </label>
-                        <input
-                            v-model="form.start_date"
-                            type="datetime-local"
-                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
-                        >
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium ">
-                            Location
-                        </label>
-                        <input
-                            v-model="form.location"
-                            type="text"
-                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
-                        >
-                    </div>
-                </div>
-
-
-                <div>
-                    <label class="block text-sm font-medium ">
-                        Event Banner
-                    </label>
-                    <input
-                        type="file"
-                        @input="form.banner = $event.target.files[0]"
-                        accept="image/*"
-                        class="mt-1 block w-full"
-                    >
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium ">
-                        Event Description
-                    </label>
-                    <QuillUploadEditor
-                        v-model:content="form.content"
-                        class="h-64"
-                        :error="form.errors.content"
-                    />
-                </div>
-
-                <!-- Submit Button -->
-                <div class="flex justify-end space-x-4">
-                    <button
-                        type="button"
-                        @click="saveDraft"
-                        class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600"
-                        :disabled="form.processing"
-                    >
-                        Save Draft
-                    </button>
-                    <button
-                        type="submit"
-                        class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-                        :disabled="form.processing"
-                    >
-                        Publish Event
-                    </button>
-                </div>
-            </form>
-        </div>
-    </AuthenticatedLayout>
-</template>
-
 <script setup>
 import {useForm} from '@inertiajs/vue3'
 import QuillUploadEditor from "@/Components/Ui/QuillUploadEditor.vue";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
+import {reactive} from "vue";
+import UiInput from "@/Components/Ui/UiInput.vue";
+import InputImage from "@/Components/Ui/InputImage.vue";
+import InputDate from "@/Components/Ui/InputDate.vue";
 
 const form = useForm({
-    title: '',
-    content: '',
-    start_date: '',
-    end_date: '',
-    location: '',
-    venue: '',
-    max_participants: null,
+    title: null,
+    content: null,
+    date_time: null,
+    location: null,
     banner: null,
-    images: [],
-    status: 'draft'
+    newBanner: null,
+})
+
+
+const data = reactive({
+    banner: null,
 })
 
 const saveDraft = () => {
@@ -121,3 +35,58 @@ const submit = () => {
     })
 }
 </script>
+
+<template>
+    <AuthenticatedLayout title="Dashboard">
+        <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8 text-white">
+            <form @submit.prevent="submit">
+                <div class="flex justify-between gap-x-10">
+                    <div class="w-1/2">
+                        <UiInput
+                            v-model="form.title"
+                            label="Title"
+                            :errors="form.errors.title"/>
+                        <UiInput
+                            v-model="form.location"
+                            label="Location"
+                            :errors="form.errors.location"/>
+                        <InputDate
+                            v-model="form.date_time"
+                            label="Event Date & Time"
+                            :errors="form.errors.date_time"/>
+                    </div>
+                    <div class="w-1/2">
+                        <InputImage
+                            :image="form.banner"
+                            v-model:preview="form.newBanner"
+                            v-model:file="data.banner"
+                            placeholder="Click to upload (1680x945)"
+                        />
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium ">
+                        Description
+                    </label>
+                    <QuillUploadEditor
+                        v-model:content="form.content"
+                        class="h-64"
+                        :error="form.errors.content"
+                    />
+                </div>
+
+                <!-- Submit Button -->
+                <div class="flex justify-end space-x-4">
+                    <button
+                        type="submit"
+                        class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+                        :disabled="form.processing"
+                    >
+                        Publish Event
+                    </button>
+                </div>
+            </form>
+        </div>
+    </AuthenticatedLayout>
+</template>
