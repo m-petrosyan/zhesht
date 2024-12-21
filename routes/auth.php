@@ -1,9 +1,9 @@
 <?php
 
-use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\AuthenticatedSessionController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\Dashboard\DashboardController;
-use App\Http\Controllers\SettingController;
+use App\Http\Controllers\Dashboard\SettingController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {

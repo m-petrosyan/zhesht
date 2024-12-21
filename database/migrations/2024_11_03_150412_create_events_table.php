@@ -15,9 +15,9 @@ return new class extends Migration {
             $table->id();
             $table->string('title');
             $table->text('content');
-            $table->date('start_date');
-            $table->time('start_time')->nullable();
+            $table->date('date_time')->nullable();
             $table->smallInteger('status')->unsigned()->default(EventStatusEnum::ACTIVE->value);
+            $table->integer('slider_order')->default(0)->after('id');
             $table->timestamps();
         });
     }
