@@ -36,8 +36,8 @@ defineProps({
                                     Dashboard
                                 </NavLink>
                                 <NavLink
-                                    :href="route('events.create')"
-                                    :active="route().current('events.create')">
+                                    :href="route('event.create')"
+                                    :active="route().current('event.create')">
                                     Event
                                 </NavLink>
                                 <NavLink

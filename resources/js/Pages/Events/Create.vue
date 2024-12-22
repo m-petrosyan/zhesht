@@ -27,7 +27,7 @@ const saveDraft = () => {
 }
 
 const submit = () => {
-    form.post(route('events.store'), {
+    form.post(route('event.store'), {
         preserveScroll: true,
         onSuccess: () => {
             form.reset()

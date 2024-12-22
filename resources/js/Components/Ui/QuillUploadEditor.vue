@@ -18,7 +18,11 @@ const modules = {
                 const formData = new FormData();
                 formData.append('image', file);
 
-                axios.post('/upload-image', formData)
+                axios.post('/upload-image', formData, {
+                    headers: {
+                        'X-CSRF-TOKEN': document.cookie.split('; ').find(row => row.startsWith('XSRF-TOKEN')).split('=')[1]
+                    }
+                })
                     .then(res => {
                         resolve(res.data.url);
                     })

@@ -4,14 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Event\EventCreateRequest;
 use App\Models\Event;
-use App\Models\User;
-use Illuminate\Http\Request;
+use App\Services\EventService;
 use Inertia\Inertia;
 
 class EventController extends Controller
 {
+    protected EventService $eventService;
+
+    public function __construct(EventService $eventService)
+    {
+        $this->eventService = $eventService;
+    }
+
     public function index()
     {
+        dd(1);
         $events = Event::with('media')
             ->latest()
             ->paginate(10)
@@ -38,37 +45,7 @@ class EventController extends Controller
 
     public function store(EventCreateRequest $request)
     {
-        dd($request->validated());
-        $validated = $request->validate([
-            'title' => 'required|max:255',
-            'content' => 'required|array',
-            'content.ops' => 'required|array',
-            'start_date' => 'required|date',
-            'end_date' => 'required|date|after:start_date',
-            'location' => 'required|string|max:255',
-            'venue' => 'required|string|max:255',
-            'max_participants' => 'nullable|integer|min:1',
-            'banner' => 'nullable|image|max:5120',
-            'images.*' => 'nullable|image|max:5120',
-        ]);
-
-        $event = Event::create([
-            ...$validated,
-            'user_id' => auth()->id(),
-            'status' => 'draft',
-        ]);
-
-        if ($request->hasFile('banner')) {
-            $event->addMedia($request->file('banner'))
-                ->toMediaCollection('event_banner');
-        }
-
-        if ($request->hasFile('images')) {
-            foreach ($request->file('images') as $image) {
-                $event->addMedia($image)
-                    ->toMediaCollection('event_images');
-            }
-        }
+        $this->eventService->store($request->validated());
 
         return redirect()->route('events.index')
             ->with('success', 'Event created successfully!');
@@ -93,16 +70,4 @@ class EventController extends Controller
         ]);
     }
 
-    public function upload(Request $request)
-    {
-        $request->validate([
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:5000',
-        ]);
-
-        $user = User::find(1);
-
-        $media = $user->addMedia($request->file('image'))->toMediaCollection('images');
-
-        return response()->json(['url' => $media->getUrl()], 201);
-    }
 }
