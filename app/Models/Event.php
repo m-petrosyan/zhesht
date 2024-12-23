@@ -14,7 +14,6 @@ class Event extends Model
         'status',
     ];
 
-
     protected $casts = ['content' => 'array'];
 
     /*

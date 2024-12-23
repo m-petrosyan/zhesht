@@ -29,6 +29,8 @@ class User extends Authenticatable implements HasMedia
         'password',
     ];
 
+    public const MEDIA_PATH = 'blog';
+
     /**
      * The attributes that should be hidden for serialization.
      *
