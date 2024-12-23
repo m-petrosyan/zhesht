@@ -24,6 +24,7 @@ class ImageUploadRequest extends FormRequest
     {
         return [
             'image' => ['required', 'image', 'mimes:jpeg,png,jpg,webp', 'max:5000'],
+            'collection' => ['required', 'string'],
         ];
     }
 }

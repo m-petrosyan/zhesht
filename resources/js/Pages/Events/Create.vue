@@ -16,15 +16,9 @@ const form = useForm({
     newBanner: null,
 })
 
-
 const data = reactive({
     banner: null,
 })
-
-const saveDraft = () => {
-    form.status = 'draft'
-    submit()
-}
 
 const submit = () => {
     form.post(route('event.store'), {
@@ -72,6 +66,7 @@ const submit = () => {
                     <QuillUploadEditor
                         v-model:content="form.content"
                         class="h-64"
+                        collection="event-image"
                         :error="form.errors.content"
                     />
                 </div>

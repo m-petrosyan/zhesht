@@ -1,13 +1,17 @@
-<template>
-    <QuillEditor class="quill-with-upload"
-                 style="min-height: 300px"
-                 :modules="modules" contentType="html"
-                 toolbar="full"/>
-</template>
-
 <script setup>
 import ImageUploader from 'quill-image-uploader';
 import {QuillEditor} from '@vueup/vue-quill'
+
+const props = defineProps({
+    collection: {
+        type: String,
+        required: true,
+    }
+})
+
+axios.defaults.withCredentials = true
+const token = document.head.querySelector('meta[name="csrf-token"]')?.getAttribute('content')
+axios.defaults.headers.common['X-CSRF-TOKEN'] = token
 
 const modules = {
     name: 'imageUploader',
@@ -16,17 +20,12 @@ const modules = {
         upload: file => {
             return new Promise((resolve, reject) => {
                 const formData = new FormData();
+                formData.append('collection', props.collection);
                 formData.append('image', file);
 
-                axios.post('/upload-image', formData, {
-                    headers: {
-                        'X-CSRF-TOKEN': document.cookie.split('; ').find(row => row.startsWith('XSRF-TOKEN')).split('=')[1]
-                    }
-                })
-                    .then(res => {
-                        resolve(res.data.url);
-                    })
-                    .catch(err => {
+                axios.post('/api/upload-image', formData)
+                    .then(res => resolve(res.data.url))
+                    .catch(error => {
                         reject("Upload failed");
                     })
             })
@@ -34,6 +33,14 @@ const modules = {
     },
 }
 </script>
+
+<template>
+    <QuillEditor class="quill-with-upload"
+                 style="min-height: 300px"
+                 :modules="modules" contentType="html"
+                 toolbar="full"/>
+</template>
+
 <style>
 .quill-with-upload {
     .ql-editor {
