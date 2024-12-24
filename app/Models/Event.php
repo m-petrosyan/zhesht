@@ -25,6 +25,17 @@ class Event extends Model implements HasMedia
 
     protected $casts = ['content' => 'array'];
 
+    public function getBannerAttribute(): array
+    {
+        $mediaData = $this->getFirstMedia('banner');
+
+        return [
+            'id' => $mediaData->id,
+            'large' => $mediaData?->getUrl('banner'),
+            'thumb' => $mediaData?->getUrl('thumb'),
+        ];
+    }
+
     /*
      * @return HasMany
      */

@@ -10,6 +10,6 @@ class EventService
 
 
         $event->addMedia($attributes['banner'])
-            ->toMediaCollection('event_banner');
+            ->toMediaCollection('banner');
     }
 }

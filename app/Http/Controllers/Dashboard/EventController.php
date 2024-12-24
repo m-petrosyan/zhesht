@@ -16,6 +16,13 @@ class EventController
         $this->eventService = $eventService;
     }
 
+    public function index()
+    {
+        return Inertia::render('Events/Index', [
+            'events' => Event::all(),
+        ]);
+    }
+
     public function create()
     {
         return Inertia::render('Events/Create');
@@ -25,8 +32,13 @@ class EventController
     {
         $this->eventService->store($request->validated());
 
-//        return redirect()->route('events.index')
-//            ->with('success', 'Event created successfully!');
+        return redirect()->route('events.index')
+            ->with('success', 'Event created successfully!');
+    }
+
+    public function show(Event $event)
+    {
+        dd($event);
     }
 
     public function edit(Event $event)
