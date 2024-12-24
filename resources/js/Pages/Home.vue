@@ -1,11 +1,15 @@
 <script setup>
 import Carousel from "@/Components/Gallery/Carousel.vue";
 import GuestLayout from "@/Layouts/GuestLayout.vue";
+
+defineProps({
+    events: {required: true}
+})
 </script>
 
 <template>
     <GuestLayout>
-        <Carousel/>
+        <Carousel :events/>
         <section class="bg-main lg:px-8 px-6 pt-20 pb-20">
             <div class="flex flex-col gap-y-20 lg:w-3/5 md:w-full mx-auto">
                 <div class="border-b-4 border-black pb-20">

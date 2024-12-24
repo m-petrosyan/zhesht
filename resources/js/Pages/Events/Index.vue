@@ -1,6 +1,7 @@
 <script setup>
 import {router} from "@inertiajs/vue3";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
+import NavLink from "@/Components/NavLink.vue";
 
 defineProps({
     events: {required: true}
@@ -14,15 +15,18 @@ const deleteItem = (id) => {
 <template>
     <AuthenticatedLayout title="Dashboard">
         <div class="flex justify-end">
+            <NavLink :href="route('event.create')">
+                Create
+            </NavLink>
             <!--            <AppButton-->
             <!--                link="event.create"-->
             <!--                text="Create"-->
             <!--                buttonStyle="db-btn"-->
             <!--            />-->
         </div>
-        <section class="mt-5">
+        <section>
             <table class="min-w-full">
-                <thead>
+                <thead class="text-left">
                 <tr>
                     <th>Banner</th>
                     <th>Title</th>

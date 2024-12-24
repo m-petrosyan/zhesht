@@ -33,7 +33,7 @@ const submit = () => {
 
 <template>
     <AuthenticatedLayout title="Dashboard">
-        <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8 text-white">
+        <div class="">
             <ErrorMessages :messages="$page.props.errors"/>
             <form @submit.prevent="submit" enctype="multipart/form-data">
                 <div class="flex justify-between gap-x-10">
