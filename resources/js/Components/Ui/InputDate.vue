@@ -1,5 +1,4 @@
-<script setup>
-import FormErrors from "@/Components/Ui/FormErrors.vue";
+<script setup>import FormErrors from "@/Components/Ui/FormErrors.vue";
 
 const props = defineProps({
 
@@ -23,7 +22,7 @@ const date_time = defineModel({
 
 <template>
     <div>
-        <label class="block text-sm font-medium ">
+        <label class="block  text-sm font-medium ">
             Start Date & Time
         </label>
         <input

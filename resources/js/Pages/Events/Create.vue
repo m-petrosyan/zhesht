@@ -6,6 +6,7 @@ import {reactive} from "vue";
 import UiInput from "@/Components/Ui/UiInput.vue";
 import InputImage from "@/Components/Ui/InputImage.vue";
 import InputDate from "@/Components/Ui/InputDate.vue";
+import ErrorMessages from "@/Components/Ui/ErrorMessages.vue";
 
 const form = useForm({
     title: null,
@@ -33,9 +34,10 @@ const submit = () => {
 <template>
     <AuthenticatedLayout title="Dashboard">
         <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8 text-white">
-            <form @submit.prevent="submit">
+            <ErrorMessages :messages="$page.props.errors"/>
+            <form @submit.prevent="submit" enctype="multipart/form-data">
                 <div class="flex justify-between gap-x-10">
-                    <div class="w-1/2">
+                    <div class="w-1/2 flex flex-col gap-y-2">
                         <UiInput
                             v-model="form.title"
                             label="Title"
@@ -52,7 +54,7 @@ const submit = () => {
                     <div class="w-1/2">
                         <InputImage
                             :image="form.banner"
-                            v-model:preview="form.newBanner"
+                            v-model:preview="form.banner"
                             v-model:file="data.banner"
                             placeholder="Click to upload (1680x945)"
                         />
@@ -71,7 +73,6 @@ const submit = () => {
                     />
                 </div>
 
-                <!-- Submit Button -->
                 <div class="flex justify-end space-x-4">
                     <button
                         type="submit"

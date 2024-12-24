@@ -2,17 +2,19 @@
 
 namespace App\Http\Requests\Event;
 
+use App\Enums\EventStatusEnum;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class EventCreateRequest extends FormRequest
+class EventUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -24,10 +26,11 @@ class EventCreateRequest extends FormRequest
     {
         return [
             'title' => ['required', 'max:255'],
-            'banner' => ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
+            'poster' => ['image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
             'location' => ['required', 'string', 'max:255'],
             'date_time' => ['required', 'date'],
-            'content' => ['required', 'max:65535'],
+            'status' => [Rule::in(EventStatusEnum::values())],
+            'content' => ['required', 'array', 'max:65535'],
         ];
     }
 }

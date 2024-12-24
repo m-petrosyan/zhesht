@@ -32,16 +32,22 @@ const modules = {
         }
     },
 }
+
 </script>
 
 <template>
-    <QuillEditor class="quill-with-upload"
-                 style="min-height: 300px"
-                 :modules="modules" contentType="html"
+    <QuillEditor class="quill-with-upload "
+                 :modules
+                 contentType="html"
                  toolbar="full"/>
 </template>
 
 <style>
+.ql-editor {
+    color: #fff;
+    min-height: 300px;
+}
+
 .quill-with-upload {
     .ql-editor {
         .ql-align-center img {

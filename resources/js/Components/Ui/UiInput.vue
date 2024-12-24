@@ -30,7 +30,7 @@ const updateValue = (event) => {
 
 <template>
     <div class="flex flex-col w-full">
-        <label v-if="label">{{ label }}</label>
+        <label v-if="label" class="block text-sm font-medium ">{{ label }}</label>
         <input
             class="w-full h-full rounded-md"
             :placeholder="placeholder"

@@ -2,8 +2,8 @@
 
 use App\Http\Controllers\AuthenticatedSessionController;
 use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Dashboard\EventController;
 use App\Http\Controllers\Dashboard\SettingController;
-use App\Http\Controllers\EventController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
