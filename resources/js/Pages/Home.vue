@@ -3,7 +3,8 @@ import Carousel from "@/Components/Gallery/Carousel.vue";
 import GuestLayout from "@/Layouts/GuestLayout.vue";
 
 defineProps({
-    events: {required: true}
+    events: {required: true},
+    pastEvents: {required: true},
 })
 </script>
 
@@ -19,28 +20,24 @@ defineProps({
                         and buy tickets to our concerts.
                     </h2>
                 </div>
-                <div class="flex lg:flex-row flex-col sm:gap-x-10 lg:gap-y-0 gap-y-10 lg:w-full sm:w-2/3 mx-auto">
+                <div v-for="item in events" :key="item.id"
+                     class="flex lg:flex-row flex-col sm:gap-x-10 lg:gap-y-0 gap-y-10 lg:w-full sm:w-2/3 mx-auto">
                     <div class="lg:w-3/6 w-full flex flex-col md:flex-row  gap-x-6 lg:gap-x-10">
                         <div class="lg:w-1/2">
-                            <div style="background-image: url('/images/marduk.jpg')"
+                            <!--                            <img :src="item.banner.thumb" :alt="item.title"-->
+                            <!--                                 class="event-image mx-auto relative w-52 h-52 bg-cover bg-no-repeat bg-center z-10"/>-->
+                            <div :style="{ backgroundImage: `url(${item.banner.thumb})` }"
                                  class="event-image mx-auto relative w-52 h-52 bg-cover bg-no-repeat bg-center z-10"/>
                         </div>
                         <div class="lg:w-1/2">
-                            <h2 class="text-3xl font-bold md:mt-14 md:text-start text-center">Marduk in Yerevan</h2>
+                            <h2 class="text-3xl font-bold md:mt-14 md:text-start text-center">{{ item.title }}</h2>
                         </div>
                     </div>
                     <div class="lg:w-3/5 w-full flex flex-col gap-y-5">
                         <div class="text-lg">
-                            <p><b>February 4 - Yerevan, Armenia</b> National Puppet Theatre</p>
+                            <p><b>{{ item.location }}</b></p>
                         </div>
-                        <p>
-                            Zhesht Events is proud to announce the coming of mighty Marduk. The legendary Swedish panzer
-                            division will land on Armenian soil on a cold winter day of February 4th and set it ablaze
-                            with their relentless battle hymns.
-                            Local support TBA.
-                            Get electronic tickets from Ticketon or the very limited (15) quantity of physical presale
-                            tickets from Rocknrolla.
-                        </p>
+                        <p v-html="item.content"/>
                         <div class="flex items-center gap-x-10">
                             <button class="bg-black text-white py-2 px-5 rounded-3xl text-lg">Tickets</button>
                             <!--                            <DateCountDown targetDate="2024-12-01T00:00:00"/>-->

@@ -16,9 +16,8 @@ class CustomPathGenerator implements PathGenerator
 
     public function getPath(Media $media): string
     {
-        return $this->getCustomPath(
-                $media
-            ).DIRECTORY_SEPARATOR.$media->model_id.DIRECTORY_SEPARATOR.$media->id.DIRECTORY_SEPARATOR;
+        return $this->getCustomPath($media)
+            .DIRECTORY_SEPARATOR.$media->model_id.DIRECTORY_SEPARATOR.$media->id.DIRECTORY_SEPARATOR;
     }
 
     public function getPathForConversions(Media $media): string

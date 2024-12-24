@@ -9,6 +9,9 @@ class HomeController extends Controller
 {
     public function index()
     {
-        return Inertia::render('Home', ['events' => Event::all()]);
+        $events = Event::query()->where('date_time', '>', now())->get();
+        $pastEvents = Event::query()->where('date_time', '<', now())->get();
+
+        return Inertia::render('Home', ['events' => $events, 'pastEvents' => $pastEvents]);
     }
 }
