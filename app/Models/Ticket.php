@@ -10,5 +10,7 @@ class Ticket extends Model
         'title',
         'url',
     ];
+
+    public $timestamps = false;
 }
 

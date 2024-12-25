@@ -31,6 +31,7 @@ class EventUpdateRequest extends FormRequest
             'date_time' => ['required', 'date'],
             'status' => [Rule::in(EventStatusEnum::values())],
             'content' => ['required', 'array', 'max:65535'],
+            'tickets' => ['array'],
         ];
     }
 }

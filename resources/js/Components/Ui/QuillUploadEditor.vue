@@ -36,10 +36,12 @@ const modules = {
 </script>
 
 <template>
-    <QuillEditor class="quill-with-upload "
-                 :modules
-                 contentType="html"
-                 toolbar="full"/>
+    <QuillEditor
+        class="quill-with-upload"
+        :modules
+        contentType="html"
+        toolbar="full"
+    />
 </template>
 
 <style>

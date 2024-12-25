@@ -20,6 +20,8 @@ const form = useForm(
         location: null,
         banner: null,
         newBanner: null,
+        tickets: [{title: 'ticket', url: 'http://zhesht-events.loc/dashboard/event/create'}]
+
     })
 
 const data = reactive({
@@ -59,7 +61,7 @@ const submit = () => {
                     <div class="w-1/2">
                         <InputImage
                             :image="form.banner"
-                            v-model:preview="form.banner.thumb"
+                            v-model:preview="form.banner"
                             v-model:file="data.banner"
                             placeholder="Click to upload (1680x945)"
                         />
