@@ -38,7 +38,9 @@ class EventController
 
     public function show(Event $event)
     {
-        dd($event);
+        return Inertia::render('Events/Create', [
+            'event' => $event,
+        ]);
     }
 
     public function edit(Event $event)

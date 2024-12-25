@@ -8,14 +8,19 @@ import InputImage from "@/Components/Ui/InputImage.vue";
 import InputDate from "@/Components/Ui/InputDate.vue";
 import ErrorMessages from "@/Components/Ui/ErrorMessages.vue";
 
-const form = useForm({
-    title: null,
-    content: null,
-    date_time: null,
-    location: null,
-    banner: null,
-    newBanner: null,
+const props = defineProps({
+    event: {type: Object},
 })
+
+const form = useForm(
+    props.event ? {...props.event} : {
+        title: null,
+        content: null,
+        date_time: null,
+        location: null,
+        banner: null,
+        newBanner: null,
+    })
 
 const data = reactive({
     banner: null,
@@ -54,7 +59,7 @@ const submit = () => {
                     <div class="w-1/2">
                         <InputImage
                             :image="form.banner"
-                            v-model:preview="form.banner"
+                            v-model:preview="form.banner.thumb"
                             v-model:file="data.banner"
                             placeholder="Click to upload (1680x945)"
                         />
