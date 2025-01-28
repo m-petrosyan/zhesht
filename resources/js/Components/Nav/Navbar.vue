@@ -3,7 +3,7 @@
 </script>
 
 <template>
-    <div class="w-full">
+    <div class="w-full  relative">
         <div class="absolute flex  top-5 justify-start lg:justify-center w-full z-10 px-8">
             <img src="/images/logo.png" alt="logo"/>
         </div>

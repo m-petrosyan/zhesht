@@ -13,7 +13,7 @@ const openTickets = ref(false);
 
 <template>
     <GuestLayout>
-        <section class="bg-main lg:px-8 px-6 pt-20 pb-20">
+        <section class="bg-main lg:px-8 px-6 pt-20 pb-20 min-h-[800px]">
             <div class="mt-20 flex flex-col gap-y-20 lg:w-7/12 md:w-full mx-auto">
                 <div class="flex lg:flex-row flex-col sm:gap-x-14 lg:gap-y-0 gap-y-10 lg:w-full sm:w-2/3 mx-auto">
                     <div class="w-6/12 h-96 flex flex-col md:flex-row gap-x-6 lg:gap-x-10">
