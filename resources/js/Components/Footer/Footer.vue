@@ -21,7 +21,7 @@ import TelegramIcon from "@/Components/Icons/TelegramIcon.vue";
             </div>
             <div class="flex justify-between mt-20">
                 <div>
-                    <p>© 2024 ZhestEvents</p>
+                    <p>© {{ new Date().getFullYear() }} ZhestEvents</p>
                 </div>
                 <div class="flex gap-x-3">
                     <FacebookIcon/>

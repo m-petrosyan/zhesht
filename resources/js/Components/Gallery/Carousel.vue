@@ -1,4 +1,7 @@
 <script setup>
+import {Link} from "@inertiajs/vue3";
+import {formatDateTime} from "@/Helpers/dateFormatHelper.js";
+
 defineProps({
     events: {required: true}
 })
@@ -6,7 +9,7 @@ defineProps({
 const splideOptions = {
     rewind: true,
     autoplay: true,
-    interval: 5000,
+    interval: 500000,
     lazyLoad: true,
     fixedHeight: '100vh',
     cover: true,
@@ -24,11 +27,14 @@ const splideOptions = {
             <img
                 :src="item.poster.large"
                 :alt="item.title">
-            <div class="info flex flex-col justify-center h-3/6 absolute bottom-0 w-full">
+            <div class="info flex  flex-col justify-center h-4/6 absolute bottom-0 w-full">
                 <div class="text-white text-center">
                     <h3 class="text-6xl">{{ item.title }}</h3>
-                    <p>{{ item.location }}</p>
-                    <!--                    <button class="text-white border border-white mt-4 py-2 px-5 rounded-3xl text-lg">Tickets</button>-->
+                    <p class=" mt-5">{{ formatDateTime(item.date_time, 'D MMMM YYYY ') + item.location }}</p>
+                    <Link :href="route('event.show',item.id)"
+                          class="text-white border border-white inline-block mt-10 py-2 px-5 rounded-3xl text-lg">
+                        Tickets
+                    </Link>
                 </div>
             </div>
         </SplideSlide>

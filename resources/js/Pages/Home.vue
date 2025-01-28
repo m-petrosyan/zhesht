@@ -2,6 +2,7 @@
 import Carousel from "@/Components/Gallery/Carousel.vue";
 import GuestLayout from "@/Layouts/GuestLayout.vue";
 import {Link} from "@inertiajs/vue3";
+import {formatDateTime} from "@/Helpers/dateFormatHelper.js";
 
 defineProps({
     events: {required: true},
@@ -27,8 +28,6 @@ defineProps({
                       class="flex lg:flex-row flex-col sm:gap-x-10 lg:gap-y-0 gap-y-10 lg:w-full sm:w-2/3 mx-auto">
                     <div class="lg:w-3/6 w-full flex flex-col md:flex-row  gap-x-6 lg:gap-x-10">
                         <div class="lg:w-1/2">
-                            <!--                            <img :src="item.banner.thumb" :alt="item.title"-->
-                            <!--                                 class="event-image mx-auto relative w-52 h-52 bg-cover bg-no-repeat bg-center z-10"/>-->
                             <div :style="{ backgroundImage: `url(${item.poster.thumb})` }"
                                  class="event-image mx-auto relative w-52 h-52 bg-cover bg-no-repeat bg-center z-10"/>
                         </div>
@@ -40,6 +39,7 @@ defineProps({
                         <div class="text-lg">
                             <p><b>{{ item.location }}</b></p>
                         </div>
+                        <p><b>{{ formatDateTime(item.date_time, 'D MMMM YYYY') }}</b></p>
                         <p v-html="item.content"/>
                         <div class="flex items-center gap-x-10">
                             <button class="bg-black text-white py-2 px-5 rounded-3xl text-lg">Tickets</button>
@@ -48,7 +48,6 @@ defineProps({
                     </div>
                 </Link>
             </div>
-
         </section>
         <section v-if="pastEvents.length" v-for="item in pastEvents" :key="item.id"
                  class="past bg-past lg:px-8 px-6 pt-20 pb-20">
@@ -71,10 +70,10 @@ defineProps({
                         <div class="text-lg">
                             <p><b>{{ item.location }}</b></p>
                         </div>
+                        <p><b>{{ formatDateTime(item.date_time, 'D MMMM YYYY') }}</b></p>
                         <p v-html="item.content"/>
                         <div class="flex items-center gap-x-10">
                             <button class="bg-black text-white py-2 px-5 rounded-3xl text-lg">Tickets</button>
-                            <!--                            <DateCountDown targetDate="2024-12-01T00:00:00"/>-->
                         </div>
                     </div>
                 </div>

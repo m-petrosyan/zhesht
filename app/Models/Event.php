@@ -22,6 +22,7 @@ class Event extends Model implements HasMedia
 
     protected $appends = [
         'poster',
+        'tickets',
     ];
 
     protected array $dates = ['date_time'];
@@ -45,6 +46,11 @@ class Event extends Model implements HasMedia
     public function tickets(): HasMany
     {
         return $this->hasMany(EventTicket::class);
+    }
+
+    public function getTicketsAttribute()
+    {
+        return $this->tickets()->get();
     }
 
     public function registerMediaConversions(Media $media = null): void
