@@ -16,30 +16,30 @@ import {Link} from "@inertiajs/vue3";
                 <div class="flex">
                     <!-- Logo -->
                     <div class="flex shrink-0 items-center">
-                        <Link :href="route('dashboard')">
+                        <Link :href="route('db.dashboard')">
                             <img src="/images/logo.png" alt="logo"/>
                         </Link>
                     </div>
 
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                         <NavLink
-                            :href="route('dashboard')"
-                            :active="route().current('dashboard')">
+                            :href="route('db.dashboard')"
+                            :active="route().current('db.dashboard')">
                             Dashboard
                         </NavLink>
                         <NavLink
-                            :href="route('event.index')"
-                            :active="route().current('event.index')">
+                            :href="route('db.event.index')"
+                            :active="route().current('db.event.index')">
                             Event
                         </NavLink>
                         <NavLink
-                            :href="route('settings.create')"
-                            :active="route().current('settings.create')">
+                            :href="route('db.settings.create')"
+                            :active="route().current('db.settings.create')">
                             Gallery
                         </NavLink>
                         <NavLink
-                            :href="route('settings.create')"
-                            :active="route().current('settings.create')">
+                            :href="route('db.settings.create')"
+                            :active="route().current('db.settings.create')">
                             Settings
                         </NavLink>
                     </div>
@@ -48,7 +48,7 @@ import {Link} from "@inertiajs/vue3";
                 <div class="hidden sm:ms-6 sm:flex sm:items-center">
                     <div class="relative ms-3">
                         <DropdownLink
-                            :href="route('logout')"
+                            :href="route('db.logout')"
                             method="post"
                             as="button"
                         >
@@ -109,8 +109,8 @@ import {Link} from "@inertiajs/vue3";
         >
             <div class="space-y-1 pb-3 pt-2">
                 <ResponsiveNavLink
-                    :href="route('dashboard')"
-                    :active="route().current('dashboard')"
+                    :href="route('db.dashboard')"
+                    :active="route().current('db.dashboard')"
                 >
                     Dashboard
                 </ResponsiveNavLink>
@@ -133,7 +133,7 @@ import {Link} from "@inertiajs/vue3";
 
                 <div class="mt-3 space-y-1">
                     <ResponsiveNavLink
-                        :href="route('logout')"
+                        :href="route('db.logout')"
                         method="post"
                         as="button"
                     >

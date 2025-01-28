@@ -22,7 +22,7 @@ const splideOptions = {
     <Splide :options="splideOptions" aria-label="Gallery">
         <SplideSlide v-for="item in events" :key="item.id">
             <img
-                :src="item.banner.large"
+                :src="item.poster.large"
                 :alt="item.title">
             <div class="info flex flex-col justify-center h-3/6 absolute bottom-0 w-full">
                 <div class="text-white text-center">

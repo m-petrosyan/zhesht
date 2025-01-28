@@ -21,18 +21,20 @@ class Event extends Model implements HasMedia
     ];
 
     protected $appends = [
-        'banner',
+        'poster',
     ];
+
+    protected array $dates = ['date_time'];
 
     protected $casts = ['content' => 'array'];
 
-    public function getBannerAttribute(): array
+    public function getPosterAttribute(): array
     {
-        $mediaData = $this->getFirstMedia('banner');
+        $mediaData = $this->getFirstMedia('poster');
 
         return [
             'id' => $mediaData->id,
-            'large' => $mediaData?->getUrl('banner'),
+            'large' => $mediaData?->getUrl('large'),
             'thumb' => $mediaData?->getUrl('thumb'),
         ];
     }
@@ -53,7 +55,7 @@ class Event extends Model implements HasMedia
             ->format('webp')
             ->nonQueued();
 
-        $this->addMediaConversion('banner')
+        $this->addMediaConversion('large')
             ->format('webp')
             ->nonQueued();
     }

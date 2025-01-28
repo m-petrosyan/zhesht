@@ -11,7 +11,6 @@ class EventController extends Controller
 
     public function index()
     {
-        dd(1);
         $events = Event::with('media')
             ->latest()
             ->paginate(10)
@@ -23,7 +22,7 @@ class EventController extends Controller
                 'location' => $event->location,
                 'venue' => $event->venue,
                 'status' => $event->status,
-                'banner' => $event->getFirstMediaUrl('event_banner'),
+                'poster' => $event->getFirstMediaUrl('event_poster'),
             ]);
 
         return Inertia::render('Events/Index', [

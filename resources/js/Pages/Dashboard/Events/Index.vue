@@ -8,14 +8,14 @@ defineProps({
 })
 
 const deleteItem = (id) => {
-    router.delete(route('event.destroy', id))
+    router.delete(route('db.event.destroy', id))
 }
 </script>
 
 <template>
     <AuthenticatedLayout title="Dashboard">
         <div class="flex justify-end">
-            <NavLink :href="route('event.create')">
+            <NavLink :href="route('db.event.create')">
                 Create
             </NavLink>
             <!--            <AppButton-->
@@ -28,15 +28,15 @@ const deleteItem = (id) => {
             <table class="min-w-full">
                 <thead class="text-left">
                 <tr>
-                    <th>Banner</th>
+                    <th>Poster</th>
                     <th>Title</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr v-for="item in events" :key="item.id">
                     <td>
-                        <a :href="route('event.show',item.id)">
-                            <img :src="item.banner.thumb" alt="event" height="150" width="150">
+                        <a :href="route('db.event.edit',item.id)">
+                            <img :src="item.poster.thumb" alt="event" height="150" width="150">
                         </a>
                     </td>
                     <td>
@@ -44,17 +44,12 @@ const deleteItem = (id) => {
                     </td>
                     <td>
                         <div class="flex justify-end gap-x-3">
-                            <!--                            <AppButton-->
-                            <!--                                :link="['db.news.edit',item.id]"-->
-                            <!--                                text="Edit"-->
-                            <!--                                buttonStyle="db-btn"-->
-                            <!--                            />-->
-                            <!--                            <AppButton-->
-                            <!--                                @click="deleteItem(item.id)"-->
-                            <!--                                text="Delete"-->
-                            <!--                                class="bg-button-db-red hover:bg-button-db-red-active"-->
-                            <!--                                buttonStyle="db-btn"-->
-                            <!--                            />-->
+                            <NavLink class="text-green-600" :href="route('db.event.edit',item.id)">
+                                Edit
+                            </NavLink>
+                            <button class="text-red-600" @click="deleteItem(item.id)">
+                                Delete
+                            </button>
                         </div>
                     </td>
                 </tr>

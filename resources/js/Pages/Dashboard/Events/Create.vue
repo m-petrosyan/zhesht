@@ -1,35 +1,36 @@
 <script setup>
-import {useForm} from '@inertiajs/vue3'
 import QuillUploadEditor from "@/Components/Ui/QuillUploadEditor.vue";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import {reactive} from "vue";
 import UiInput from "@/Components/Ui/UiInput.vue";
 import InputImage from "@/Components/Ui/InputImage.vue";
 import InputDate from "@/Components/Ui/InputDate.vue";
 import ErrorMessages from "@/Components/Ui/ErrorMessages.vue";
+import useFormHelper from "@/Helpers/formHelper.js";
 
 const props = defineProps({
     event: {type: Object},
 })
 
-const form = useForm(
-    props.event ? {...props.event} : {
-        title: null,
-        content: null,
-        date_time: null,
-        location: null,
-        banner: null,
-        newBanner: null,
-        tickets: [{title: 'ticket', url: 'http://zhesht-events.loc/dashboard/event/create'}]
+const form = useFormHelper(
+    props.event?.id
+        ? {...props.event}
+        : {
+            title: null,
+            content: null,
+            date_time: null,
+            location: null,
+            poster: null,
+            banner: null,
+            tickets: []
+        })
 
-    })
 
-const data = reactive({
-    banner: null,
-})
+const addTicket = () => {
+    form.tickets.push({title: 'ticket', url: 'http://zhesht-events.loc/dashboard/event/create'})
+}
 
 const submit = () => {
-    form.post(route('event.store'), {
+    form.post(route(form.id ? 'db.event.update' : 'db.event.store', form), {
         preserveScroll: true,
         onSuccess: () => {
             form.reset()
@@ -60,9 +61,8 @@ const submit = () => {
                     </div>
                     <div class="w-1/2">
                         <InputImage
-                            :image="form.banner"
-                            v-model:preview="form.banner"
-                            v-model:file="data.banner"
+                            :preview="form.banner"
+                            v-model:file="form.poster"
                             placeholder="Click to upload (1680x945)"
                         />
                     </div>
@@ -78,6 +78,33 @@ const submit = () => {
                         collection="event-image"
                         :error="form.errors.content"
                     />
+                </div>
+
+                <div class="flex flex-col gap-y-2">
+                    <div class="flex justify-between">
+                        <label class="block text-sm font-medium ">
+                            Tickets
+                        </label>
+                        <button
+                            type="button"
+                            @click="addTicket"
+                            class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+                        >
+                            Add Ticket
+                        </button>
+                    </div>
+                    <div class="flex flex-col gap-y-2">
+                        <div v-for="(ticket, index) in form.tickets" :key="index" class="flex gap-x-2">
+                            <UiInput
+                                v-model="ticket.title"
+                                label="Title"
+                                :errors="form.errors.tickets ? form.errors.tickets[index].title : null"/>
+                            <UiInput
+                                v-model="ticket.url"
+                                label="URL"
+                                :errors="form.errors.tickets ? form.errors.tickets[index].url : null"/>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="flex justify-end space-x-4">

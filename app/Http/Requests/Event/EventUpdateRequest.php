@@ -14,7 +14,7 @@ class EventUpdateRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -26,11 +26,11 @@ class EventUpdateRequest extends FormRequest
     {
         return [
             'title' => ['required', 'max:255'],
-            'poster' => ['image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
+            'poster' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
             'location' => ['required', 'string', 'max:255'],
             'date_time' => ['required', 'date'],
             'status' => [Rule::in(EventStatusEnum::values())],
-            'content' => ['required', 'array', 'max:65535'],
+            'content' => ['required', 'max:65535'],
             'tickets' => ['array'],
         ];
     }

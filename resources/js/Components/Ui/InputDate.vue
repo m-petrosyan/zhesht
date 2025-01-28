@@ -1,7 +1,6 @@
 <script setup>import FormErrors from "@/Components/Ui/FormErrors.vue";
 
 const props = defineProps({
-
     label: {
         type: String,
         default: ''
@@ -26,7 +25,8 @@ const date_time = defineModel({
             Start Date & Time
         </label>
         <input
-            v-model="date_time"
+            @change="event => date_time = event.target.value"
+            :value="date_time"
             type="datetime-local"
             class="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
         >
