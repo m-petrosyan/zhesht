@@ -2,11 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Subscribe\SubscribeCreateRequest;
 use App\Models\Subscribe;
-use Illuminate\Http\Request;
+use App\Services\SubscribeService;
 
 class SubscribeController extends Controller
 {
+    protected SubscribeService $subscribeService;
+
+    public function __construct(SubscribeService $subscribeService)
+    {
+        $this->subscribeService = $subscribeService;
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -16,43 +24,11 @@ class SubscribeController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(SubscribeCreateRequest $request): void
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Subscribe $subscribe)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Subscribe $subscribe)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Subscribe $subscribe)
-    {
-        //
+        $this->subscribeService->store($request->validated());
     }
 
     /**

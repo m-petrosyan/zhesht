@@ -1,17 +1,25 @@
 <script setup>
+import {Link} from "@inertiajs/vue3";
 
+const scrollTo = (sectionId) => {
+    const section = document.getElementById(sectionId);
+    if (section) {
+        section.scrollIntoView({behavior: 'smooth', block: 'start'});
+    }
+}
 </script>
 
 <template>
-    <div class="w-full  relative">
-        <div class="absolute flex  top-5 justify-start lg:justify-center w-full z-10 px-8">
-            <img src="/images/logo.png" alt="logo"/>
-        </div>
-        <div class="w-full flex mt-7 justify-end absolute z-10 lg:px-0 px-8">
-            <ul class="hidden md:flex gap-x-5 mr-5 text-2xl text-white font-bold">
-                <li>Upcoming shows</li>
-                <li>Past Shows</li>
-                <li>Contacts</li>
+    <div class="w-full">
+        <div class="w-full flex justify-end absolute z-10 lg:px-0 px-8">
+            <Link :href="route('home')"
+                  class="absolute top-2 left-1/2 transform -translate-x-1/2 z-1 px-8">
+                <img src="/images/logo.png" alt="logo"/>
+            </Link>
+            <ul class="hidden md:flex mt-7 gap-x-5 mr-5 text-xl text-white font-bold">
+                <li class="cursor-pointer" @click="scrollTo('')">Upcoming showss</li>
+                <li class="cursor-pointer" @click="scrollTo('past')">Past Shows</li>
+                <li class="cursor-pointer" @click="scrollTo('footer')">Contacts</li>
             </ul>
             <div class="md:hidden block">
                 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"

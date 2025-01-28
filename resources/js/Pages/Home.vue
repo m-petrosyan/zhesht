@@ -50,6 +50,7 @@ defineProps({
             </div>
         </section>
         <section v-if="pastEvents.length" v-for="item in pastEvents" :key="item.id"
+                 id="past"
                  class="past bg-past lg:px-8 px-6 pt-20 pb-20">
             <div class="flex flex-col gap-y-20 lg:w-3/5 mx-auto">
                 <div class="border-b-2 border-black pb-4">

@@ -4,3 +4,4 @@ events list countdown
 past events
 event create send subscribers email
 event status change resend email
+google analytics
