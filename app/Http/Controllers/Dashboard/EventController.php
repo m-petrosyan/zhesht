@@ -8,6 +8,7 @@ use App\Models\Event;
 use App\Services\EventService;
 use Illuminate\Http\RedirectResponse;
 use Inertia\Inertia;
+use Inertia\Response;
 
 class EventController
 {
@@ -25,12 +26,12 @@ class EventController
         ]);
     }
 
-    public function create()
+    public function create(): Response
     {
         return Inertia::render('Dashboard/Events/Create');
     }
 
-    public function store(EventCreateRequest $request)
+    public function store(EventCreateRequest $request): RedirectResponse
     {
         $this->eventService->store($request->validated());
 
@@ -38,16 +39,10 @@ class EventController
             ->with('success', 'Event created successfully!');
     }
 
-    public function show(Event $event)
-    {
-        return Inertia::render('Dashboard/Events/Create', [
-            'event' => $event,
-        ]);
-    }
 
-    public function edit(Event $event)
+    public function edit(Event $event): Response
     {
-        return Inertia::render('Dashboard/Events/Create', [
+        return Inertia::render('Dashboard/Events/CreateEdit', [
             'event' => [
                 'id' => $event->id,
                 'title' => $event->title,

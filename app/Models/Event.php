@@ -44,7 +44,7 @@ class Event extends Model implements HasMedia
      */
     public function tickets(): HasMany
     {
-        return $this->hasMany(Ticket::class);
+        return $this->hasMany(EventTicket::class);
     }
 
     public function registerMediaConversions(Media $media = null): void

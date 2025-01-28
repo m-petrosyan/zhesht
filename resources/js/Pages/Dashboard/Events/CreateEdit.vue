@@ -26,7 +26,7 @@ const form = useFormHelper(
 
 
 const addTicket = () => {
-    form.tickets.push({title: 'ticket', url: 'http://zhesht-events.loc/dashboard/event/create'})
+    form.tickets.push({title: '', url: ''})
 }
 
 const submit = () => {
@@ -97,11 +97,11 @@ const submit = () => {
                         <div v-for="(ticket, index) in form.tickets" :key="index" class="flex gap-x-2">
                             <UiInput
                                 v-model="ticket.title"
-                                label="Title"
+                                placeholder="Title"
                                 :errors="form.errors.tickets ? form.errors.tickets[index].title : null"/>
                             <UiInput
                                 v-model="ticket.url"
-                                label="URL"
+                                placeholder="URL"
                                 :errors="form.errors.tickets ? form.errors.tickets[index].url : null"/>
                         </div>
                     </div>

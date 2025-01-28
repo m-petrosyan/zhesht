@@ -4,29 +4,24 @@ namespace App\Http\Controllers;
 
 use App\Models\Event;
 use Inertia\Inertia;
+use Inertia\Response;
 
 class EventController extends Controller
 {
 
 
-    public function index()
+    public function index(): Response
     {
-        $events = Event::with('media')
-            ->latest()
-            ->paginate(10)
-            ->through(fn($event) => [
-                'id' => $event->id,
-                'title' => $event->title,
-                'start_date' => $event->start_date->format('Y-m-d H:i'),
-                'end_date' => $event->end_date->format('Y-m-d H:i'),
-                'location' => $event->location,
-                'venue' => $event->venue,
-                'status' => $event->status,
-                'poster' => $event->getFirstMediaUrl('event_poster'),
-            ]);
+        $events = Event::query()->where('date_time', '>', now())->get();
+        $pastEvents = Event::query()->where('date_time', '<', now())->get();
 
-        return Inertia::render('Events/Index', [
-            'events' => $events,
+        return Inertia::render('Home', ['events' => $events, 'pastEvents' => $pastEvents]);
+    }
+
+    public function show(Event $event): Response
+    {
+        return Inertia::render('Events/Event', [
+            'event' => $event,
         ]);
     }
 }

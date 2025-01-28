@@ -1,6 +1,7 @@
 <script setup>
 import Carousel from "@/Components/Gallery/Carousel.vue";
 import GuestLayout from "@/Layouts/GuestLayout.vue";
+import {Link} from "@inertiajs/vue3";
 
 defineProps({
     events: {required: true},
@@ -20,8 +21,10 @@ defineProps({
                         and buy tickets to our concerts.
                     </h2>
                 </div>
-                <div v-for="item in events" :key="item.id"
-                     class="flex lg:flex-row flex-col sm:gap-x-10 lg:gap-y-0 gap-y-10 lg:w-full sm:w-2/3 mx-auto">
+
+                <Link v-for="item in events" :key="item.id"
+                      :href="route('event.show',item.id)"
+                      class="flex lg:flex-row flex-col sm:gap-x-10 lg:gap-y-0 gap-y-10 lg:w-full sm:w-2/3 mx-auto">
                     <div class="lg:w-3/6 w-full flex flex-col md:flex-row  gap-x-6 lg:gap-x-10">
                         <div class="lg:w-1/2">
                             <!--                            <img :src="item.banner.thumb" :alt="item.title"-->
@@ -43,7 +46,7 @@ defineProps({
                             <!--                            <DateCountDown targetDate="2024-12-01T00:00:00"/>-->
                         </div>
                     </div>
-                </div>
+                </Link>
             </div>
 
         </section>

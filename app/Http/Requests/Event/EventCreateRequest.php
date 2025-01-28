@@ -29,6 +29,8 @@ class EventCreateRequest extends FormRequest
             'date_time' => ['required', 'date'],
             'content' => ['required', 'max:65535'],
             'tickets' => ['array'],
+            'tickets.*.title' => ['required', 'max:255'],
+            'tickets.*.url' => ['required', 'url'],
         ];
     }
 }
