@@ -37,6 +37,10 @@ const submit = () => {
         }
     })
 }
+
+const removeTicket = (index) => {
+    form.tickets.splice(index, 1)
+}
 </script>
 
 <template>
@@ -88,7 +92,7 @@ const submit = () => {
                         <button
                             type="button"
                             @click="addTicket"
-                            class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+                            class="px-4 mt-5 py-2 bg-green-500 text-white rounded hover:bg-blue-600"
                         >
                             Add Ticket
                         </button>
@@ -103,6 +107,9 @@ const submit = () => {
                                 v-model="ticket.url"
                                 placeholder="URL"
                                 :errors="form.errors.tickets ? form.errors.tickets[index].url : null"/>
+                            <button type="button" @click="removeTicket(index)"
+                                    class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"> delete
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -110,7 +117,7 @@ const submit = () => {
                 <div class="flex justify-end space-x-4">
                     <button
                         type="submit"
-                        class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+                        class="px-4 mt-10 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
                         :disabled="form.processing"
                     >
                         Publish Event

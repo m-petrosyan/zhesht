@@ -32,6 +32,8 @@ class EventUpdateRequest extends FormRequest
             'status' => [Rule::in(EventStatusEnum::values())],
             'content' => ['required', 'max:65535'],
             'tickets' => ['array'],
+            'tickets.*.title' => ['required', 'max:255'],
+            'tickets.*.url' => ['required', 'url'],
         ];
     }
 }

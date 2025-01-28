@@ -28,7 +28,7 @@ class EventController
 
     public function create(): Response
     {
-        return Inertia::render('Dashboard/Events/Create');
+        return Inertia::render('Dashboard/Events/CreateEdit');
     }
 
     public function store(EventCreateRequest $request): RedirectResponse
