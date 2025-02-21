@@ -24,13 +24,15 @@ class EventCreateRequest extends FormRequest
     {
         return [
             'title' => ['required', 'max:255'],
-            'poster' => ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
-            'location' => ['required', 'string', 'max:255'],
-            'date_time' => ['required', 'date'],
+            'poster' => ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:10000'],
             'content' => ['required', 'max:65535'],
-            'tickets' => ['array'],
-            'tickets.*.title' => ['required', 'max:255'],
-            'tickets.*.url' => ['required', 'url'],
+            'events' => [
+                'location' => ['required', 'string', 'max:255'],
+                'date_time' => ['required', 'date'],
+                'tickets' => ['array'],
+                'tickets.*.title' => ['required', 'max:255'],
+                'tickets.*.url' => ['required', 'url'],
+            ],
         ];
     }
 }

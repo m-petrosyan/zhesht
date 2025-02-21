@@ -33,6 +33,7 @@ class EventController
 
     public function store(EventCreateRequest $request): RedirectResponse
     {
+        dd($request->validated());
         $this->eventService->store($request->validated());
 
         return redirect()->route('db.event.index')

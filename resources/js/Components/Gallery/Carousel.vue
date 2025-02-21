@@ -22,18 +22,20 @@ const splideOptions = {
 </script>
 
 <template>
-    <Splide :options="splideOptions" aria-label="Gallery">
+    <Splide :options="splideOptions" aria-label="Gallery" class="bg-black">
         <SplideSlide v-for="item in events" :key="item.id">
             <img
                 :src="item.poster.large"
                 :alt="item.title">
-            <div class="info flex  flex-col justify-center h-4/6 absolute bottom-0 w-full">
-                <div class="text-white text-center">
-                    <h3 class="text-6xl">{{ item.title }}</h3>
-                    <p class=" mt-5">{{ formatDateTime(item.date_time, 'D MMMM YYYY ') + item.location }}</p>
+            <div class="info flex flex-col justify-end h-4/6 absolute bottom-0 w-full">
+                <div class="text-white text-center pb-10">
                     <Link :href="route('event.show',item.id)"
-                          class="text-white border border-white inline-block mt-10 py-2 px-5 rounded-3xl text-lg">
-                        Tickets
+                          class="">
+                        <h3 class="text-6xl">{{ item.title }}</h3>
+                        <div class="mt-5">
+                            <b class="text-2xl">{{ formatDateTime(item.date_time, 'D MMMM YYYY ') }}</b>
+                            <p class="text-2xl">{{ item.location }}</p>
+                        </div>
                     </Link>
                 </div>
             </div>

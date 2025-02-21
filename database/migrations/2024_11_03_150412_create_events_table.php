@@ -14,8 +14,7 @@ return new class extends Migration {
         Schema::create('events', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->string('title');
-            $table->text('content');
+            $table->foreignId('tour_id')->constrained()->onDelete('cascade');
             $table->string('location')->nullable();
             $table->dateTime('date_time')->nullable();
             $table->smallInteger('status')->unsigned()->default(EventStatusEnum::ACTIVE->value);

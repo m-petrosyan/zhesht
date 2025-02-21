@@ -40,7 +40,7 @@ defineProps({
                             <p><b>{{ item.location }}</b></p>
                         </div>
                         <p><b>{{ formatDateTime(item.date_time, 'D MMMM YYYY') }}</b></p>
-                        <p v-html="item.content"/>
+                        <p class="line-clamp-6" v-html="item.content"/>
                         <div class="flex items-center gap-x-10">
                             <button class="bg-black text-white py-2 px-5 rounded-3xl text-lg">Tickets</button>
                             <!--                            <DateCountDown targetDate="2024-12-01T00:00:00"/>-->
@@ -72,7 +72,7 @@ defineProps({
                             <p><b>{{ item.location }}</b></p>
                         </div>
                         <p><b>{{ formatDateTime(item.date_time, 'D MMMM YYYY') }}</b></p>
-                        <p v-html="item.content"/>
+                        <p class="line-clamp-3" v-html="item.content"/>
                         <div class="flex items-center gap-x-10">
                             <button class="bg-black text-white py-2 px-5 rounded-3xl text-lg">Tickets</button>
                         </div>

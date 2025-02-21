@@ -20,7 +20,10 @@ export default {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
             fontSize: {
-                'lg': '18px'
+                'lg': '18px',
+                '2xl': '20px',
+                '3xl': '24px',
+
             },
             screens: {
                 'sm': '480px',
