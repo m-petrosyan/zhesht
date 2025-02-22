@@ -54,7 +54,7 @@ class TourController
             ],
         ]);
     }
-    
+
     public function reorder(TourReorderRequest $request): void
     {
         $this->tourService->reorder($request->validated());

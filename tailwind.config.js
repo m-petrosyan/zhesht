@@ -19,6 +19,7 @@ export default {
                 green: '#4caf50',
                 'blue-green': '#2a9d8f',
                 orange: '#fb8500',
+                red: '#F44336',
                 'dark-orange': '#FF5722',
                 past: '#e5e5e5'
             },

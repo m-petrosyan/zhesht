@@ -4,7 +4,6 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import UiInput from "@/Components/Ui/UiInput.vue";
 import InputImage from "@/Components/Ui/InputImage.vue";
 import InputDate from "@/Components/Ui/InputDate.vue";
-import ErrorMessages from "@/Components/Ui/ErrorMessages.vue";
 import useFormHelper from "@/Helpers/formHelper.js";
 import {ref} from "vue";
 import DeleteIcon from "@/Components/Icons/DeleteIcon.vue";
@@ -41,7 +40,7 @@ const addTicket = () => {
 
 const submit = () => {
     form.post(route(props.tour?.id ? 'db.event.update' : 'db.event.store', form), {
-        preserveScroll: true,
+        preserveScroll: false,
         onSuccess: () => {
             form.reset()
         }
@@ -73,7 +72,6 @@ const setCurrentEvent = (index) => {
 
 <template>
     <AuthenticatedLayout title="Dashboard">
-        <ErrorMessages :messages="$page.props.errors"/>
         <form @submit.prevent="submit" enctype="multipart/form-data">
             <div class="flex gap-x-2 font-black">
                 <div class="flex gap-x-2">

@@ -21,8 +21,7 @@ const updateSorting = () => {
         id: item.id,
         slider_order: index + 1,
     }));
-    console.log(sortedIds)
-    router.post(route("db.tour.reorder"), {sortedIds}, {preserveScroll: true});
+    router.post(route("db.tour.reorder"), {sortedIds}, {preserveScroll: false});
 };
 </script>
 
@@ -48,15 +47,11 @@ const updateSorting = () => {
                     <template v-slot:item="{ element }">
                         <tr class="border-b border-gray-900 cursor-grab">
                             <td class="w-48">
-                                <a :href="route('db.event.edit',element.id)">
-                                    <img :src="element.banner_file.thumb" alt="event" class="h-24">
-                                </a>
+                                <img :src="element.banner_file.thumb" alt="event" class="h-24">
                             </td>
                             <td class="w-32">
-                                <a :href="route('db.event.edit',element.id)">
-                                    <img v-if="element.poster_file?.thumb" :src="element.poster_file?.thumb" alt="event"
-                                         class="h-24">
-                                </a>
+                                <img v-if="element.poster_file?.thumb" :src="element.poster_file?.thumb" alt="event"
+                                     class="h-24">
                             </td>
                             <td>
                                 <p> {{ element.title }}</p>
