@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Requests\Event\EventCreateRequest;
 use App\Http\Requests\Event\EventUpdateRequest;
-use App\Models\Event;
 use App\Models\Tour;
 use App\Services\EventService;
 use Illuminate\Http\RedirectResponse;
@@ -51,9 +50,6 @@ class EventController
                 'banner' => $tour->poster,
                 'images' => $tour->getMedia('event_images')->map->toArray(),
                 'events' => $tour->events->map->toArray(),
-//
-//                'date_time' => \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $event->date_time)->format('Y-m-d\TH:i'),
-//                'status' => $event->status,
             ],
         ]);
     }
@@ -65,8 +61,8 @@ class EventController
         return redirect()->route('db.event.index');
     }
 
-    public function destroy(Event $event): void
+    public function destroy(Tour $tour): void
     {
-        $this->eventService->destroy($event);
+        $this->eventService->destroy($tour);
     }
 }

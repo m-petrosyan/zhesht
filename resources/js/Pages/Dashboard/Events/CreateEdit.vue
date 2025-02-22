@@ -7,6 +7,7 @@ import InputDate from "@/Components/Ui/InputDate.vue";
 import ErrorMessages from "@/Components/Ui/ErrorMessages.vue";
 import useFormHelper from "@/Helpers/formHelper.js";
 import {ref} from "vue";
+import DeleteIcon from "@/Components/Icons/DeleteIcon.vue";
 
 const props = defineProps({
     tour: {type: Object},
@@ -56,6 +57,12 @@ const addEvent = () => {
         tickets: []
     })
     currentEvent.value = form.events.length - 1
+}
+
+const removeEvent = (index) => {
+    console.log(index)
+    form.events.splice(index, 1)
+    currentEvent.value = 0
 }
 
 const setCurrentEvent = (index) => {
@@ -145,7 +152,16 @@ const setCurrentEvent = (index) => {
                 </div>
             </div>
 
-            <div class="flex justify-end space-x-4">
+            <div class="flex justify-between space-x-4">
+                <div>
+                    <button
+                        v-if="currentEvent !== 0"
+                        type="button"
+                        class="px-4 mt-10 py-2 bg-red-500 text-white rounded"
+                        @click="removeEvent(currentEvent)">
+                        <DeleteIcon/>
+                    </button>
+                </div>
                 <button
                     type="submit"
                     class="px-4 mt-10 py-2 bg-dark-orange text-white rounded"
