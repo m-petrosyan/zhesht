@@ -33,20 +33,20 @@ defineProps({
                                  class="event-image mx-auto relative w-52 h-52 bg-cover bg-no-repeat bg-center z-10"/>
                         </div>
                         <div class="lg:w-1/2">
-                            <h2 class="text-3xl font-bold md:mt-14 md:text-start text-center">{{ item.title }}</h2>
+                            <h2 class="text-3xl font-bold md:mt-6 md:text-start text-center">{{ item.title }}</h2>
+                            <template v-for="event in item.events" :key="event.id">
+                                <div class="text-lg">
+                                    <p><b>{{ event.location }}</b></p>
+                                </div>
+                                <p><b>{{ formatDateTime(event.date_time, 'D MMMM YYYY') }}</b></p>
+                            </template>
                         </div>
                     </div>
                     <div class="lg:w-3/5 w-full flex flex-col gap-y-5">
-                        <template v-for="event in item.events" :key="event.id">
-                            <div class="text-lg">
-                                <p><b>{{ event.location }}</b></p>
-                            </div>
-                            <p><b>{{ formatDateTime(event.date_time, 'D MMMM YYYY') }}</b></p>
-                        </template>
+
                         <p class="line-clamp-6" v-html="item.content"/>
                         <div class="flex items-center gap-x-10">
-                            <button class="bg-black text-white py-2 px-5 rounded-3xl text-lg">Tickets</button>
-                            <!--                            <DateCountDown targetDate="2024-12-01T00:00:00"/>-->
+                            <button class="bg-black text-white py-2 px-5 rounded-3xl text-lg">More</button>
                         </div>
                     </div>
                 </Link>
