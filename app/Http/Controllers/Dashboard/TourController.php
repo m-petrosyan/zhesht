@@ -2,27 +2,28 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use App\Http\Requests\Event\EventCreateRequest;
-use App\Http\Requests\Event\EventUpdateRequest;
+use App\Http\Requests\Tour\TourCreateRequest;
+use App\Http\Requests\Tour\TourReorderRequest;
+use App\Http\Requests\Tour\TourUpdateRequest;
 use App\Models\Tour;
-use App\Services\EventService;
+use App\Services\TourService;
 use Illuminate\Http\RedirectResponse;
 use Inertia\Inertia;
 use Inertia\Response;
 
-class EventController
+class TourController
 {
-    protected EventService $eventService;
+    protected TourService $tourService;
 
-    public function __construct(EventService $eventService)
+    public function __construct(TourService $tourService)
     {
-        $this->eventService = $eventService;
+        $this->tourService = $tourService;
     }
 
-    public function index()
+    public function index(): Response
     {
         return Inertia::render('Dashboard/Events/Index', [
-            'tours' => Tour::with('events')->get(),
+            'tours' => Tour::with('events')->orderBy('slider_order')->get(),
         ]);
     }
 
@@ -31,9 +32,9 @@ class EventController
         return Inertia::render('Dashboard/Events/CreateEdit');
     }
 
-    public function store(EventCreateRequest $request): RedirectResponse
+    public function store(TourCreateRequest $request): RedirectResponse
     {
-        $this->eventService->store($request->validated());
+        $this->tourService->store($request->validated());
 
         return redirect()->route('db.event.index')
             ->with('success', 'Event created successfully!');
@@ -49,21 +50,25 @@ class EventController
                 'content' => $tour->content,
                 'banner' => $tour->banner_file,
                 'poster' => $tour->poster_file,
-                'images' => $tour->getMedia('event_images')->map->toArray(),
                 'events' => $tour->events->map->toArray(),
             ],
         ]);
     }
-
-    public function update(EventUpdateRequest $request, Tour $tour): RedirectResponse
+    
+    public function reorder(TourReorderRequest $request): void
     {
-        $this->eventService->update($tour, $request->validated());
+        $this->tourService->reorder($request->validated());
+    }
+
+    public function update(TourUpdateRequest $request, Tour $tour): RedirectResponse
+    {
+        $this->tourService->update($tour, $request->validated());
 
         return redirect()->route('db.event.index');
     }
 
     public function destroy(Tour $tour): void
     {
-        $this->eventService->destroy($tour);
+        $this->tourService->destroy($tour);
     }
 }

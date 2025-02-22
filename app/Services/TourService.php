@@ -5,7 +5,7 @@ namespace App\Services;
 use App\Models\Tour;
 use Illuminate\Support\Facades\DB;
 
-class EventService
+class TourService
 {
     public function store(array $attributes): void
     {
@@ -42,7 +42,7 @@ class EventService
                 $tour->clearMediaCollection('banner_file');
                 $tour->addMedia($attributes['banner_file'])->toMediaCollection('banner_file');
             }
-    
+
             if (isset($attributes['poster_file'])) {
                 $tour->clearMediaCollection('poster_file');
                 $tour->addMedia($attributes['poster_file'])->toMediaCollection('poster_file');
@@ -70,6 +70,14 @@ class EventService
                 }
             }
         });
+    }
+
+    public function reorder(array $attributes): void
+    {
+        foreach ($attributes['sortedIds'] as $data) {
+            Tour::query()->where('id', $data['id'])
+                ->update(['slider_order' => $data['slider_order']]);
+        }
     }
 
     public function destroy(Tour $tour): void

@@ -15,6 +15,7 @@ class Tour extends Model implements HasMedia
     protected $fillable = [
         'title',
         'content',
+        'slider_order',
     ];
 
     protected $appends = [

@@ -4,11 +4,11 @@
 //Route::group(['as' => 'event.'], function () {
 //});
 
-use App\Http\Controllers\EventController;
 use App\Http\Controllers\SubscribeController;
+use App\Http\Controllers\TourController;
 
-Route::get('/', [EventController::class, 'index'])->name('home');
-Route::get('event/{tour}', [EventController::class, 'show'])->name('event.show');
+Route::get('/', [TourController::class, 'index'])->name('home');
+Route::get('event/{tour}', [TourController::class, 'show'])->name('event.show');
 Route::post('subscribe', [SubscribeController::class, 'store'])->name('subscribe');
 
 require __DIR__.'/auth.php';

@@ -6,7 +6,6 @@ import {ref} from "vue";
 import draggable from "vuedraggable";
 import {formatDateTime} from "@/Helpers/dateFormatHelper.js";
 
-
 const props = defineProps({
     tours: {required: true}
 })
@@ -17,10 +16,14 @@ const deleteItem = (id) => {
     router.delete(route('db.event.destroy', id))
 }
 
-const updateSorting = (event) => {
-    // alert()
-    console.log(event)
-}
+const updateSorting = () => {
+    const sortedIds = items.value.map((item, index) => ({
+        id: item.id,
+        slider_order: index + 1,
+    }));
+    console.log(sortedIds)
+    router.post(route("db.tour.reorder"), {sortedIds}, {preserveScroll: true});
+};
 </script>
 
 <template>
@@ -82,7 +85,3 @@ const updateSorting = (event) => {
         </section>
     </AuthenticatedLayout>
 </template>
-
-<style scoped>
-
-</style>

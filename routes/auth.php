@@ -2,8 +2,8 @@
 
 use App\Http\Controllers\AuthenticatedSessionController;
 use App\Http\Controllers\Dashboard\DashboardController;
-use App\Http\Controllers\Dashboard\EventController;
 use App\Http\Controllers\Dashboard\SettingController;
+use App\Http\Controllers\Dashboard\TourController;
 
 
 Route::middleware('guest')->group(function () {
@@ -15,9 +15,11 @@ Route::middleware('guest')->group(function () {
 
 Route::prefix('dashboard')->as('db.')->middleware('auth')->group(function () {
     Route::get('/', DashboardController::class)->name('dashboard');
-    Route::resource('event', EventController::class)->parameters([
+    Route::resource('event', TourController::class)->parameters([
         'event' => 'tour',
     ]);
+    Route::post('tour/order', [TourController::class, 'reorder'])->name('tour.reorder');
+
     Route::get('settings', [SettingController::class, 'create'])->name('settings.create');
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
         ->name('logout');

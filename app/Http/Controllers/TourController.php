@@ -6,15 +6,13 @@ use App\Models\Tour;
 use Inertia\Inertia;
 use Inertia\Response;
 
-class EventController extends Controller
+class TourController extends Controller
 {
-
-
     public function index(): Response
     {
         $tours = Tour::query()->with('events')->whereHas('events', function ($query) {
             $query->where('date_time', '>', now());
-        })->get();
+        })->orderBy('slider_order')->get();
 
         $pastTours = Tour::query()->whereDoesntHave('events', function ($query) {
             $query->where('date_time', '>=', now());
