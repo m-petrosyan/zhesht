@@ -13,13 +13,11 @@ return new class extends Migration {
     {
         Schema::create('events', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('tour_id')->constrained()->onDelete('cascade');
             $table->string('location')->nullable();
             $table->dateTime('date_time')->nullable();
             $table->smallInteger('status')->unsigned()->default(EventStatusEnum::ACTIVE->value);
             $table->smallInteger('slider_order')->unsigned()->default(0);
-            $table->timestamps();
         });
     }
 

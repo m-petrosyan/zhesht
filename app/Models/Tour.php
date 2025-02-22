@@ -4,10 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
-class Tour extends Model
+class Tour extends Model implements HasMedia
 {
+    use InteractsWithMedia;
+
     protected $fillable = [
         'title',
         'content',
@@ -34,10 +38,6 @@ class Tour extends Model
         ];
     }
 
-    public function getTicketsAttribute()
-    {
-        return $this->tickets()->get();
-    }
 
     public function registerMediaConversions(Media $media = null): void
     {

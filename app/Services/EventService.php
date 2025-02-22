@@ -3,35 +3,49 @@
 namespace App\Services;
 
 use App\Models\Event;
+use App\Models\Tour;
 
 class EventService
 {
     public function store(array $attributes): void
     {
-        $event = auth()->user()->events()->create($attributes);
+        $tour = auth()->user()->tours()->create($attributes);
 
-        if (isset($attributes['tickets'])) {
-            $event->tickets()->createMany($attributes['tickets']);
+        foreach ($attributes['events'] as $index => $eventAttributes) {
+            $event = $tour->events()->create($attributes['events'][$index]);
+
+            if (isset($eventAttributes['tickets'])) {
+                $event->tickets()->createMany($eventAttributes['tickets']);
+            }
         }
 
         if (request()->hasFile('poster')) {
-            $event->addMedia($attributes['poster'])
+            $tour->addMedia($attributes['poster'])
                 ->toMediaCollection('poster');
         }
     }
 
-    public function update(Event $event, array $attributes): void
+    public function update(Tour $tour, array $attributes): void
     {
-        $event->update($attributes);
+        $tour->update($attributes);
 
-        if (isset($attributes['tickets'])) {
-            $event->tickets()->delete();
-            $event->tickets()->createMany($attributes['tickets']);
+
+        foreach ($attributes['events'] as $index => $eventAttributes) {
+            $eventAttributes = array_filter($eventAttributes, function ($key) {
+                return $key !== 'tickets';
+            }, ARRAY_FILTER_USE_KEY);
+            $tour->events()->where('id', $eventAttributes['id'])->update($eventAttributes);
+            if (isset($eventAttributes['tickets'])) {
+                $tourEvent = $tour->events()->find($eventAttributes['id']);
+                $tourEvent->tickets()->delete();
+                $tourEvent->tickets()->createMany($eventAttributes['tickets']);
+            }
         }
 
+
         if (isset($attributes['poster'])) {
-            $event->clearMediaCollection('poster');
-            $event->addMedia($attributes['poster'])
+            $tour->clearMediaCollection('poster');
+            $tour->addMedia($attributes['poster'])
                 ->toMediaCollection('poster');
         }
     }

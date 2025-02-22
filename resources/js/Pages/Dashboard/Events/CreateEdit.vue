@@ -33,12 +33,11 @@ const form = useFormHelper(
 
 
 const addTicket = () => {
-    console.log(form.events[currentEvent.value].tickets)
     form.events[currentEvent.value].tickets.push({title: '', url: ''})
 }
 
 const submit = () => {
-    form.post(route(false ? 'db.event.update' : 'db.event.store', form), {
+    form.post(route(props.tour?.id ? 'db.event.update' : 'db.event.store', form), {
         preserveScroll: true,
         onSuccess: () => {
             form.reset()
@@ -58,6 +57,10 @@ const addEvent = () => {
     })
     currentEvent.value = form.events.length - 1
 }
+
+const setCurrentEvent = (index) => {
+    currentEvent.value = index
+}
 </script>
 
 <template>
@@ -65,13 +68,20 @@ const addEvent = () => {
         <div>
             <ErrorMessages :messages="$page.props.errors"/>
             <form @submit.prevent="submit" enctype="multipart/form-data">
-                <button type="button" class="px-4 mt-10 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
-                    {{ form.events[currentEvent].location }}
-                </button>
-                <button type="button" @click="addEvent"
-                        class="px-4 mt-10 py-2 bg-green-500 text-white rounded hover:bg-blue-600">
-                    +
-                </button>
+                <div class="flex gap-x-2">
+                    <div class="flex gap-x-2">
+                        <button @click="setCurrentEvent(index)" v-for="(event,index) in form.events" type="button"
+                                class="px-4 mt-10 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+                                :class="{'bg-yellow-500 hover:bg-yellow-600': currentEvent === index}"
+                        >
+                            {{ event.location?.slice(0, 10) }}
+                        </button>
+                    </div>
+                    <button type="button" @click="addEvent"
+                            class="px-4 mt-10 py-2 bg-green-500 text-white rounded hover:bg-blue-600">
+                        +
+                    </button>
+                </div>
                 <div class="flex justify-between gap-x-10">
                     <div class="w-1/2 flex flex-col gap-y-2">
                         <UiInput

@@ -15,7 +15,9 @@ Route::middleware('guest')->group(function () {
 
 Route::prefix('dashboard')->as('db.')->middleware('auth')->group(function () {
     Route::get('/', DashboardController::class)->name('dashboard');
-    Route::resource('event', EventController::class);
+    Route::resource('event', EventController::class)->parameters([
+        'event' => 'tour',
+    ]);
     Route::get('settings', [SettingController::class, 'create'])->name('settings.create');
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
         ->name('logout');

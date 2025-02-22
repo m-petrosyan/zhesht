@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Requests\Event\EventCreateRequest;
 use App\Http\Requests\Event\EventUpdateRequest;
 use App\Models\Event;
+use App\Models\Tour;
 use App\Services\EventService;
 use Illuminate\Http\RedirectResponse;
 use Inertia\Inertia;
@@ -22,7 +23,7 @@ class EventController
     public function index()
     {
         return Inertia::render('Dashboard/Events/Index', [
-            'events' => Event::all(),
+            'events' => Tour::with('events')->get(),
         ]);
     }
 
@@ -33,7 +34,6 @@ class EventController
 
     public function store(EventCreateRequest $request): RedirectResponse
     {
-        dd($request->validated());
         $this->eventService->store($request->validated());
 
         return redirect()->route('db.event.index')
@@ -41,26 +41,26 @@ class EventController
     }
 
 
-    public function edit(Event $event): Response
+    public function edit(Tour $tour): Response
     {
         return Inertia::render('Dashboard/Events/CreateEdit', [
-            'event' => [
-                'id' => $event->id,
-                'title' => $event->title,
-                'content' => $event->content,
-                'date_time' => \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $event->date_time)->format('Y-m-d\TH:i'),
-                'location' => $event->location,
-                'status' => $event->status,
-                'banner' => $event->poster,
-                'tickets' => $event->tickets,
-                'images' => $event->getMedia('event_images')->map->toArray(),
+            'tour' => [
+                'id' => $tour->id,
+                'title' => $tour->title,
+                'content' => $tour->content,
+                'banner' => $tour->poster,
+                'images' => $tour->getMedia('event_images')->map->toArray(),
+                'events' => $tour->events->map->toArray(),
+//
+//                'date_time' => \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $event->date_time)->format('Y-m-d\TH:i'),
+//                'status' => $event->status,
             ],
         ]);
     }
 
-    public function update(EventUpdateRequest $request, Event $event): RedirectResponse
+    public function update(EventUpdateRequest $request, Tour $tour): RedirectResponse
     {
-        $this->eventService->update($event, $request->validated());
+        $this->eventService->update($tour, $request->validated());
 
         return redirect()->route('db.event.index');
     }

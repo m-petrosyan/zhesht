@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -58,8 +57,8 @@ class User extends Authenticatable implements HasMedia
     /**
      * @return HasMany
      */
-    public function events(): HasMany
+    public function tours(): HasMany
     {
-        return $this->hasMany(Event::class);
+        return $this->hasMany(Tour::class);
     }
 }

@@ -2,14 +2,12 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Spatie\MediaLibrary\HasMedia;
-use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Event extends Model implements HasMedia
+class Event extends Model
 {
-    use InteractsWithMedia;
 
     protected $fillable = [
         'location',
@@ -21,10 +19,16 @@ class Event extends Model implements HasMedia
         'tickets',
     ];
 
+    public $timestamps = false;
+
     protected array $dates = ['date_time'];
 
     protected $casts = ['content' => 'array'];
 
+    public function getTicketsAttribute(): Collection
+    {
+        return $this->tickets()->get();
+    }
 
     /*
      * @return HasMany
