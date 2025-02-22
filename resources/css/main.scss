@@ -6,19 +6,24 @@ input {
     color: black;
 }
 
-button {
-    transition: filter 0.3s ease;
+.dashboard {
+    button, a {
+        transition: filter 0.3s ease;
 
-    &:hover {
-        filter: contrast(1.5);
+        &:hover {
+            filter: contrast(1.5);
+        }
+    }
+
+    .ql-toolbar.ql-snow {
+        background-color: #ffb703;
+    }
+
+    .ql-toolbar.ql-snow, .ql-container.ql-snow {
+        border: 1px solid black !important;
+        border-radius: 0.375rem;
     }
 }
 
-.ql-toolbar.ql-snow {
-    background-color: #ffb703;
-}
 
-.ql-toolbar.ql-snow, .ql-container.ql-snow {
-    border: 1px solid black !important;
-    border-radius: 0.375rem;
-}
+
