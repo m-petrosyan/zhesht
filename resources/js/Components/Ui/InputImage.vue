@@ -1,5 +1,6 @@
 <script setup>
 import {computed, ref} from "vue";
+import {v4 as uuidv4} from 'uuid';
 
 const props = defineProps({
     file: {type: Object, required: true},
@@ -23,15 +24,17 @@ const previewStyle = computed(() => {
         ? {backgroundImage: `url(${imageUrl})`}
         : {backgroundColor: 'rgb(31, 41, 55)'};
 });
+
+const uniqueId = uuidv4();
 </script>
 
 <template>
     <div>
-        <input type="file" hidden accept="image/*" id="preview"
+        <input type="file" hidden accept="image/*" :id="uniqueId"
                @change="changePreview">
         <label
             :class="['flex h-inherit min-h-60 w-inherit items-center justify-center border-dashed border-2 border-black-600-30 cursor-pointer rounded-md bg-no-repeat bg-center rounded-10 mx-auto']"
-            for="preview"
+            :for="uniqueId"
             :style="previewStyle">
             <span v-if="!preview">{{ placeholder }}</span>
         </label>

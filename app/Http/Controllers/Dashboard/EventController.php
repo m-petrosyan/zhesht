@@ -48,6 +48,7 @@ class EventController
                 'title' => $tour->title,
                 'content' => $tour->content,
                 'banner' => $tour->banner_file,
+                'poster' => $tour->poster_file,
                 'images' => $tour->getMedia('event_images')->map->toArray(),
                 'events' => $tour->events->map->toArray(),
             ],

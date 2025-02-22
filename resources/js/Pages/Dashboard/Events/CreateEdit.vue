@@ -20,7 +20,9 @@ const form = useFormHelper(
         ? {...props.tour}
         : {
             banner_file: null,
+            poster_file: null,
             banner: null,
+            poster: null,
             title: null,
             content: null,
             events: [
@@ -105,9 +107,9 @@ const setCurrentEvent = (index) => {
                     </div>
                     <div class="w-1/3">
                         <InputImage
-                            :preview="form.banner"
-                            v-model:file="form.banner_file"
-                            placeholder="Click to upload (1680x945)"
+                            :preview="form.poster"
+                            v-model:file="form.poster_file"
+                            placeholder="Poster"
                         />
                     </div>
                 </div>
@@ -115,7 +117,7 @@ const setCurrentEvent = (index) => {
                     <InputImage
                         :preview="form.banner"
                         v-model:file="form.banner_file"
-                        placeholder="Click to upload (1680x945)"
+                        placeholder="Banner (1680x945)"
                     />
                 </div>
             </div>

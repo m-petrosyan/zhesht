@@ -16,6 +16,10 @@ class EventService
                 $tour->addMedia($attributes['banner_file'])
                     ->toMediaCollection('banner_file');
             }
+            if (request()->hasFile('poster_file')) {
+                $tour->addMedia($attributes['poster_file'])
+                    ->toMediaCollection('poster_file');
+            }
 
             foreach ($attributes['events'] as $eventData) {
                 $event = $tour->events()->create($eventData);
@@ -37,6 +41,11 @@ class EventService
             if (isset($attributes['banner_file'])) {
                 $tour->clearMediaCollection('banner_file');
                 $tour->addMedia($attributes['banner_file'])->toMediaCollection('banner_file');
+            }
+    
+            if (isset($attributes['poster_file'])) {
+                $tour->clearMediaCollection('poster_file');
+                $tour->addMedia($attributes['poster_file'])->toMediaCollection('poster_file');
             }
 
             if (isset($attributes['events'])) {

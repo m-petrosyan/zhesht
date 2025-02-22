@@ -5,6 +5,7 @@ const useFormHelper = (initialValues) => {
     const data = {
         ...initialValues,
         banner_file: null,
+        poster_file: null,
         _method: initialValues.id ? 'PUT' : 'POST'
     };
 
