@@ -154,7 +154,7 @@ const setCurrentEvent = (index) => {
                             placeholder="URL"
                             :errors="form.events[currentEvent]?.errors?.tickets ? form.events[currentEvent]?.errors?.tickets[index].url : null"/>
                         <button type="button" @click="removeTicket(index)"
-                                class="px-4 py-2 bg-red-500 text-white rounded"> delete
+                                class="px-4 py-2 bg-red text-white rounded"> delete
                         </button>
                     </div>
                 </div>

@@ -8,7 +8,7 @@ const props = defineProps({
 <template>
     <div v-if="Object.keys(messages).length" class="pt-6">
         <div v-if="!simple"
-             class="bg-red text-white p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 bg-red text-white text-wrap"
+             class="bg-red text-white p-4 text-sm text-red-800 rounded-lg bg-red-50 bg-red text-white text-wrap"
              role="alert">
             <ul v-for="error in messages " :key="error">
                 <li>{{ error }}</li>

@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Event;
 use App\Models\Tour;
+use App\Repositories\TourRepository;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -11,33 +11,9 @@ class TourController extends Controller
 {
     public function index(): Response
     {
-        $sliderTours = Tour::query()->with('events')->whereHas('events', function ($query) {
-            $query->where('date_time', '>', now());
-        })->orderBy('slider_order')->get();
-
-        $upcomingTours = Tour::query()
-            ->with([
-                'events' => function ($query) {
-                    $query->orderBy('date_time', 'asc');
-                },
-            ])
-            ->whereHas('events', function ($query) {
-                $query->where('date_time', '>', now());
-            })
-            ->addSelect([
-                'nearest_event' => Event::query()->select('date_time')
-                    ->whereColumn('tour_id', 'tours.id')
-                    ->where('date_time', '>', now())
-                    ->orderBy('date_time', 'asc')
-                    ->limit(1),
-            ])
-            ->orderBy('nearest_event', 'asc')
-            ->get();
-
-
-        $pastTours = Tour::query()->whereDoesntHave('events', function ($query) {
-            $query->where('date_time', '>=', now());
-        })->get();
+        $upcomingTours = TourRepository::getUpcomingTours();
+        $pastTours = TourRepository::getPastTours();
+        $sliderTours = TourRepository::getSliderTours();
 
         return Inertia::render(
             'Home',

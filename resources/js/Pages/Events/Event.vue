@@ -34,7 +34,7 @@ const openTickets = ref(false);
                                         >
                                             Tickets
                                         </button>
-                                        <div v-if="openTickets" class="flex flex-col gap-y-2 mt-2">
+                                        <div v-show="openTickets" class="flex flex-col gap-y-2 mt-2">
                                             <a
                                                 v-for="item in event?.tickets"
                                                 class="bg-black text-white py-2 px-5 rounded-3xl text-lg"
