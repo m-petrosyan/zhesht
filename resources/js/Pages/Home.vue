@@ -5,14 +5,15 @@ import {Link} from "@inertiajs/vue3";
 import {formatDateTime} from "@/Helpers/dateFormatHelper.js";
 
 defineProps({
-    tours: {required: true},
+    upcomingTours: {required: true},
+    sliderTours: {required: true},
     pastTours: {required: true},
 })
 </script>
 
 <template>
     <GuestLayout>
-        <Carousel :tours/>
+        <Carousel :sliderTours/>
         <section class="bg-main lg:px-8 px-6 pt-20 pb-20">
             <div class="flex flex-col gap-y-20 lg:w-3/5 md:w-full mx-auto">
                 <div class="border-b-4 border-black pb-20">
@@ -23,7 +24,7 @@ defineProps({
                     </h2>
                 </div>
 
-                <Link v-for="item in tours" :key="item.id"
+                <Link v-for="item in upcomingTours" :key="item.id"
                       :href="route('event.show',item.id)"
                       class="flex lg:flex-row flex-col sm:gap-x-10 lg:gap-y-0 gap-y-10 lg:w-full sm:w-2/3 mx-auto">
                     <div class="lg:w-3/6 w-full flex flex-col md:flex-row  gap-x-6 lg:gap-x-10">

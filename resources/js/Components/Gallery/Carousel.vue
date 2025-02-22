@@ -3,7 +3,7 @@ import {Link} from "@inertiajs/vue3";
 import {formatDateTime} from "@/Helpers/dateFormatHelper.js";
 
 defineProps({
-    tours: {required: true}
+    sliderTours: {required: true}
 })
 
 const splideOptions = {
@@ -23,7 +23,7 @@ const splideOptions = {
 
 <template>
     <Splide :options="splideOptions" aria-label="Gallery" class="bg-black">
-        <SplideSlide v-for="item in tours" :key="item.id">
+        <SplideSlide v-for="item in sliderTours" :key="item.id">
             <img
                 :src="item.banner_file.large"
                 :alt="item.title">
