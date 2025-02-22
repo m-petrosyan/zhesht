@@ -28,7 +28,7 @@ const deleteItem = (id) => {
             <table class="min-w-full">
                 <thead class="text-left">
                 <tr>
-                    <th>Poster</th>
+                    <th>Banner</th>
                     <th>Title</th>
                 </tr>
                 </thead>
@@ -36,7 +36,7 @@ const deleteItem = (id) => {
                 <tr v-for="item in events" :key="item.id">
                     <td>
                         <a :href="route('db.event.edit',item.id)">
-                            <img :src="item.poster.thumb" alt="event" height="150" width="150">
+                            <img :src="item.banner_file.thumb" alt="event" height="150" width="150">
                         </a>
                     </td>
                     <td>

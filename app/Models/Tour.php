@@ -18,7 +18,7 @@ class Tour extends Model implements HasMedia
     ];
 
     protected $appends = [
-        'poster',
+        'banner_file',
     ];
 
     public function events(): HasMany
@@ -27,9 +27,9 @@ class Tour extends Model implements HasMedia
     }
 
 
-    public function getPosterAttribute(): array
+    public function getBannerFileAttribute(): array
     {
-        $mediaData = $this->getFirstMedia('poster');
+        $mediaData = $this->getFirstMedia('banner_file');
 
         return [
             'id' => $mediaData->id,

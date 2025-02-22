@@ -24,7 +24,7 @@ class EventCreateRequest extends FormRequest
     {
         return [
             'title' => ['required', 'max:255'],
-            'poster' => ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:10000'],
+            'banner_file' => ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:10000'],
             'content' => ['required', 'max:65535'],
             'events' => ['required', 'array'],
             'events.*.location' => ['required', 'string'],

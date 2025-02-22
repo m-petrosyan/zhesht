@@ -17,7 +17,7 @@ const openTickets = ref(false);
             <div class="mt-20 lg:w-7/12 md:w-full mx-auto">
                 <h1 class="text-5xl font-bold text-center block">{{ tour.title }}</h1>
                 <div class="lg:w-full mt-4">
-                    <div :style="{ backgroundImage: `url(${tour.poster.large})` }"
+                    <div :style="{ backgroundImage: `url(${tour.banner_file.large})` }"
                          class="event-image w-full h-96 bg-cover bg-no-repeat bg-center z-10  rounded-lg"
                     />
                 </div>

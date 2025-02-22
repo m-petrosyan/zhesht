@@ -19,7 +19,7 @@ const form = useFormHelper(
     props.tour?.id
         ? {...props.tour}
         : {
-            poster: null,
+            banner_file: null,
             banner: null,
             title: null,
             content: null,
@@ -60,9 +60,8 @@ const addEvent = () => {
 }
 
 const removeEvent = (index) => {
-    console.log(index)
     form.events.splice(index, 1)
-    currentEvent.value = 0
+    currentEvent.value = currentEvent.value - 1
 }
 
 const setCurrentEvent = (index) => {
@@ -90,23 +89,32 @@ const setCurrentEvent = (index) => {
                 </button>
             </div>
             <div class="flex justify-between gap-x-10 mt-10">
-                <div class="w-1/2 flex flex-col gap-y-2">
-                    <UiInput
-                        v-model="form.title"
-                        placeholder="Title"
-                        :errors="form.errors.title"/>
-                    <UiInput
-                        v-model="form.events[currentEvent].location"
-                        placeholder="Location"
-                        :errors="form.events[currentEvent]?.errors?.location"/>
-                    <InputDate
-                        v-model="form.events[currentEvent].date_time"
-                        :errors="form.events[currentEvent]?.errors?.date_time"/>
+                <div class="w-1/2 flex gap-x-2">
+                    <div class="w-2/3 flex flex-col gap-y-2">
+                        <UiInput
+                            v-model="form.title"
+                            placeholder="Title"
+                            :errors="form.errors.title"/>
+                        <UiInput
+                            v-model="form.events[currentEvent].location"
+                            placeholder="Location"
+                            :errors="form.events[currentEvent]?.errors?.location"/>
+                        <InputDate
+                            v-model="form.events[currentEvent].date_time"
+                            :errors="form.events[currentEvent]?.errors?.date_time"/>
+                    </div>
+                    <div class="w-1/3">
+                        <InputImage
+                            :preview="form.banner"
+                            v-model:file="form.banner_file"
+                            placeholder="Click to upload (1680x945)"
+                        />
+                    </div>
                 </div>
                 <div class="w-1/2">
                     <InputImage
                         :preview="form.banner"
-                        v-model:file="form.poster"
+                        v-model:file="form.banner_file"
                         placeholder="Click to upload (1680x945)"
                     />
                 </div>

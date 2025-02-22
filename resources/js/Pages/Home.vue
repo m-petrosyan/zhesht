@@ -28,7 +28,7 @@ defineProps({
                       class="flex lg:flex-row flex-col sm:gap-x-10 lg:gap-y-0 gap-y-10 lg:w-full sm:w-2/3 mx-auto">
                     <div class="lg:w-3/6 w-full flex flex-col md:flex-row  gap-x-6 lg:gap-x-10">
                         <div class="lg:w-1/2">
-                            <div :style="{ backgroundImage: `url(${item.poster.thumb})` }"
+                            <div :style="{ backgroundImage: `url(${item.banner_file.thumb})` }"
                                  class="event-image mx-auto relative w-52 h-52 bg-cover bg-no-repeat bg-center z-10"/>
                         </div>
                         <div class="lg:w-1/2">
@@ -62,7 +62,7 @@ defineProps({
                     class="flex lg:flex-row flex-col sm:gap-x-10 lg:gap-y-0 gap-y-10 lg:w-full sm:w-2/3 mx-auto opacity-50">
                     <div class="lg:w-3/6 w-full flex flex-col md:flex-row gap-x-6 lg:gap-x-10">
                         <div class="lg:w-1/2">
-                            <div :style="{ backgroundImage: `url(${item.poster.thumb})` }"
+                            <div :style="{ backgroundImage: `url(${item.banner_file.thumb})` }"
                                  class="event-image mx-auto relative w-52 h-52 bg-cover bg-no-repeat bg-center z-10"/>
                         </div>
                         <div class="lg:w-1/2">

@@ -12,9 +12,9 @@ class EventService
         DB::transaction(function () use ($attributes) {
             $tour = auth()->user()->tours()->create($attributes);
 
-            if (request()->hasFile('poster')) {
-                $tour->addMedia($attributes['poster'])
-                    ->toMediaCollection('poster');
+            if (request()->hasFile('banner_file')) {
+                $tour->addMedia($attributes['banner_file'])
+                    ->toMediaCollection('banner_file');
             }
 
             foreach ($attributes['events'] as $eventData) {
@@ -34,9 +34,9 @@ class EventService
         DB::transaction(function () use ($tour, $attributes) {
             $tour->update($attributes);
 
-            if (isset($attributes['poster'])) {
-                $tour->clearMediaCollection('poster');
-                $tour->addMedia($attributes['poster'])->toMediaCollection('poster');
+            if (isset($attributes['banner_file'])) {
+                $tour->clearMediaCollection('banner_file');
+                $tour->addMedia($attributes['banner_file'])->toMediaCollection('banner_file');
             }
 
             if (isset($attributes['events'])) {

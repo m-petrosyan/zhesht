@@ -24,7 +24,7 @@ class EventUpdateRequest extends FormRequest
     {
         return [
             'title' => ['required', 'max:255'],
-            'poster' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:10000'],
+            'banner_file' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:10000'],
             'content' => ['required', 'max:65535'],
             'events' => ['required', 'array'],
             'events.*.id' => ['required', 'numeric', 'exists:events,id'],
