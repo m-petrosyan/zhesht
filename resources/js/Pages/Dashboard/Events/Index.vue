@@ -2,14 +2,24 @@
 import {router} from "@inertiajs/vue3";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import NavLink from "@/Components/NavLink.vue";
+import {ref} from "vue";
+import draggable from "vuedraggable";
 import {formatDateTime} from "@/Helpers/dateFormatHelper.js";
 
-defineProps({
+
+const props = defineProps({
     tours: {required: true}
 })
 
+const items = ref(props.tours);
+
 const deleteItem = (id) => {
     router.delete(route('db.event.destroy', id))
+}
+
+const updateSorting = (event) => {
+    // alert()
+    console.log(event)
 }
 </script>
 
@@ -32,38 +42,43 @@ const deleteItem = (id) => {
                 </tr>
                 </thead>
                 <tbody>
-                <tr v-for="item in tours" :key="item.id" class="border-b border-gray-900">
-                    <td class="w-48">
-                        <a :href="route('db.event.edit',item.id)">
-                            <img :src="item.banner_file.thumb" alt="event" class="h-24">
-                        </a>
-                    </td>
-                    <td class="w-32">
-                        <a :href="route('db.event.edit',item.id)">
-                            <img v-if="item.poster_file?.thumb" :src="item.poster_file?.thumb" alt="event" class="h-24">
-                        </a>
-                    </td>
-                    <td>
-                        <p> {{ item.title }}</p>
-                    </td>
-                    <td>
-                        <p v-for="event in item.events" :key="event.id">
-                            {{ formatDateTime(event.date_time, 'D MMMM YYYY HH:mm') }}
-                        </p>
-                    </td>
-                    <td>
-                        <div class="flex justify-end align-center gap-x-3 h-20">
-                            <NavLink class="px-4 mt-10 py-2 bg-green text-white rounded"
-                                     :href="route('db.event.edit',item.id)">
-                                Edit
-                            </NavLink>
-                            <button class="px-4 mt-10 bg-dark-orange text-white rounded"
-                                    @click="deleteItem(item.id)">
-                                Delete
-                            </button>
-                        </div>
-                    </td>
-                </tr>
+                <draggable v-model="items" @end="updateSorting">
+                    <template v-slot:item="{ element }">
+                        <tr class="border-b border-gray-900">
+                            <td class="w-48">
+                                <a :href="route('db.event.edit',element.id)">
+                                    <img :src="element.banner_file.thumb" alt="event" class="h-24">
+                                </a>
+                            </td>
+                            <td class="w-32">
+                                <a :href="route('db.event.edit',element.id)">
+                                    <img v-if="element.poster_file?.thumb" :src="element.poster_file?.thumb" alt="event"
+                                         class="h-24">
+                                </a>
+                            </td>
+                            <td>
+                                <p> {{ element.title }}</p>
+                            </td>
+                            <td>
+                                <p v-for="event in element.events" :key="event.id">
+                                    {{ formatDateTime(event.date_time, 'D MMMM YYYY HH:mm') }}
+                                </p>
+                            </td>
+                            <td>
+                                <div class="flex justify-end align-center gap-x-3 h-20">
+                                    <NavLink class="px-4 mt-10 py-2 bg-green text-white rounded"
+                                             :href="route('db.event.edit',element.id)">
+                                        Edit
+                                    </NavLink>
+                                    <button class="px-4 mt-10 bg-dark-orange text-white rounded"
+                                            @click="deleteItem(element.id)">
+                                        Delete
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </template>
+                </draggable>
                 </tbody>
             </table>
         </section>
