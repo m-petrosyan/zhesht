@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Event;
+use App\Models\Tour;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -12,16 +12,21 @@ class EventController extends Controller
 
     public function index(): Response
     {
-        $events = Event::query()->where('date_time', '>', now())->get();
-        $pastEvents = Event::query()->where('date_time', '<', now())->get();
+        $tours = Tour::query()->with('events')->whereHas('events', function ($query) {
+            $query->where('date_time', '>', now());
+        })->get();
 
-        return Inertia::render('Home', ['events' => $events, 'pastEvents' => $pastEvents]);
+        $pastTours = Tour::query()->whereHas('events', function ($query) {
+            $query->where('date_time', '<', now());
+        })->get();
+
+        return Inertia::render('Home', ['tours' => $tours, 'pastTours' => $pastTours]);
     }
 
-    public function show(Event $event): Response
+    public function show(Tour $tour): Response
     {
         return Inertia::render('Events/Event', [
-            'event' => $event,
+            'tour' => $tour->load('events'),
         ]);
     }
 }

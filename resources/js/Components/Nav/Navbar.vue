@@ -1,12 +1,15 @@
 <script setup>
-import {Link} from "@inertiajs/vue3";
+import {Link, usePage} from "@inertiajs/vue3";
+
+const page = usePage();
+const invert = page.url.startsWith('/event/');
 </script>
 
 <template>
     <div class="w-full">
         <div class="absolute left-3 top-3 z-10">
             <Link :href="route('home')">
-                <img src="/images/logo.png" width="130" alt="logo"/>
+                <img :class="{'invert': invert}" src="/images/logo.png" width="130" alt="logo"/>
             </Link>
         </div>
     </div>

@@ -5,14 +5,14 @@ import {Link} from "@inertiajs/vue3";
 import {formatDateTime} from "@/Helpers/dateFormatHelper.js";
 
 defineProps({
-    events: {required: true},
-    pastEvents: {required: true},
+    tours: {required: true},
+    pastTours: {required: true},
 })
 </script>
 
 <template>
     <GuestLayout>
-        <Carousel :events/>
+        <Carousel :tours/>
         <section class="bg-main lg:px-8 px-6 pt-20 pb-20">
             <div class="flex flex-col gap-y-20 lg:w-3/5 md:w-full mx-auto">
                 <div class="border-b-4 border-black pb-20">
@@ -23,7 +23,7 @@ defineProps({
                     </h2>
                 </div>
 
-                <Link v-for="item in events" :key="item.id"
+                <Link v-for="item in tours" :key="item.id"
                       :href="route('event.show',item.id)"
                       class="flex lg:flex-row flex-col sm:gap-x-10 lg:gap-y-0 gap-y-10 lg:w-full sm:w-2/3 mx-auto">
                     <div class="lg:w-3/6 w-full flex flex-col md:flex-row  gap-x-6 lg:gap-x-10">
@@ -36,10 +36,12 @@ defineProps({
                         </div>
                     </div>
                     <div class="lg:w-3/5 w-full flex flex-col gap-y-5">
-                        <div class="text-lg">
-                            <p><b>{{ item.location }}</b></p>
-                        </div>
-                        <p><b>{{ formatDateTime(item.date_time, 'D MMMM YYYY') }}</b></p>
+                        <template v-for="event in item.events" :key="event.id">
+                            <div class="text-lg">
+                                <p><b>{{ event.location }}</b></p>
+                            </div>
+                            <p><b>{{ formatDateTime(event.date_time, 'D MMMM YYYY') }}</b></p>
+                        </template>
                         <p class="line-clamp-6" v-html="item.content"/>
                         <div class="flex items-center gap-x-10">
                             <button class="bg-black text-white py-2 px-5 rounded-3xl text-lg">Tickets</button>
@@ -49,7 +51,7 @@ defineProps({
                 </Link>
             </div>
         </section>
-        <section v-if="pastEvents.length" v-for="item in pastEvents" :key="item.id"
+        <section v-if="pastTours.length" v-for="item in pastTours" :key="item.id"
                  id="past"
                  class="past bg-past lg:px-8 px-6 pt-20 pb-20">
             <div class="flex flex-col gap-y-20 lg:w-3/5 mx-auto">

@@ -14,6 +14,12 @@ export default {
         extend: {
             colors: {
                 main: '#ffc107',
+                yellow: '#ffb703',
+                'dark-blue': '#003049',
+                green: '#4caf50',
+                'light-green': '#2a9d8f',
+                orange: '#fb8500',
+                'dark-orange': '#FF5722',
                 past: '#e5e5e5'
             },
             fontFamily: {

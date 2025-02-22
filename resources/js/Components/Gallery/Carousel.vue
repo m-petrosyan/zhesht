@@ -3,7 +3,7 @@ import {Link} from "@inertiajs/vue3";
 import {formatDateTime} from "@/Helpers/dateFormatHelper.js";
 
 defineProps({
-    events: {required: true}
+    tours: {required: true}
 })
 
 const splideOptions = {
@@ -23,7 +23,7 @@ const splideOptions = {
 
 <template>
     <Splide :options="splideOptions" aria-label="Gallery" class="bg-black">
-        <SplideSlide v-for="item in events" :key="item.id">
+        <SplideSlide v-for="item in tours" :key="item.id">
             <img
                 :src="item.poster.large"
                 :alt="item.title">
@@ -32,9 +32,9 @@ const splideOptions = {
                     <Link :href="route('event.show',item.id)"
                           class="">
                         <h3 class="text-6xl">{{ item.title }}</h3>
-                        <div class="mt-5">
-                            <b class="text-2xl">{{ formatDateTime(item.date_time, 'D MMMM YYYY ') }}</b>
-                            <p class="text-2xl">{{ item.location }}</p>
+                        <div v-for="event in item.events" class="mt-5">
+                            <b class="text-2xl">{{ formatDateTime(event.date_time, 'D MMMM YYYY ') }}</b>
+                            <p class="text-2xl">{{ event.location }}</p>
                         </div>
                     </Link>
                 </div>

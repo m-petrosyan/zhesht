@@ -12,10 +12,9 @@ defineProps({
 <template>
     <Head :title/>
     <div>
-        <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
+        <div class="min-h-screen bg-gray-100 dark:bg-gray-900 pb-10">
             <DashboardNavbar/>
-
-            <main class="max-w-7xl mx-auto dark:bg-gray-800 mt-10 py-5 sm:px-6 lg:px-8 text-white">
+            <main class="max-w-7xl mx-auto dark:bg-gray-800 mt-10 sm:px-6 lg:px-8 text-white pb-5">
                 <slot/>
             </main>
         </div>

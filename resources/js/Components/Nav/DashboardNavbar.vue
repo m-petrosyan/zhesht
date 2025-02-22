@@ -8,7 +8,7 @@ import {Link} from "@inertiajs/vue3";
 
 <template>
     <nav
-        class="border-b border-gray-100 bg-white dark:border-gray-700 dark:bg-gray-800"
+        class="bg-white dark:border-gray-700 dark:bg-gray-800"
     >
         <!-- Primary Navigation Menu -->
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -17,7 +17,7 @@ import {Link} from "@inertiajs/vue3";
                     <!-- Logo -->
                     <div class="flex shrink-0 items-center">
                         <Link :href="route('db.dashboard')">
-                            <img src="/images/logo.png" alt="logo"/>
+                            <img src="/images/logo.png" width="100" alt="logo"/>
                         </Link>
                     </div>
 

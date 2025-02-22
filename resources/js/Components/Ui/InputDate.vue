@@ -22,7 +22,7 @@ const date_time = defineModel({
 <template>
     <div>
         <label class="block  text-sm font-medium ">
-            Start Date & Time
+            {{ label }}
         </label>
         <input
             @change="event => date_time = event.target.value"
