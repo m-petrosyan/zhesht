@@ -43,8 +43,9 @@ class Tour extends Model implements HasMedia
     {
         $mediaData = $this->getFirstMedia('poster_file');
 
+
         return [
-            'id' => $mediaData->id,
+            'id' => $mediaData?->id,
             'large' => $mediaData?->getUrl('large'),
             'thumb' => $mediaData?->getUrl('thumb'),
         ];

@@ -16,7 +16,7 @@ import {Link} from "@inertiajs/vue3";
                 <div class="flex">
                     <!-- Logo -->
                     <div class="flex shrink-0 items-center">
-                        <Link :href="route('db.dashboard')">
+                        <Link :href="route('db.event.index')">
                             <img src="/images/logo.png" width="100" alt="logo"/>
                         </Link>
                     </div>

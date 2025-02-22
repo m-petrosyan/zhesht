@@ -90,8 +90,8 @@ const setCurrentEvent = (index) => {
                     +
                 </button>
             </div>
-            <div class="flex justify-between gap-x-10 mt-10">
-                <div class="w-1/2 flex gap-x-2">
+            <div class="flex justify-between gap-x-5 mt-10">
+                <div class="w-1/2 flex gap-x-5">
                     <div class="w-2/3 flex flex-col gap-y-2">
                         <UiInput
                             v-model="form.title"

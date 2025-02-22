@@ -22,7 +22,7 @@ class EventController
     public function index()
     {
         return Inertia::render('Dashboard/Events/Index', [
-            'events' => Tour::with('events')->get(),
+            'tours' => Tour::with('events')->get(),
         ]);
     }
 
