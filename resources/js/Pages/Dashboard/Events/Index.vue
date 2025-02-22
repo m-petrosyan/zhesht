@@ -32,7 +32,7 @@ const updateSorting = (event) => {
             </NavLink>
         </div>
         <section>
-            <table class="min-w-full">
+            <table class="min-w-full border-separate border-spacing-y-4">
                 <thead class="text-left">
                 <tr class="leading-[2]">
                     <th>Banner</th>
@@ -41,10 +41,9 @@ const updateSorting = (event) => {
                     <th>Dates</th>
                 </tr>
                 </thead>
-                <tbody>
-                <draggable v-model="items" @end="updateSorting">
+                <draggable tag="tbody" v-model="items" @end="updateSorting" c>
                     <template v-slot:item="{ element }">
-                        <tr class="border-b border-gray-900">
+                        <tr class="border-b border-gray-900 cursor-grab">
                             <td class="w-48">
                                 <a :href="route('db.event.edit',element.id)">
                                     <img :src="element.banner_file.thumb" alt="event" class="h-24">
@@ -79,7 +78,6 @@ const updateSorting = (event) => {
                         </tr>
                     </template>
                 </draggable>
-                </tbody>
             </table>
         </section>
     </AuthenticatedLayout>
