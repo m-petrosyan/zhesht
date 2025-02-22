@@ -22,11 +22,11 @@ import {Link} from "@inertiajs/vue3";
                     </div>
 
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                        <NavLink
-                            :href="route('db.dashboard')"
-                            :active="route().current('db.dashboard')">
-                            Dashboard
-                        </NavLink>
+                        <!--                        <NavLink-->
+                        <!--                            :href="route('db.dashboard')"-->
+                        <!--                            :active="route().current('db.dashboard')">-->
+                        <!--                            Dashboard-->
+                        <!--                        </NavLink>-->
                         <NavLink
                             :href="route('db.event.index')"
                             :active="route().current('db.event.index')">
