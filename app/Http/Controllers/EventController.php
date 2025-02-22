@@ -16,8 +16,8 @@ class EventController extends Controller
             $query->where('date_time', '>', now());
         })->get();
 
-        $pastTours = Tour::query()->whereHas('events', function ($query) {
-            $query->where('date_time', '<', now());
+        $pastTours = Tour::query()->whereDoesntHave('events', function ($query) {
+            $query->where('date_time', '>=', now());
         })->get();
 
         return Inertia::render('Home', ['tours' => $tours, 'pastTours' => $pastTours]);

@@ -28,7 +28,7 @@ class EventUpdateRequest extends FormRequest
             'poster_file' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:20000'],
             'content' => ['required', 'max:65535'],
             'events' => ['required', 'array'],
-            'events.*.id' => ['required', 'numeric', 'exists:events,id'],
+            'events.*.id' => ['nullable', 'numeric', 'exists:events,id'],
             'events.*.location' => ['required', 'string'],
             'events.*.date_time' => ['required', 'date'],
             'events.*.tickets' => ['nullable', 'array'],

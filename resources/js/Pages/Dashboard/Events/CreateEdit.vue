@@ -136,7 +136,7 @@ const setCurrentEvent = (index) => {
                     <button
                         type="button"
                         @click="addTicket"
-                        class="px-4 mt-5 py-2 bg-light-green text-white rounded"
+                        class="px-4 mt-5 py-2 bg-blue-green text-white rounded"
                     >
                         Add Ticket
                     </button>

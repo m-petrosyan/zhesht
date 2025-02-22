@@ -16,7 +16,8 @@ const deleteItem = (id) => {
 <template>
     <AuthenticatedLayout title="Dashboard">
         <div class="flex justify-end">
-            <NavLink :href="route('db.event.create')">
+            <NavLink :href="route('db.event.create')"
+                     class="px-4 mt-10 py-2 bg-blue-green text-white rounded">
                 Create
             </NavLink>
             <!--            <AppButton-->
@@ -36,7 +37,7 @@ const deleteItem = (id) => {
                 </tr>
                 </thead>
                 <tbody>
-                <tr v-for="item in tours" :key="item.id" class="leading-[8] border-b border-gray-900">
+                <tr v-for="item in tours" :key="item.id" class="border-b border-gray-900">
                     <td class="w-48">
                         <a :href="route('db.event.edit',item.id)">
                             <img :src="item.banner_file.thumb" alt="event" class="h-24">
@@ -56,11 +57,13 @@ const deleteItem = (id) => {
                         </p>
                     </td>
                     <td>
-                        <div class="flex justify-end gap-x-3">
-                            <NavLink class="text-green-600" :href="route('db.event.edit',item.id)">
+                        <div class="flex justify-end align-center gap-x-3 h-20">
+                            <NavLink class="px-4 mt-10 py-2 bg-green text-white rounded"
+                                     :href="route('db.event.edit',item.id)">
                                 Edit
                             </NavLink>
-                            <button class="text-red-600" @click="deleteItem(item.id)">
+                            <button class="px-4 mt-10 bg-dark-orange text-white rounded"
+                                    @click="deleteItem(item.id)">
                                 Delete
                             </button>
                         </div>
