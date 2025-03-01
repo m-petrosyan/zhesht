@@ -2,10 +2,6 @@ import '../css/app.css';
 import '@splidejs/vue-splide/css/sea-green';
 import './bootstrap';
 import '../css/main.scss';
-// import "@splidejs/vue-splide/css";
-// import '@splidejs/vue-splide/css/skyblue';
-// import '@vueup/vue-quill/dist/vue-quill.bubble.css';
-// import '@vueup/vue-quill/dist/vue-quill.core.css';
 import '@vueup/vue-quill/dist/vue-quill.snow.css';
 
 import {createInertiaApp} from '@inertiajs/vue3';

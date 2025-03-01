@@ -3,10 +3,14 @@ import QuillUploadEditor from "@/Components/Ui/QuillUploadEditor.vue";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import UiInput from "@/Components/Ui/UiInput.vue";
 import InputImage from "@/Components/Ui/InputImage.vue";
+import ErrorMessages from "@/Components/Ui/ErrorMessages.vue";
 import InputDate from "@/Components/Ui/InputDate.vue";
 import useFormHelper from "@/Helpers/formHelper.js";
 import {ref} from "vue";
 import DeleteIcon from "@/Components/Icons/DeleteIcon.vue";
+import VueDatePicker from '@vuepic/vue-datepicker';
+import '@vuepic/vue-datepicker/dist/main.css'
+
 
 const props = defineProps({
     tour: {type: Object},
@@ -68,6 +72,24 @@ const removeEvent = (index) => {
 const setCurrentEvent = (index) => {
     currentEvent.value = index
 }
+
+
+/////////date
+const format = (date) => {
+    //
+    form.events[currentEvent.value].date_time = date.toISOString().slice(0, 19).replace('T', ' ');
+    // return form.events[currentEvent.value].date_time;
+    return `Selected date is`;
+}
+
+const dateFormat = (value) => {
+    return String(value).padStart(2, '0')
+}
+
+const def = {
+    flow: ['calendar', 'time'],
+}
+
 </script>
 
 <template>
@@ -77,16 +99,18 @@ const setCurrentEvent = (index) => {
                 <div class="flex gap-x-2">
                     <button @click="setCurrentEvent(index)"
                             v-for="(event,index) in form.events" type="button"
-                            class="px-4 mt-10 py-2 bg-yellow  text-white rounded "
+                            class="px-4 py-2 bg-yellow  text-white rounded "
                             :class="currentEvent === index ? 'opacity-100': 'opacity-50'"
                     >
                         {{ event.location?.slice(0, 10) ?? 'New Event' }}
                     </button>
                 </div>
-                <button type="button" @click="addEvent"
-                        class="px-4 mt-10 py-2 bg-orange text-white rounded">
-                    +
-                </button>
+                <div>
+                    <button type="button" @click="addEvent"
+                            class="px-4 py-2 bg-orange text-white rounded">
+                        +
+                    </button>
+                </div>
             </div>
             <div class="flex justify-between gap-x-5 mt-10">
                 <div class="w-1/2 flex gap-x-5">
@@ -99,9 +123,16 @@ const setCurrentEvent = (index) => {
                             v-model="form.events[currentEvent].location"
                             placeholder="Location"
                             :errors="form.events[currentEvent]?.errors?.location"/>
-                        <InputDate
-                            v-model="form.events[currentEvent].date_time"
-                            :errors="form.events[currentEvent]?.errors?.date_time"/>
+                        <!--                        <InputDate-->
+                        <!--                            v-model="form.events[currentEvent].date_time"-->
+                        <!--                            :errors="form.events[currentEvent]?.errors?.date_time"/>-->
+                        <VueDatePicker :value="form.events[currentEvent].date_time"
+                                       :format
+                                       :flow="def.flow"
+                                       minutes-grid-increment="30"
+                                       class="w-full"
+                                       is-expanded
+                                       dark inline/>
                     </div>
                     <div class="w-1/3">
                         <InputImage

@@ -27,12 +27,14 @@ const updateSorting = () => {
 
 <template>
     <AuthenticatedLayout title="Dashboard">
-        <div class="flex justify-end">
-            <NavLink :href="route('db.event.create')"
-                     class="px-4 mt-10 py-2 bg-blue-green text-white rounded">
-                Create
-            </NavLink>
-        </div>
+        <template #header>
+            <div class="flex justify-end">
+                <NavLink :href="route('db.event.create')"
+                         class="px-4 py-2 bg-blue-green text-white rounded">
+                    Create
+                </NavLink>
+            </div>
+        </template>
         <section>
             <table class="min-w-full border-separate border-spacing-y-4">
                 <thead class="text-left">

@@ -33,6 +33,11 @@ import {Link} from "@inertiajs/vue3";
                             Event
                         </NavLink>
                         <NavLink
+                            :href="route('db.subscribers.index')"
+                            :active="route().current('db.subscribers.index')">
+                            Subscribers
+                        </NavLink>
+                        <NavLink
                             :href="route('db.settings.create')"
                             :active="route().current('db.settings.create')">
                             Gallery

@@ -1,37 +1,28 @@
-<script setup>import FormErrors from "@/Components/Ui/FormErrors.vue";
+<script setup>
+import {computed, ref} from 'vue';
 
-const props = defineProps({
-    label: {
-        type: String,
-        default: ''
-    },
-    errors: {
-        type: Array,
-        default: []
+const selectedDate = ref('');
+const selectedTime = ref('');
+
+const timeOptions = computed(() => {
+    const times = [];
+    for (let h = 0; h < 24; h++) {
+        times.push(`${String(h).padStart(2, '0')}:00`);
+        times.push(`${String(h).padStart(2, '0')}:30`);
     }
+    return times;
 });
-
-const date_time = defineModel({
-    type: String,
-    default: ''
-});
-
-
 </script>
 
 <template>
-    <div>
-        <label class="block  text-sm font-medium ">
-            {{ label }}
-        </label>
-        <input
-            @change="event => date_time = event.target.value"
-            :value="date_time"
-            type="datetime-local"
-            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
-        >
+    <div class="flex gap-2">
+        <input type="date" v-model="selectedDate" class="border rounded-md p-2">
+        <select v-model="selectedTime" class="border rounded-md p-2">
+            <option v-for="time in timeOptions" :key="time" :value="time">
+                {{ time }}
+            </option>
+        </select>
     </div>
-    <FormErrors :errors="errors"/>
 </template>
 
 <style scoped lang="scss">
