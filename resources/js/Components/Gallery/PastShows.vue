@@ -36,7 +36,7 @@ const splideOptions = {
 
 <template>
     <div class="flex bg-main justify-end">
-        <NavLink href="{{ route('event.index') }}">
+        <NavLink :href="route('past')">
             <h2 class="text-2xl text-black pr-2">Past events</h2>
         </NavLink>
     </div>
