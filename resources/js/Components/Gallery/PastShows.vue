@@ -1,7 +1,6 @@
 <script setup>
 import {Splide, SplideSlide} from "@splidejs/vue-splide";
 import "@splidejs/splide/dist/css/splide.min.css";
-import {AutoScroll} from "@splidejs/splide-extension-auto-scroll";
 import {formatDateTime} from "@/Helpers/dateFormatHelper.js";
 import {Link} from "@inertiajs/vue3";
 import NavLink from "../../../../vendor/laravel/breeze/stubs/inertia-vue-ts/resources/js/Components/NavLink.vue"; // ✅ Correct Import
@@ -17,7 +16,6 @@ const splideOptions = {
     perPage: 6,
     // perMove: 1,
 
-    autoplay: true,
     lazyLoad: true,
     arrows: false,
     pagination: false,
@@ -40,10 +38,10 @@ const splideOptions = {
             <h2 class="text-2xl text-black pr-2">Past events</h2>
         </NavLink>
     </div>
-    <Splide :options="splideOptions" :extensions="{ AutoScroll }" aria-label="Past events">
-        <SplideSlide v-for="item in pastTours" :key="item.id" class="w-25">
+    <Splide :options="splideOptions" aria-label="Past events">
+        <SplideSlide v-for="item in pastTours" :key="item.id">
             <img :src="item.poster_file?.thumb ?? item.banner_file.thumb" :alt="item.title"
-                 class="h-96">
+                 class="h-96 w-full">
             <div class="info flex flex-col justify-end h-4/6 absolute bottom-0 w-full">
                 <div class="text-white text-center pb-10">
                     <Link :href="route('event.show',item.id)"
