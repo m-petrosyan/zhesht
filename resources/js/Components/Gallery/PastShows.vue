@@ -1,9 +1,11 @@
 <script setup>
 import {Splide, SplideSlide} from "@splidejs/vue-splide";
 import "@splidejs/splide/dist/css/splide.min.css";
+import {AutoScroll} from "@splidejs/splide-extension-auto-scroll";
 import {formatDateTime} from "@/Helpers/dateFormatHelper.js";
 import {Link} from "@inertiajs/vue3";
-import NavLink from "../../../../vendor/laravel/breeze/stubs/inertia-vue-ts/resources/js/Components/NavLink.vue"; // ✅ Correct Import
+import NavLink from "@/Components/NavLink.vue";
+
 
 defineProps({
     pastTours: {required: true}
