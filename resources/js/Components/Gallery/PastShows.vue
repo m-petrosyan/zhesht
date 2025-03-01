@@ -3,7 +3,8 @@ import {Splide, SplideSlide} from "@splidejs/vue-splide";
 import "@splidejs/splide/dist/css/splide.min.css";
 import {AutoScroll} from "@splidejs/splide-extension-auto-scroll";
 import {formatDateTime} from "@/Helpers/dateFormatHelper.js";
-import {Link} from "@inertiajs/vue3"; // ✅ Correct Import
+import {Link} from "@inertiajs/vue3";
+import NavLink from "../../../../vendor/laravel/breeze/stubs/inertia-vue-ts/resources/js/Components/NavLink.vue"; // ✅ Correct Import
 
 defineProps({
     pastTours: {required: true}
@@ -34,6 +35,11 @@ const splideOptions = {
 </script>
 
 <template>
+    <div class="flex bg-main justify-end">
+        <NavLink href="{{ route('event.index') }}">
+            <h2 class="text-2xl text-black pr-2">Past events</h2>
+        </NavLink>
+    </div>
     <Splide :options="splideOptions" :extensions="{ AutoScroll }" aria-label="Past events">
         <SplideSlide v-for="item in pastTours" :key="item.id" class="w-25">
             <img :src="item.poster_file?.thumb ?? item.banner_file.thumb" :alt="item.title"

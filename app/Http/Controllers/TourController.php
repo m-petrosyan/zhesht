@@ -16,7 +16,7 @@ class TourController extends Controller
         $sliderTours = TourRepository::getSliderTours();
 
         return Inertia::render(
-            'Home',
+            'Client/Home',
             [
                 'upcomingTours' => $upcomingTours,
                 'pastTours' => $pastTours,
@@ -25,9 +25,19 @@ class TourController extends Controller
         );
     }
 
+    public function past()
+    {
+        $pastTours = TourRepository::getPastToursByYears();
+
+
+        return Inertia::render('Client/PastList', [
+            'pastTours' => $pastTours,
+        ]);
+    }
+
     public function show(Tour $tour): Response
     {
-        return Inertia::render('Events/Event', [
+        return Inertia::render('Client/EventList', [
             'tour' => $tour->load('events'),
         ]);
     }

@@ -26,4 +26,12 @@ input {
 }
 
 
+.splide {
+    .splide__arrows .splide__arrow {
+        background: none;
 
+        svg {
+            font-size: 26px;
+        }
+    }
+}

@@ -2,14 +2,13 @@ import '../css/app.css';
 import '@splidejs/vue-splide/css/sea-green';
 import './bootstrap';
 import '../css/main.scss';
-import '@vueup/vue-quill/dist/vue-quill.snow.css';
+
 
 import {createInertiaApp} from '@inertiajs/vue3';
 import {resolvePageComponent} from 'laravel-vite-plugin/inertia-helpers';
 import {createApp, h} from 'vue';
 import {ZiggyVue} from '../../vendor/tightenco/ziggy';
 import VueSplide from '@splidejs/vue-splide';
-
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 

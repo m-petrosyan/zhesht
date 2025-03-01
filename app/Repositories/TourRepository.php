@@ -2,8 +2,8 @@
 
 namespace App\Repositories;
 
-use App\Models\Event;
 use App\Models\Tour;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 
 class TourRepository
@@ -19,22 +19,25 @@ class TourRepository
             ->whereHas('events', function ($query) {
                 $query->where('date_time', '>', now());
             })
-            ->addSelect([
-                'nearest_event' => Event::query()->select('date_time')
-                    ->whereColumn('tour_id', 'tours.id')
-                    ->where('date_time', '>', now())
-                    ->orderBy('date_time', 'asc')
-                    ->limit(1),
-            ])
-            ->orderBy('nearest_event', 'asc')
             ->get();
     }
 
     public static function getPastTours(): Collection
     {
-        return Tour::query()->whereDoesntHave('events', function ($query) {
-            $query->where('date_time', '>=', now());
-        })->get();
+        return Tour::query()->with([
+            'events' => function ($query) {
+                $query->orderBy('date_time', 'asc');
+            },
+        ])->get();
+    }
+
+    public static function getPastToursByYears(): Collection
+    {
+        return Tour::query()->with([
+            'events' => function ($query) {
+                $query->orderBy('date_time', 'desc');
+            },
+        ])->get()->groupBy(fn($tour) => Carbon::parse($tour->events->first()->date_time)->format('Y'));
     }
 
     public static function getSliderTours(): Collection

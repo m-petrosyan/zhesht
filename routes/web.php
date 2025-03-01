@@ -9,6 +9,7 @@ use App\Http\Controllers\TourController;
 
 Route::get('/', [TourController::class, 'index'])->name('home');
 Route::get('event/{tour}', [TourController::class, 'show'])->name('event.show');
+Route::get('past', [TourController::class, 'past'])->name('past');
 Route::post('subscribe', SubscribeController::class)->name('subscribe');
 
 require __DIR__.'/auth.php';
