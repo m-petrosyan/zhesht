@@ -38,7 +38,7 @@ const splideOptions = {
             <h2 class="text-2xl text-black pr-2">Past events</h2>
         </NavLink>
     </div>
-    <Splide :options="splideOptions" aria-label="Past events">
+    <Splide :options="splideOptions" :extensions="{ AutoScroll }" aria-label="Past events">
         <SplideSlide v-for="item in pastTours" :key="item.id">
             <img :src="item.poster_file?.thumb ?? item.banner_file.thumb" :alt="item.title"
                  class="h-96 w-full">
