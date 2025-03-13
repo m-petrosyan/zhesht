@@ -1,4 +1,5 @@
 # Laravel Specific
+Zone.Identifier
 /vendor/
 .env
 .phpunit.result.cache
