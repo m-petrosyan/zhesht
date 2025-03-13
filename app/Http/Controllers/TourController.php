@@ -29,7 +29,6 @@ class TourController extends Controller
     {
         $pastTours = TourRepository::getPastToursByYears();
 
-
         return Inertia::render('Client/PastList', [
             'pastTours' => $pastTours,
         ]);

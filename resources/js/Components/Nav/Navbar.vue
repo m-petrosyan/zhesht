@@ -2,7 +2,7 @@
 import {Link, usePage} from "@inertiajs/vue3";
 
 const page = usePage();
-const invert = page.url.startsWith('/event/');
+const invert = page.url.startsWith('/event/') || page.url === '/past';
 </script>
 
 <template>

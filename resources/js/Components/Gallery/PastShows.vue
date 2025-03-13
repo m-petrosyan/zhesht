@@ -5,18 +5,13 @@ import {AutoScroll} from "@splidejs/splide-extension-auto-scroll";
 import {formatDateTime} from "@/Helpers/dateFormatHelper.js";
 import {Link} from "@inertiajs/vue3";
 
-
 defineProps({
     pastTours: {required: true}
 })
 
-
 const splideOptions = {
     type: 'loop',
-
     perPage: 6,
-    // perMove: 1,
-
     lazyLoad: true,
     arrows: false,
     pagination: false,
@@ -24,11 +19,6 @@ const splideOptions = {
         speed: 1,
         pauseOnHover: true,
         pauseOnFocus: false,
-    },
-    breakpoints: {
-        768: {
-            // padding: '4rem'
-        },
     },
 }
 </script>
@@ -52,7 +42,6 @@ const splideOptions = {
                             <b class="text-2xl">{{ formatDateTime(event.date_time, 'D MMMM YYYY ') }}</b>
                             <p class="text-2xl">{{ event.location }}</p>
                         </div>
-
                     </div>
                 </div>
             </Link>

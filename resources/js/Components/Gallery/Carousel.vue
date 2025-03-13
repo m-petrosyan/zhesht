@@ -2,7 +2,6 @@
 import {Link} from "@inertiajs/vue3";
 import {formatDateTime} from "@/Helpers/dateFormatHelper.js";
 
-
 defineProps({
     sliderTours: {required: true}
 })
