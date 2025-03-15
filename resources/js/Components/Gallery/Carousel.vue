@@ -26,7 +26,7 @@ const splideOptions = {
     <Splide :options="splideOptions" aria-label="Gallery" class="bg-black">
         <SplideSlide v-for="item in sliderTours" :key="item.id">
             <img
-                :src="item.banner_file.large"
+                :src="item.banner.large"
                 :alt="item.title">
             <div class="info flex flex-col justify-end h-4/6 absolute bottom-0 w-full">
                 <div class="text-white text-center pb-10">
@@ -34,8 +34,11 @@ const splideOptions = {
                           class="">
                         <h3 class="text-6xl">{{ item.title }}</h3>
                         <div v-for="event in item.events" class="mt-5">
-                            <b class="text-2xl">{{ formatDateTime(event.date_time, 'D MMMM YYYY ') }}</b>
-                            <p class="text-2xl">{{ event.location }}</p>
+
+                            <p class="text-2xl">
+                                <b>{{ event.location }} </b>
+                                <span class="text-2xl pl-2">{{ formatDateTime(event.date_time, 'D MMMM YYYY ') }}</span>
+                            </p>
                         </div>
                     </Link>
                 </div>

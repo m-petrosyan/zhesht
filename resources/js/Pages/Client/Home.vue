@@ -8,7 +8,7 @@ import PastShows from "@/Components/Gallery/PastShows.vue";
 defineProps({
     upcomingTours: {required: true},
     sliderTours: {required: true},
-    pastTours: {required: true},
+    pastEvents: {required: true},
 })
 </script>
 
@@ -30,22 +30,24 @@ defineProps({
                       class="flex lg:flex-row flex-col sm:gap-x-10 lg:gap-y-0 gap-y-10 lg:w-full sm:w-2/3 mx-auto">
                     <div class="lg:w-3/6 w-full flex flex-col md:flex-row  gap-x-6 lg:gap-x-10">
                         <div class="lg:w-1/2">
-                            <div :style="{ backgroundImage: `url(${item.banner_file.thumb})` }"
+                            <div :style="{ backgroundImage: `url(${item.banner.thumb})` }"
                                  class="event-image mx-auto relative w-52 h-52 bg-cover bg-no-repeat bg-center z-10"/>
                         </div>
                         <div class="lg:w-1/2">
                             <h2 class="text-3xl font-bold md:mt-6 md:text-start text-center">{{ item.title }}</h2>
                             <template v-for="event in item.events" :key="event.id">
                                 <div class="text-lg">
-                                    <p><b>{{ event.location }}</b></p>
+                                    <p>
+                                        <b>{{ event.location }}</b>
+                                        <span class="pl-2">{{ formatDateTime(event.date_time, 'D MMMM YYYY') }}</span>
+                                    </p>
                                 </div>
-                                <p><b>{{ formatDateTime(event.date_time, 'D MMMM YYYY') }}</b></p>
+
                             </template>
                         </div>
                     </div>
                     <div class="lg:w-3/5 w-full flex flex-col gap-y-5">
-
-                        <p class="line-clamp-6" v-html="item.content"/>
+                        <p class="line-clamp-6" v-html="item.intro"/>
                         <div class="flex items-center gap-x-10">
                             <button class="bg-black text-white py-2 px-5 rounded-3xl text-lg">More</button>
                         </div>
@@ -53,8 +55,7 @@ defineProps({
                 </Link>
             </div>
         </section>
-        <PastShows :pastTours/>
-
+        <PastShows :pastEvents/>
     </GuestLayout>
 </template>
 

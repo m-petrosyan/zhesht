@@ -2,9 +2,10 @@
 
 use App\Http\Controllers\AuthenticatedSessionController;
 use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Dashboard\EventController;
 use App\Http\Controllers\Dashboard\SettingController;
-use App\Http\Controllers\Dashboard\TourController;
 use App\Http\Controllers\Dashboard\SubscribeController;
+use App\Http\Controllers\Dashboard\TourController;
 
 
 Route::middleware('guest')->group(function () {
@@ -19,6 +20,8 @@ Route::prefix('dashboard')->as('db.')->middleware('auth')->group(function () {
     Route::resource('event', TourController::class)->parameters([
         'event' => 'tour',
     ]);
+
+    Route::delete('event/{event}/delete', [EventController::class, 'destroy'])->name('event.delete');
 
     Route::get('/subscribers', SubscribeController::class)
         ->name('subscribers.index');

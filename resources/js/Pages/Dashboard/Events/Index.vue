@@ -49,11 +49,14 @@ const updateSorting = () => {
                     <template v-slot:item="{ element }">
                         <tr class="border-b border-gray-900 cursor-grab">
                             <td class="w-48">
-                                <img :src="element.banner_file.thumb" alt="event" class="h-24">
+                                <img :src="element.banner.thumb" alt="event" class="h-24">
                             </td>
                             <td class="w-32">
-                                <img v-if="element.poster_file?.thumb" :src="element.poster_file?.thumb" alt="event"
-                                     class="h-24">
+                                <div v-for="event in element.events" :key="event.id">
+                                    <img v-if="event.poster?.thumb" :src="event.poster?.thumb" alt="event"
+                                         class="h-24">
+                                </div>
+
                             </td>
                             <td>
                                 <p> {{ element.title }}</p>

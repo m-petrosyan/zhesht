@@ -3,13 +3,13 @@ import QuillUploadEditor from "@/Components/Ui/QuillUploadEditor.vue";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import UiInput from "@/Components/Ui/UiInput.vue";
 import InputImage from "@/Components/Ui/InputImage.vue";
-import ErrorMessages from "@/Components/Ui/ErrorMessages.vue";
-import InputDate from "@/Components/Ui/InputDate.vue";
 import useFormHelper from "@/Helpers/formHelper.js";
-import {ref} from "vue";
+import {computed, ref} from "vue";
 import DeleteIcon from "@/Components/Icons/DeleteIcon.vue";
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
+import {formatDateTime, formatUtcDateTime} from "@/Helpers/dateFormatHelper.js";
+import {router} from "@inertiajs/vue3";
 
 
 const props = defineProps({
@@ -17,22 +17,24 @@ const props = defineProps({
 })
 
 const currentEvent = ref(0)
+const date_time = computed(() => formatDateTime(form.events[currentEvent.value]?.date_time, 'D MMMM YYYY HH:mm'))
 
 const form = useFormHelper(
     props.tour?.id
         ? {...props.tour}
         : {
             banner_file: null,
-            poster_file: null,
             banner: null,
-            poster: null,
             title: null,
+            intro: null,
             content: null,
             events: [
                 {
                     date_time: null,
                     location: null,
-                    tickets: []
+                    tickets: [],
+                    poster_file: null,
+                    poster: null,
                 }
             ]
         })
@@ -65,6 +67,11 @@ const addEvent = () => {
 }
 
 const removeEvent = (index) => {
+    const id = form.events[index]?.id
+
+    if (id) {
+        router.delete(route('db.event.delete', id));
+    }
     form.events.splice(index, 1)
     currentEvent.value = currentEvent.value - 1
 }
@@ -73,13 +80,9 @@ const setCurrentEvent = (index) => {
     currentEvent.value = index
 }
 
-
-/////////date
 const format = (date) => {
-    //
-    form.events[currentEvent.value].date_time = date.toISOString().slice(0, 19).replace('T', ' ');
-    // return form.events[currentEvent.value].date_time;
-    return `Selected date is`;
+    form.events[currentEvent.value].date_time = formatUtcDateTime(date, 'Y-MM-DD HH:mm');
+    return date;
 }
 
 const dateFormat = (value) => {
@@ -123,21 +126,18 @@ const def = {
                             v-model="form.events[currentEvent].location"
                             placeholder="Location"
                             :errors="form.events[currentEvent]?.errors?.location"/>
-                        <!--                        <InputDate-->
-                        <!--                            v-model="form.events[currentEvent].date_time"-->
-                        <!--                            :errors="form.events[currentEvent]?.errors?.date_time"/>-->
-                        <VueDatePicker :value="form.events[currentEvent].date_time"
+                        <VueDatePicker v-model="date_time"
                                        :format
                                        :flow="def.flow"
                                        minutes-grid-increment="30"
-                                       class="w-full"
-                                       is-expanded
-                                       dark inline/>
+                                       expanded
+                                       dark/>
+                        <textarea v-model="form.intro" placeholder="Intro" rows="5"/>
                     </div>
                     <div class="w-1/3">
                         <InputImage
-                            :preview="form.poster"
-                            v-model:file="form.poster_file"
+                            :preview="form.events[currentEvent].poster"
+                            v-model:file="form.events[currentEvent].poster_file"
                             placeholder="Poster"
                         />
                     </div>
@@ -145,7 +145,7 @@ const def = {
                 <div class="w-1/2">
                     <InputImage
                         :preview="form.banner"
-                        v-model:file="form.banner_file"
+                        v-model:file="form.banner"
                         placeholder="Banner (1680x945)"
                     />
                 </div>

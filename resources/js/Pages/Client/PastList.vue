@@ -1,5 +1,4 @@
-<script setup>
-import GuestLayout from "@/Layouts/GuestLayout.vue";
+<script setup>import GuestLayout from "@/Layouts/GuestLayout.vue";
 import {formatDateTime} from "@/Helpers/dateFormatHelper.js";
 import {Link} from "@inertiajs/vue3";
 import {nextTick, onMounted, onUnmounted, ref} from "vue";
@@ -74,7 +73,7 @@ onUnmounted(() => {
 
                 <div class="w-11/12 flex flex-wrap gap-y-5 gap-x-5">
                     <div v-for="event in data" :key="event.id" class="w-1/6 relative">
-                        <img :src="event.tour.poster_file?.thumb ?? event.tour.banner_file.thumb"
+                        <img :src="event.tour.poster?.thumb ?? event.tour.banner.thumb"
                              :alt="event.tour.title"
                              class="h-96">
                         <div class="info flex flex-col justify-end h-4/6 absolute bottom-0 w-full">

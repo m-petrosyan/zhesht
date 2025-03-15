@@ -4,9 +4,13 @@ namespace App\Services;
 
 use App\Models\Tour;
 use Illuminate\Support\Facades\DB;
+use Throwable;
 
 class TourService
 {
+    /**
+     * @throws Throwable
+     */
     public function store(array $attributes): void
     {
         DB::transaction(function () use ($attributes) {
@@ -15,10 +19,6 @@ class TourService
             if (request()->hasFile('banner_file')) {
                 $tour->addMedia($attributes['banner_file'])
                     ->toMediaCollection('banner_file');
-            }
-            if (request()->hasFile('poster_file')) {
-                $tour->addMedia($attributes['poster_file'])
-                    ->toMediaCollection('poster_file');
             }
 
             foreach ($attributes['events'] as $eventData) {
@@ -29,10 +29,18 @@ class TourService
                         $event->tickets()->create($ticketData);
                     }
                 }
+
+                if (isset($eventData['poster_file'])) {
+                    $event->addMedia($eventData['poster_file'])
+                        ->toMediaCollection('poster_file');
+                }
             }
         });
     }
 
+    /**
+     * @throws Throwable
+     */
     public function update(Tour $tour, array $attributes): void
     {
         DB::transaction(function () use ($tour, $attributes) {
@@ -43,10 +51,6 @@ class TourService
                 $tour->addMedia($attributes['banner_file'])->toMediaCollection('banner_file');
             }
 
-            if (isset($attributes['poster_file'])) {
-                $tour->clearMediaCollection('poster_file');
-                $tour->addMedia($attributes['poster_file'])->toMediaCollection('poster_file');
-            }
 
             if (isset($attributes['events'])) {
                 foreach ($attributes['events'] as $eventData) {
@@ -66,6 +70,11 @@ class TourService
                         foreach ($eventData['tickets'] as $ticketData) {
                             $event->tickets()->create($ticketData);
                         }
+                    }
+
+                    if (isset($eventData['poster_file'])) {
+                        $event->clearMediaCollection('poster_file');
+                        $event->addMedia($eventData['poster_file'])->toMediaCollection('poster_file');
                     }
                 }
             }

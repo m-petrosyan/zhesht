@@ -29,11 +29,11 @@ const uniqueId = uuidv4();
 </script>
 
 <template>
-    <div>
+    <div class="h-full">
         <input type="file" hidden accept="image/*" :id="uniqueId"
                @change="changePreview">
         <label
-            :class="['flex h-inherit min-h-60 w-inherit items-center justify-center border-dashed border-2 border-black-600-30 cursor-pointer rounded-md bg-no-repeat bg-center rounded-10 mx-auto']"
+            :class="['flex h-full min-h-60 w-inherit items-center justify-center border-dashed border-2 border-black-600-30 cursor-pointer rounded-md bg-no-repeat bg-center rounded-10 mx-auto']"
             :for="uniqueId"
             :style="previewStyle">
             <span v-if="!preview">{{ placeholder }}</span>

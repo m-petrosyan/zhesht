@@ -3,9 +3,8 @@
 namespace App\Http\Requests\Tour;
 
 use Illuminate\Contracts\Validation\ValidationRule;
-use Illuminate\Foundation\Http\FormRequest;
 
-class TourUpdateRequest extends FormRequest
+class TourUpdateRequest extends TourCreateRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,18 +21,12 @@ class TourUpdateRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            'title' => ['required', 'max:255'],
-            'banner_file' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg,webp', 'max:20000'],
-            'poster_file' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg,webp', 'max:20000'],
-            'content' => ['required', 'max:65535'],
-            'events' => ['required', 'array'],
-            'events.*.id' => ['nullable', 'numeric', 'exists:events,id'],
-            'events.*.location' => ['required', 'string'],
-            'events.*.date_time' => ['required', 'date'],
-            'events.*.tickets' => ['nullable', 'array'],
-            'events.*.tickets.*.title' => ['required', 'max:255'],
-            'events.*.tickets.*.url' => ['required', 'url'],
-        ];
+        return array_merge(
+            parent::rules(),
+            [
+                'banner_file' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg,webp', 'max:20000'],
+                'events.*.id' => ['nullable', 'numeric', 'exists:events,id'],
+            ]
+        );
     }
 }

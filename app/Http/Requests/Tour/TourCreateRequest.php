@@ -25,10 +25,11 @@ class TourCreateRequest extends FormRequest
         return [
             'title' => ['required', 'max:255'],
             'banner_file' => ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg,webp', 'max:20000'],
-            'poster_file' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg,webp', 'max:20000'],
+            'intro' => ['required', 'max:65535'],
             'content' => ['required', 'max:65535'],
             'events' => ['required', 'array'],
             'events.*.location' => ['required', 'string'],
+            'events.*.poster_file' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg,webp', 'max:20000'],
             'events.*.date_time' => ['required', 'date'],
             'events.*.tickets' => ['nullable', 'array'],
             'events.*.tickets.*.title' => ['required', 'max:255'],

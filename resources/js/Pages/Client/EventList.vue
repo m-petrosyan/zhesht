@@ -16,7 +16,7 @@ const openTickets = ref(false);
         <section class="bg-main lg:px-8 px-6 pt-20 pb-20 min-h-[800px]">
             <div class="mt-20 lg:w-7/12 md:w-full mx-auto">
                 <div class="lg:w-full mt-4">
-                    <div :style="{ backgroundImage: `url(${tour.banner_file.large})` }"
+                    <div :style="{ backgroundImage: `url(${tour.banner.large})` }"
                          class="event-image w-full h-96 bg-cover bg-no-repeat bg-center z-10  rounded-lg"
                     />
                 </div>

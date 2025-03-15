@@ -44,14 +44,7 @@ class TourController
     public function edit(Tour $tour): Response
     {
         return Inertia::render('Dashboard/Events/CreateEdit', [
-            'tour' => [
-                'id' => $tour->id,
-                'title' => $tour->title,
-                'content' => $tour->content,
-                'banner' => $tour->banner_file,
-                'poster' => $tour->poster_file,
-                'events' => $tour->events->map->toArray(),
-            ],
+            'tour' => $tour->load('events'),
         ]);
     }
 

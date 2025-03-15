@@ -14,4 +14,9 @@ class EventRepository
             fn($event) => Carbon::parse($event->date_time)->format('Y')
         );
     }
+
+    public static function getPastEvents(): array|Collection
+    {
+        return Event::query()->with('tour')->orderByDesc('date_time')->get();
+    }
 }

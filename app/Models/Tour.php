@@ -14,13 +14,13 @@ class Tour extends Model implements HasMedia
 
     protected $fillable = [
         'title',
+        'intro',
         'content',
         'slider_order',
     ];
 
     protected $appends = [
-        'banner_file',
-        'poster_file',
+        'banner',
     ];
 
     public function events(): HasMany
@@ -29,21 +29,9 @@ class Tour extends Model implements HasMedia
     }
 
 
-    public function getBannerFileAttribute(): array
+    public function getBannerAttribute(): array
     {
         $mediaData = $this->getFirstMedia('banner_file');
-
-        return [
-            'id' => $mediaData?->id,
-            'large' => $mediaData?->getUrl('large'),
-            'thumb' => $mediaData?->getUrl('thumb'),
-        ];
-    }
-
-    public function getPosterFileAttribute(): array
-    {
-        $mediaData = $this->getFirstMedia('poster_file');
-
 
         return [
             'id' => $mediaData?->id,
