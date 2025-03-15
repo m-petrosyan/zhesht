@@ -40,11 +40,6 @@ import {Link} from "@inertiajs/vue3";
                         <NavLink
                             :href="route('db.settings.create')"
                             :active="route().current('db.settings.create')">
-                            Gallery
-                        </NavLink>
-                        <NavLink
-                            :href="route('db.settings.create')"
-                            :active="route().current('db.settings.create')">
                             Settings
                         </NavLink>
                     </div>
