@@ -43,6 +43,7 @@ const updateSorting = () => {
                     <th>Poster</th>
                     <th>Title</th>
                     <th>Dates</th>
+                    <th>Intro</th>
                 </tr>
                 </thead>
                 <draggable tag="tbody" v-model="items" @end="updateSorting" c>
@@ -65,6 +66,9 @@ const updateSorting = () => {
                                 <p v-for="event in element.events" :key="event.id">
                                     {{ formatDateTime(event.date_time, 'D MMMM YYYY HH:mm') }}
                                 </p>
+                            </td>
+                            <td class="w-96">
+                                <p class="line-clamp-6" v-html="element.intro"></p>
                             </td>
                             <td>
                                 <div class="flex justify-end align-center gap-x-3 h-20">
