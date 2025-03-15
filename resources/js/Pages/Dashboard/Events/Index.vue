@@ -52,12 +52,11 @@ const updateSorting = () => {
                             <td class="w-48">
                                 <img :src="element.banner.thumb" alt="event" class="h-24">
                             </td>
-                            <td class="w-32">
+                            <td class="flex gap-x-4">
                                 <div v-for="event in element.events" :key="event.id">
                                     <img v-if="event.poster?.thumb" :src="event.poster?.thumb" alt="event"
                                          class="h-24">
                                 </div>
-
                             </td>
                             <td>
                                 <p> {{ element.title }}</p>

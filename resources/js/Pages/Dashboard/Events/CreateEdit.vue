@@ -3,25 +3,27 @@ import QuillUploadEditor from "@/Components/Ui/QuillUploadEditor.vue";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import UiInput from "@/Components/Ui/UiInput.vue";
 import InputImage from "@/Components/Ui/InputImage.vue";
-import useFormHelper from "@/Helpers/formHelper.js";
 import {computed, ref} from "vue";
 import DeleteIcon from "@/Components/Icons/DeleteIcon.vue";
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 import {formatDateTime, formatUtcDateTime} from "@/Helpers/dateFormatHelper.js";
-import {router} from "@inertiajs/vue3";
+import {router, useForm} from "@inertiajs/vue3";
+import SelectImages from "@/Components/Ui/SelectImages.vue";
 
 
 const props = defineProps({
     tour: {type: Object},
 })
 
-const currentEvent = ref(0)
-const date_time = computed(() => formatDateTime(form.events[currentEvent.value]?.date_time, 'D MMMM YYYY HH:mm'))
+const currentEventIndex = ref(0)
+const currentEvent = computed(() => form.events[currentEventIndex.value])
+const date_time = computed(() => formatDateTime(form.events[currentEventIndex.value]?.date_time, 'D MMMM YYYY HH:mm'))
+const addGallery = ref(false)
 
-const form = useFormHelper(
+const form = useForm(
     props.tour?.id
-        ? {...props.tour}
+        ? {...props.tour, banner_file: null, _method: 'PUT'}
         : {
             banner_file: null,
             banner: null,
@@ -37,11 +39,16 @@ const form = useFormHelper(
                     poster: null,
                 }
             ]
-        })
+        });
 
+const gallery = useForm({
+    title: '',
+    images: [],
+    files: [],
+});
 
 const addTicket = () => {
-    form.events[currentEvent.value].tickets.push({title: '', url: ''})
+    form.events[currentEventIndex.value].tickets.push({title: '', url: ''})
 }
 
 const submit = () => {
@@ -54,7 +61,7 @@ const submit = () => {
 }
 
 const removeTicket = (index) => {
-    form.events[currentEvent.value].tickets.splice(index, 1)
+    form.events[currentEventIndex.value].tickets.splice(index, 1)
 }
 
 const addEvent = () => {
@@ -63,7 +70,7 @@ const addEvent = () => {
         location: null,
         tickets: []
     })
-    currentEvent.value = form.events.length - 1
+    currentEventIndex.value = form.events.length - 1
 }
 
 const removeEvent = (index) => {
@@ -73,15 +80,15 @@ const removeEvent = (index) => {
         router.delete(route('db.event.delete', id));
     }
     form.events.splice(index, 1)
-    currentEvent.value = currentEvent.value - 1
+    currentEventIndex.value = currentEventIndex.value - 1
 }
 
 const setCurrentEvent = (index) => {
-    currentEvent.value = index
+    currentEventIndex.value = index
 }
 
 const format = (date) => {
-    form.events[currentEvent.value].date_time = formatUtcDateTime(date, 'Y-MM-DD HH:mm');
+    form.events[currentEventIndex.value].date_time = formatUtcDateTime(date, 'Y-MM-DD HH:mm');
     return date;
 }
 
@@ -103,7 +110,7 @@ const def = {
                     <button @click="setCurrentEvent(index)"
                             v-for="(event,index) in form.events" type="button"
                             class="px-4 py-2 bg-yellow  text-white rounded "
-                            :class="currentEvent === index ? 'opacity-100': 'opacity-50'"
+                            :class="currentEventIndex === index ? 'opacity-100': 'opacity-50'"
                     >
                         {{ event.location?.slice(0, 10) ?? 'New Event' }}
                     </button>
@@ -123,9 +130,9 @@ const def = {
                             placeholder="Title"
                             :errors="form.errors.title"/>
                         <UiInput
-                            v-model="form.events[currentEvent].location"
+                            v-model="form.events[currentEventIndex].location"
                             placeholder="Location"
-                            :errors="form.events[currentEvent]?.errors?.location"/>
+                            :errors="form.events[currentEventIndex]?.errors?.location"/>
                         <VueDatePicker v-model="date_time"
                                        :format
                                        :flow="def.flow"
@@ -136,8 +143,8 @@ const def = {
                     </div>
                     <div class="w-1/3">
                         <InputImage
-                            :preview="form.events[currentEvent].poster"
-                            v-model:file="form.events[currentEvent].poster_file"
+                            :preview="form.events[currentEventIndex].poster"
+                            v-model:file="form.events[currentEventIndex].poster_file"
                             placeholder="Poster"
                         />
                     </div>
@@ -165,25 +172,31 @@ const def = {
                     <button
                         type="button"
                         @click="addTicket"
-                        class="px-4 mt-5 py-2 bg-blue-green text-white rounded"
+                        class="px-4 mt-5 py-2 bg-blue-green text-white rounded flex gap-x-2"
                     >
                         Add Ticket
+
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                             fill="#e8eaed">
+                            <path
+                                d="M480-280q17 0 28.5-11.5T520-320q0-17-11.5-28.5T480-360q-17 0-28.5 11.5T440-320q0 17 11.5 28.5T480-280Zm0-160q17 0 28.5-11.5T520-480q0-17-11.5-28.5T480-520q-17 0-28.5 11.5T440-480q0 17 11.5 28.5T480-440Zm0-160q17 0 28.5-11.5T520-640q0-17-11.5-28.5T480-680q-17 0-28.5 11.5T440-640q0 17 11.5 28.5T480-600Zm320 440H160q-33 0-56.5-23.5T80-240v-160q33 0 56.5-23.5T160-480q0-33-23.5-56.5T80-560v-160q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v160q-33 0-56.5 23.5T800-480q0 33 23.5 56.5T880-400v160q0 33-23.5 56.5T800-160Zm0-80v-102q-37-22-58.5-58.5T720-480q0-43 21.5-79.5T800-618v-102H160v102q37 22 58.5 58.5T240-480q0 43-21.5 79.5T160-342v102h640ZM480-480Z"/>
+                        </svg>
                     </button>
                 </div>
                 <div class="flex flex-col gap-y-2 mt-10">
-                    <label v-if="form.events[currentEvent]?.tickets.length" class="block text-sm font-medium">
+                    <label v-if="currentEvent?.tickets.length" class="block text-sm font-medium">
                         Tickets
                     </label>
-                    <div v-for="(ticket, index) in form.events[currentEvent]?.tickets" :key="index"
+                    <div v-for="(ticket, index) in currentEvent?.tickets" :key="index"
                          class="flex gap-x-2">
                         <UiInput
                             v-model="ticket.title"
                             placeholder="Title"
-                            :errors="form.events[currentEvent]?.errors?.tickets ? form.events[currentEvent]?.errors?.tickets[index].title : null"/>
+                            :errors="currentEvent?.errors?.tickets ? currentEvent?.errors?.tickets[index].title : null"/>
                         <UiInput
                             v-model="ticket.url"
                             placeholder="URL"
-                            :errors="form.events[currentEvent]?.errors?.tickets ? form.events[currentEvent]?.errors?.tickets[index].url : null"/>
+                            :errors="currentEvent?.errors?.tickets ? currentEvent?.errors?.tickets[index].url : null"/>
                         <button type="button" @click="removeTicket(index)"
                                 class="px-4 py-2 bg-red text-white rounded"> delete
                         </button>
@@ -194,10 +207,11 @@ const def = {
             <div class="flex justify-between space-x-4">
                 <div>
                     <button
-                        v-if="currentEvent !== 0"
+                        v-if="currentEventIndex !== 0"
                         type="button"
-                        class="px-4 mt-10 py-2 bg-red-500 text-white rounded"
-                        @click="removeEvent(currentEvent)">
+                        class="px-4 mt-10 py-2 bg-red-500 text-white rounded flex gap-x-2 bg-red"
+                        @click="removeEvent(currentEventIndex)">
+                        Delete Event
                         <DeleteIcon/>
                     </button>
                 </div>
@@ -206,9 +220,31 @@ const def = {
                     class="px-4 mt-10 py-2 bg-dark-orange text-white rounded"
                     :disabled="form.processing"
                 >
-                    Publish Event
+                    {{ currentEvent?.id ? 'Update' : 'Create' }}
                 </button>
             </div>
         </form>
+        <div v-if="currentEvent?.id">
+            <button @click="addGallery = !addGallery" class="px-4 mt-10 py-2 bg-green text-white rounded flex gap-x-2">
+                Add gellery
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                     fill="#e8eaed">
+                    <path
+                        d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h560v-560H200v560Zm40-80h480L570-480 450-320l-90-120-120 160Zm-40 80v-560 560Z"/>
+                </svg>
+            </button>
+            <div v-if="addGallery" class="my-20">
+                <UiInput
+                    classes="w-96 mx-auto"
+                    v-model="gallery.title"
+                    placeholder="Title"
+                    :errors="form.errors.title"/>
+                <SelectImages
+                    classes="mt-10"
+                    :images="gallery?.images"
+                    v-model:previews="form.newImages"
+                    v-model:files="gallery.files"/>
+            </div>
+        </div>
     </AuthenticatedLayout>
 </template>

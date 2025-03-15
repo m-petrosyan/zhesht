@@ -1,9 +1,9 @@
 <script setup>
 import {Splide, SplideSlide} from "@splidejs/vue-splide";
 import "@splidejs/splide/dist/css/splide.min.css";
-import {AutoScroll} from "@splidejs/splide-extension-auto-scroll";
 import {formatDateTime} from "@/Helpers/dateFormatHelper.js";
 import {Link} from "@inertiajs/vue3";
+import {AutoScroll} from "@splidejs/splide-extension-auto-scroll";
 
 defineProps({
     pastEvents: {required: true}
@@ -31,7 +31,7 @@ const splideOptions = {
     </div>
     <Splide :options="splideOptions" :extensions="{ AutoScroll }" aria-label="Past events">
         <SplideSlide v-for="event in pastEvents" :key="event.id">
-            <Link class="relative" :href="route('event.show',event.id)">
+            <Link class="relative" :href="route('event.show', event.tour_id)">
                 <img :src="event.poster?.thumb ?? event.tour.banner.thumb" :alt="event.tour.title"
                      class="h-96 w-full ">
                 <div class="absolute top-0 z-1 h-full w-full bg-[rgba(33,33,33,.2)]"></div>

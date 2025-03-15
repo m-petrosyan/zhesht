@@ -6,6 +6,10 @@ const props = defineProps({
         type: String,
         default: ''
     },
+    classes: {
+        type: String,
+        default: 'w-full'
+    },
     label: {
         type: String,
         default: ''
@@ -29,7 +33,7 @@ const updateValue = (event) => {
 </script>
 
 <template>
-    <div class="flex flex-col w-full">
+    <div class="flex flex-col" :class="classes">
         <label v-if="label" class="block text-sm font-medium ">{{ label }}</label>
         <input
             class="w-full h-full rounded-md"
