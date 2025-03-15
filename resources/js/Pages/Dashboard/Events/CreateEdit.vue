@@ -145,7 +145,7 @@ const def = {
                 <div class="w-1/2">
                     <InputImage
                         :preview="form.banner"
-                        v-model:file="form.banner"
+                        v-model:file="form.banner_file"
                         placeholder="Banner (1680x945)"
                     />
                 </div>
