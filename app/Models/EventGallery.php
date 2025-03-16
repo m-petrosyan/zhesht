@@ -44,7 +44,8 @@ class EventGallery extends Model implements HasMedia
     public function registerMediaConversions(Media $media = null): void
     {
         $this->addMediaConversion('thumb')
-            ->width(356);
+            ->width(356)
+            ->nonQueued();
 
         $this->addMediaConversion('large')
             ->width(1920);
