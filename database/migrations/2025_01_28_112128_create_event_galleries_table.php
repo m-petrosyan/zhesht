@@ -11,6 +11,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('event_galleries', function (Blueprint $table) {
+            $table->id();
             $table->foreignId('event_id')->constrained()->cascadeOnDelete();
             $table->string('title');
         });

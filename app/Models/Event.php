@@ -22,20 +22,16 @@ class Event extends Model implements HasMedia
 
     protected $appends = [
         'tickets',
-//        'poster_file',
         'poster',
     ];
+
+    protected $hidden = ['media'];
 
     public $timestamps = false;
 
     protected array $dates = ['date_time'];
 
     protected $casts = ['content' => 'array'];
-
-//    public function getPosterAttribute()
-//    {
-//        return $this->poster_file;
-//    }
 
     public function getPosterAttribute(): array
     {
@@ -48,7 +44,6 @@ class Event extends Model implements HasMedia
         ];
     }
 
-
     public function getTicketsAttribute(): Collection
     {
         return $this->tickets()->get();
@@ -57,6 +52,11 @@ class Event extends Model implements HasMedia
     public function tour(): BelongsTo
     {
         return $this->belongsTo(Tour::class);
+    }
+
+    public function galleries(): HasMany
+    {
+        return $this->hasMany(EventGallery::class);
     }
 
     /*
@@ -70,13 +70,9 @@ class Event extends Model implements HasMedia
     public function registerMediaConversions(Media $media = null): void
     {
         $this->addMediaConversion('thumb')
-            ->width(300)
-            ->format('webp')
-            ->nonQueued();
+            ->width(300);
 
         $this->addMediaConversion('large')
-            ->width(600)
-            ->format('webp')
-            ->nonQueued();
+            ->width(1920);
     }
 }

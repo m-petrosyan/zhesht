@@ -3,6 +3,8 @@
 use App\Http\Controllers\AuthenticatedSessionController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\EventController;
+use App\Http\Controllers\Dashboard\GalleryController;
+use App\Http\Controllers\Dashboard\ImageController;
 use App\Http\Controllers\Dashboard\SettingController;
 use App\Http\Controllers\Dashboard\SubscribeController;
 use App\Http\Controllers\Dashboard\TourController;
@@ -22,6 +24,9 @@ Route::prefix('dashboard')->as('db.')->middleware('auth')->group(function () {
     ]);
 
     Route::delete('event/{event}/delete', [EventController::class, 'destroy'])->name('event.delete');
+    Route::post('event/{event}/gallery', [GalleryController::class, 'store'])->name('gallery.store');
+    Route::delete('event/{eventGallery}/gallery', [GalleryController::class, 'destroy'])->name('gallery.destroy');
+    Route::delete('media/{media}', [ImageController::class, 'destroy'])->name('media.destroy');
 
     Route::get('/subscribers', SubscribeController::class)
         ->name('subscribers.index');

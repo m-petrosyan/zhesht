@@ -23,6 +23,8 @@ class Tour extends Model implements HasMedia
         'banner',
     ];
 
+    protected $hidden = ['media'];
+
     public function events(): HasMany
     {
         return $this->hasMany(Event::class);
@@ -45,12 +47,10 @@ class Tour extends Model implements HasMedia
     {
         $this->addMediaConversion('thumb')
             ->width(356)
-            ->format('webp')
-            ->nonQueued();
+            ->format('webp');
 
         $this->addMediaConversion('large')
             ->width(1920)
-            ->format('webp')
-            ->nonQueued();
+            ->format('webp');
     }
 }

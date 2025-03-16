@@ -2,9 +2,8 @@
 import {useForm} from "@inertiajs/vue3";
 
 const props = defineProps({
-    images: {type: Object, required: true},
-    previews: {type: Object, required: true},
-    files: {type: Array, required: true},
+    previews: {type: Array, required: true},
+    files: {type: Object, required: true},
     classes: {type: String, default: ''}
 })
 
@@ -12,40 +11,40 @@ const emit = defineEmits(['update:previews', 'update:files'])
 
 const form = useForm({});
 
-const removeImageQuery = (id) => {
-    form.delete(route('db.image.destroy', id))
-}
-
 const removeImage = (index) => {
-    const newFiles = [...props.files];
-
-    newFiles.splice(index, 1);
-
-    emit('update:files', newFiles);
+    const newPreviews = [...props.previews];
+    newPreviews.splice(index, 1);
+    emit('update:previews', newPreviews);
 
     const dataTransfer = new DataTransfer();
+    const filesArray = Array.from(props.files);
 
-    newFiles.forEach(file => {
-        dataTransfer.items.add(file.file);
+    filesArray.forEach((file, i) => {
+        if (i !== index) {
+            dataTransfer.items.add(file);
+        }
     });
 
-    const newPreviews = !dataTransfer.files ? [] : dataTransfer.files;
-
-    emit('update:previews', newPreviews);
+    emit('update:files', dataTransfer.files);
 };
 
 const uploadImages = (event) => {
     const files = event.target.files;
 
+    emit('update:files', files);
+
+    const previewArray = [];
+
     for (const file of files) {
         const reader = new FileReader();
 
         reader.onload = (e) => {
-            emit('update:files', [...props.files, {file, url: e.target.result}])
+            previewArray.push({file, url: e.target.result});
+
+            if (previewArray.length === files.length) {
+                emit('update:previews', previewArray);
+            }
         };
-
-        emit('update:previews', files)
-
         reader.readAsDataURL(file);
     }
 };
@@ -65,19 +64,10 @@ const uploadImages = (event) => {
         </label>
     </div>
     <div class="flex flex-wrap gap-2 mt-5">
-        <div v-if="images?.length" v-for="(image, index) in images" :key="index"
+        <div v-if="previews.length" v-for="(preview, index) in previews" :key="index"
              class="w-1/12">
-            <img :src="image.thumb" class="images object-cover" alt="Image"/>
-            <button type="button" @click="removeImageQuery(image.id)">Remove</button>
-        </div>
-        <div v-if="files.length" v-for="(file, index) in files" :key="index"
-             class="w-1/12">
-            <img :src="file.url" class="images object-cover" alt="Image"/>
+            <img :src="preview.url" class="images object-cover" alt="Image"/>
             <button type="button" @click="removeImage(index)">Remove</button>
         </div>
     </div>
 </template>
-
-<style scoped>
-
-</style>

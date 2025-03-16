@@ -44,21 +44,13 @@ const form = useForm(
 const gallery = useForm({
     title: '',
     images: [],
-    files: [],
+    preview: [],
 });
 
 const addTicket = () => {
     form.events[currentEventIndex.value].tickets.push({title: '', url: ''})
 }
 
-const submit = () => {
-    form.post(route(props.tour?.id ? 'db.event.update' : 'db.event.store', form), {
-        preserveScroll: false,
-        onSuccess: () => {
-            form.reset()
-        }
-    })
-}
 
 const removeTicket = (index) => {
     form.events[currentEventIndex.value].tickets.splice(index, 1)
@@ -100,6 +92,46 @@ const def = {
     flow: ['calendar', 'time'],
 }
 
+const submit = () => {
+    form.post(route(props.tour?.id ? 'db.event.update' : 'db.event.store', form), {
+        preserveScroll: false,
+        onSuccess: () => {
+            form.reset()
+        }
+    })
+}
+
+const submitGallery = () => {
+    gallery.post(route('db.gallery.store', currentEvent?.value.id), {
+        preserveScroll: false,
+        onSuccess: () => {
+            gallery.reset()
+        }
+    })
+}
+
+const removeImageQuery = (id) => {
+    form.delete(route('db.media.destroy', id), {
+        preserveScroll: true,
+        onSuccess: () => {
+            if (currentEvent.value && currentEvent.value.galleries) {
+                currentEvent.value.galleries.forEach(gallery => {
+                    gallery.images = gallery.images.filter(image => image.id !== id);
+                });
+            }
+            addGallery.value = false
+        },
+    });
+}
+
+const removeGallery = (id) => {
+    form.delete(route('db.gallery.destroy', id), {
+        preserveScroll: true,
+        onSuccess: () => {
+            router.reload();
+        },
+    });
+}
 </script>
 
 <template>
@@ -173,9 +205,7 @@ const def = {
                         type="button"
                         @click="addTicket"
                         class="px-4 mt-5 py-2 bg-blue-green text-white rounded flex gap-x-2"
-                    >
-                        Add Ticket
-
+                    > Add Ticket
                         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
                              fill="#e8eaed">
                             <path
@@ -233,6 +263,26 @@ const def = {
                         d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h560v-560H200v560Zm40-80h480L570-480 450-320l-90-120-120 160Zm-40 80v-560 560Z"/>
                 </svg>
             </button>
+
+            <div v-if="currentEvent.galleries?.length">
+                <div v-for="(gallery, index) in currentEvent.galleries" :key="index">
+                    <h2 class="text-center">{{ gallery.title }}</h2>
+                    <div class="flex flex-wrap gap-2 mt-5 ">
+                        <div v-for="image in gallery.images" :key="image.id" class="w-24">
+                            <img :src="image.thumb" class="object-cover" alt="Image"/>
+                            <button type="button" @click="removeImageQuery(image.id)">Remove</button>
+                        </div>
+                    </div>
+                    <button
+                        type="button"
+                        class="px-4 mt-10 py-2 bg-red-500 text-white rounded flex gap-x-2 bg-red"
+                        @click="removeGallery(gallery.id)">
+                        Remove Gallery
+                        <DeleteIcon/>
+                    </button>
+                </div>
+            </div>
+
             <div v-if="addGallery" class="my-20">
                 <UiInput
                     classes="w-96 mx-auto"
@@ -241,9 +291,12 @@ const def = {
                     :errors="form.errors.title"/>
                 <SelectImages
                     classes="mt-10"
-                    :images="gallery?.images"
-                    v-model:previews="form.newImages"
-                    v-model:files="gallery.files"/>
+                    v-model:previews="gallery.preview"
+                    v-model:files="gallery.images"/>
+                <button v-if="gallery.images.length" @click="submitGallery"
+                        class="px-4 mt-10 py-2 bg-dark-orange mx-auto text-white rounded flex gap-x-2">
+                    Create gellery
+                </button>
             </div>
         </div>
     </AuthenticatedLayout>
