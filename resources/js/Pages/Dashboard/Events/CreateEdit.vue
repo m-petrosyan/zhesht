@@ -8,8 +8,9 @@ import DeleteIcon from "@/Components/Icons/DeleteIcon.vue";
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 import {formatDateTime, formatUtcDateTime} from "@/Helpers/dateFormatHelper.js";
-import {router, useForm, usePoll} from "@inertiajs/vue3";
+import {router, useForm} from "@inertiajs/vue3";
 import SelectImages from "@/Components/Ui/SelectImages.vue";
+
 
 const props = defineProps({
     tour: {type: Object},
@@ -104,11 +105,6 @@ const submitGallery = () => {
     gallery.post(route('db.gallery.store', currentEvent?.value.id), {
         preserveState: false,
         preserveScroll: true,
-        onSuccess: () => {
-            usePoll(() => {
-                router.reload({only: ['tour']})
-            }, 2000)
-        }
     })
 }
 
@@ -116,14 +112,6 @@ const removeImageQuery = (id) => {
     form.delete(route('db.media.destroy', id), {
         preserveState: false,
         preserveScroll: true,
-        onSuccess: () => {
-            if (currentEvent.value && currentEvent.value.galleries) {
-                currentEvent.value.galleries.forEach(gallery => {
-                    gallery.images = gallery.images.filter(image => image.id !== id);
-                });
-            }
-            addGallery.value = false
-        },
     });
 }
 
@@ -269,11 +257,20 @@ const removeGallery = (id) => {
             </button>
 
             <div v-if="currentEvent.galleries?.length">
-                <div v-for="(gallery, index) in currentEvent.galleries" :key="index">
+                <div v-for="(gallery, index) in tour.events[currentEventIndex].galleries" :key="index">
                     <h2 class="text-center">{{ gallery.title }}</h2>
                     <div class="flex flex-wrap gap-2 mt-5 ">
                         <div v-for="image in gallery.images" :key="image.id" class="w-24">
-                            <img :src="image.thumb" class="object-cover" alt="Image"/>
+                            <img v-if="image.thumb && image.thumb.trim()"
+                                 :src="image.thumb"
+                                 class="object-cover"
+                                 alt="Image"
+                                 @error="$event.target.src = image.original || '/images/placeholder.png'"/>
+                            <img v-else-if="image.original"
+                                 :src="image.original"
+                                 class="object-cover"
+                                 alt="Image"
+                                 @error="$event.target.src = '/images/placeholder.png'"/>
                             <button type="button" @click="removeImageQuery(image.id)">Remove</button>
                         </div>
                     </div>
