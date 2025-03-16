@@ -257,7 +257,7 @@ const removeGallery = (id) => {
             </button>
 
             <div v-if="currentEvent.galleries?.length">
-                <div v-for="(gallery, index) in tour.events[currentEventIndex].galleries" :key="index">
+                <div v-for="(gallery, index) in currentEvent.galleries" :key="index">
                     <h2 class="text-center">{{ gallery.title }}</h2>
                     <div class="flex flex-wrap gap-2 mt-5 ">
                         <div v-for="image in gallery.images" :key="image.id" class="w-24">
