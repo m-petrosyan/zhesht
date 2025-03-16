@@ -105,9 +105,7 @@ const submitGallery = () => {
         preserveState: false,
         preserveScroll: true,
         onSuccess: () => {
-            usePoll(() => {
-                router.reload({only: ['tour']})
-            }, 2000)
+            usePoll(2000)
         }
     })
 }
