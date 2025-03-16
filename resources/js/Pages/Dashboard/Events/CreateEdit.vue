@@ -8,9 +8,8 @@ import DeleteIcon from "@/Components/Icons/DeleteIcon.vue";
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 import {formatDateTime, formatUtcDateTime} from "@/Helpers/dateFormatHelper.js";
-import {router, useForm} from "@inertiajs/vue3";
+import {router, useForm, usePoll} from "@inertiajs/vue3";
 import SelectImages from "@/Components/Ui/SelectImages.vue";
-
 
 const props = defineProps({
     tour: {type: Object},
@@ -106,7 +105,7 @@ const submitGallery = () => {
         preserveState: false,
         preserveScroll: true,
         onSuccess: () => {
-            gallery.reset()
+            usePoll(2000)
         }
     })
 }
