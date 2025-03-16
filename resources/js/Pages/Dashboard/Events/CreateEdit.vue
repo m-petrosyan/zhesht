@@ -103,7 +103,8 @@ const submit = () => {
 
 const submitGallery = () => {
     gallery.post(route('db.gallery.store', currentEvent?.value.id), {
-        preserveScroll: false,
+        preserveState: false,
+        preserveScroll: true,
         onSuccess: () => {
             gallery.reset()
         }
@@ -112,6 +113,7 @@ const submitGallery = () => {
 
 const removeImageQuery = (id) => {
     form.delete(route('db.media.destroy', id), {
+        preserveState: false,
         preserveScroll: true,
         onSuccess: () => {
             if (currentEvent.value && currentEvent.value.galleries) {
@@ -126,6 +128,7 @@ const removeImageQuery = (id) => {
 
 const removeGallery = (id) => {
     form.delete(route('db.gallery.destroy', id), {
+        preserveState: false,
         preserveScroll: true,
         onSuccess: () => {
             router.reload();

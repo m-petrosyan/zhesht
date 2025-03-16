@@ -13,7 +13,9 @@ const props = defineProps({
 const items = ref(props.tours);
 
 const deleteItem = (id) => {
-    router.delete(route('db.event.destroy', id))
+    router.delete(route('db.event.destroy', id), {
+        preserveState: false
+    })
 }
 
 const updateSorting = () => {
