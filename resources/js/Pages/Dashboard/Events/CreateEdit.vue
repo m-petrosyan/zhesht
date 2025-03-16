@@ -265,12 +265,11 @@ const removeGallery = (id) => {
                                  :src="image.thumb"
                                  class="object-cover"
                                  alt="Image"
-                                 @error="$event.target.src = image.original || '/images/placeholder.png'"/>
+                                 @error="$event.target.src = image.original"/>
                             <img v-else-if="image.original"
                                  :src="image.original"
                                  class="object-cover"
-                                 alt="Image"
-                                 @error="$event.target.src = '/images/placeholder.png'"/>
+                                 alt="Image"/>
                             <button type="button" @click="removeImageQuery(image.id)">Remove</button>
                         </div>
                     </div>
