@@ -47,10 +47,12 @@ class Tour extends Model implements HasMedia
     {
         $this->addMediaConversion('thumb')
             ->width(356)
-            ->format('webp');
+            ->format('webp')
+            ->nonQueued();
 
         $this->addMediaConversion('large')
             ->width(1920)
-            ->format('webp');
+            ->format('webp')
+            ->nonQueued();
     }
 }

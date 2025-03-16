@@ -70,9 +70,11 @@ class Event extends Model implements HasMedia
     public function registerMediaConversions(Media $media = null): void
     {
         $this->addMediaConversion('thumb')
-            ->width(300);
+            ->width(300)
+            ->nonQueued();
 
         $this->addMediaConversion('large')
-            ->width(1920);
+            ->width(1920)
+            ->nonQueued();
     }
 }
