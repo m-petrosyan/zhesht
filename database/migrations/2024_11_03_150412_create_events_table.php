@@ -15,7 +15,7 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('tour_id')->constrained()->onDelete('cascade');
             $table->string('location')->nullable();
-            $table->dateTime('date_time')->nullable();
+            $table->dateTime('date_time')->index()->nullable();
             $table->smallInteger('status')->unsigned()->default(EventStatusEnum::ACTIVE->value);
         });
     }
