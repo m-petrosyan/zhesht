@@ -22,8 +22,18 @@ class TourController
 
     public function index(): Response
     {
+        $tours = Tour::with('events')->get()->groupBy(function ($tour) {
+            $now = now();
+            $hasPastEvents = $tour->events->every(fn($event) => $event->date_time < $now);
+
+            return $hasPastEvents ? 'past' : 'active';
+        });
+
+        $activeTours = $tours->get('active', collect())->sortBy('slider_order')->values();
+
         return Inertia::render('Dashboard/Events/Index', [
-            'tours' => Tour::with('events')->orderBy('slider_order')->get(),
+            'past' => $tours->get('past', []),
+            'active' => $activeTours,
         ]);
     }
 

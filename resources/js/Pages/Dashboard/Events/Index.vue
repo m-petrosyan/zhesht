@@ -7,10 +7,11 @@ import draggable from "vuedraggable";
 import {formatDateTime} from "@/Helpers/dateFormatHelper.js";
 
 const props = defineProps({
-    tours: {required: true}
+    active: {required: true},
+    past: {required: true}
 })
 
-const items = ref(props.tours);
+const items = ref(props.active);
 
 const deleteItem = (id) => {
     router.delete(route('db.event.destroy', id), {
@@ -86,6 +87,40 @@ const updateSorting = () => {
                         </tr>
                     </template>
                 </draggable>
+                <tr v-for="tour in past" class="border-b border-gray-900 cursor-not-allowed opacity-25">
+                    <td class="w-48">
+                        <img :src="tour.banner.thumb" alt="event" class="h-24">
+                    </td>
+                    <td class="flex gap-x-4">
+                        <div v-for="event in tour.events" :key="event.id">
+                            <img v-if="event.poster?.thumb" :src="event.poster?.thumb" alt="event"
+                                 class="h-24">
+                        </div>
+                    </td>
+                    <td>
+                        <p> {{ tour.title }}</p>
+                    </td>
+                    <td>
+                        <p v-for="event in tour.events" :key="event.id">
+                            {{ formatDateTime(event.date_time, 'D MMMM YYYY HH:mm') }}
+                        </p>
+                    </td>
+                    <td class="w-96">
+                        <p class="line-clamp-6" v-html="tour.intro"></p>
+                    </td>
+                    <td>
+                        <div class="flex justify-end align-center gap-x-3 h-20">
+                            <NavLink class="px-4 mt-10 py-2 bg-green text-white rounded"
+                                     :href="route('db.event.edit',tour.id)">
+                                Edit
+                            </NavLink>
+                            <button class="px-4 mt-10 bg-dark-orange text-white rounded"
+                                    @click="deleteItem(tour.id)">
+                                Delete
+                            </button>
+                        </div>
+                    </td>
+                </tr>
             </table>
         </section>
     </AuthenticatedLayout>
