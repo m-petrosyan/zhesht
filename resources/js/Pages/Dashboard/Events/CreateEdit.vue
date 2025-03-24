@@ -93,7 +93,7 @@ const def = {
 }
 
 const submit = () => {
-    form.post(route(props.tour?.id ? 'db.event.update' : 'db.event.store', form), {
+    form.post(route(props.tour?.id ? 'db.event.update' : 'db.event.store', props.tour?.id), {
         preserveScroll: false,
         onSuccess: () => {
             form.reset()
