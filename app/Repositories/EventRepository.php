@@ -17,6 +17,6 @@ class EventRepository
 
     public static function getPastEvents(): array|Collection
     {
-        return Event::query()->with('tour')->orderByDesc('date_time')->get();
+        return Event::query()->with('tour')->where('date_time', '<', now())->orderByDesc('date_time')->get();
     }
 }
