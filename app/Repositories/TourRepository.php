@@ -13,20 +13,20 @@ class TourRepository
         return Tour::query()
             ->with([
                 'events' => function ($query) {
-                    $query->orderBy('date_time', 'asc'); // Загружаем ивенты, отсортированные по дате
+                    $query->orderBy('date_time', 'asc');
                 },
             ])
             ->whereHas('events', function ($query) {
-                $query->where('date_time', '>', now()); // Только туры с будущими ивентами
+                $query->where('date_time', '>', now());
             })
-            ->select('tours.*') // Выбираем все поля из таблицы tours
+            ->select('tours.*')
             ->addSelect([
                 'earliest_event_date' => Event::select('date_time')
                     ->whereColumn('events.tour_id', 'tours.id')
-                    ->orderBy('date_time', 'asc') // Берем ближайшую дату
+                    ->orderBy('date_time')
                     ->limit(1)
             ])
-            ->orderBy('earliest_event_date', 'asc') // Сортируем туры по ближайшей дате ивента
+            ->orderBy('earliest_event_date')
             ->get();
     }
 
