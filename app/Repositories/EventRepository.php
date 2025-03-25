@@ -8,11 +8,12 @@ use Illuminate\Database\Eloquent\Collection;
 
 class EventRepository
 {
-    public static function getPastEventsByYears(): array|Collection
+    public static function getPastEventsByYears(): array
     {
-        return Event::query()->with('tour')->orderByDesc('date_time')->get()->groupBy(
-            fn($event) => Carbon::parse($event->date_time)->format('Y')
-        );
+        return Event::query()->with('tour')->where('date_time', '<', now())
+            ->orderByDesc('date_time')->get()->groupBy(
+                fn($event) => Carbon::parse($event->date_time)->format('Y')
+            )->toArray();
     }
 
     public static function getPastEvents(): array|Collection

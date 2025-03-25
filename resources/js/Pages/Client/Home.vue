@@ -7,7 +7,7 @@ import {formatDateTime} from '@/Helpers/dateFormatHelper.js';
 defineProps({
   upcomingTours: {required: true},
   sliderTours: {required: true},
-  pastEvents: {required: true},
+  // pastEvents: {required: true},
 });
 </script>
 
@@ -27,7 +27,7 @@ defineProps({
 
         <Link v-for="item in upcomingTours" :key="item.id"
               :href="route('event.show',item.id)"
-              class="flex lg:flex-row flex-col sm:gap-x-10 lg:gap-y-0 gap-y-10 lg:w-full sm:w-2/3 mx-auto">
+              class="flex lg:flex-row flex-col sm:gap-x-10 md:gap-x-4 lg:gap-y-0 gap-y-10 lg:w-full sm:w-2/3 mx-auto">
           <div class="lg:w-3/6 w-full flex flex-col md:flex-row gap-x-6 lg:gap-x-12">
             <div class="lg:w-1/3">
               <div :style="{ backgroundImage: `url(${item.banner.thumb})` }"

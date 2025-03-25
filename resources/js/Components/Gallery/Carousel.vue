@@ -1,15 +1,15 @@
 <script setup>
-import { Link } from '@inertiajs/vue3';
-import { formatDateTime } from '@/Helpers/dateFormatHelper.js';
+import {Link} from '@inertiajs/vue3';
+import {formatDateTime} from '@/Helpers/dateFormatHelper.js';
 
 defineProps({
-  sliderTours: { required: true },
+  sliderTours: {required: true},
 });
 
 const splideOptions = {
   rewind: true,
   autoplay: true,
-  interval: 50000,
+  interval: 5000,
   lazyLoad: true,
   pauseOnHover: false,
   fixedHeight: '100vh',

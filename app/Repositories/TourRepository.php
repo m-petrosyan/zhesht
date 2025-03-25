@@ -29,15 +29,7 @@ class TourRepository
             ->orderBy('earliest_event_date')
             ->get();
     }
-
-    public static function getPastTours(): Collection
-    {
-        return Tour::query()->with([
-            'events' => function ($query) {
-                $query->orderBy('date_time', 'asc');
-            },
-        ])->get();
-    }
+    
 
     public static function getSliderTours(): Collection
     {
