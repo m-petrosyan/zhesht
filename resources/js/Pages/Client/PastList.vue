@@ -26,8 +26,6 @@ const setRefs = (el, year) => {
 let observer = null;
 
 onMounted(async () => {
-  console.log('pastTours:', props.pastTours);
-  console.log('sortedPastTours:', sortedPastTours.value);
   await nextTick();
   observer = new IntersectionObserver(
       (entries) => {
@@ -79,7 +77,7 @@ onUnmounted(() => {
                  class="h-96">
             <div class="info flex flex-col justify-end h-4/6 absolute bottom-0 w-full">
               <div class="text-white text-center pb-10">
-                <Link :href="route('event.show', event.tour.id)">
+                <Link :href="route('event.show', event.tour.slug)">
                   <h3 class="text-3xl">{{ event.tour.title }}</h3>
                   <div class="mt-5">
                     <b class="text-2xl">
