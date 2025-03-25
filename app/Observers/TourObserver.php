@@ -9,7 +9,7 @@ class TourObserver
 {
     public function created(Tour $tour): void
     {
-        $tour->slug = Str::slug($tour->title);
+        $tour->slug = Str::slug($tour->title) . '-' . substr(md5($tour->title . now()->timestamp), 0, 8);
         $tour->save();
     }
 }
