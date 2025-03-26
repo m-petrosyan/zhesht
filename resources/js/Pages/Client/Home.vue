@@ -67,7 +67,7 @@ onMounted(() => {
 
 <style scoped lang="scss">
 .event-image {
-  background-size: 102%;
+  background-size: 98%;
 
   &:before {
     content: '';
@@ -77,7 +77,7 @@ onMounted(() => {
     height: 100%;
     width: 100%;
     background-repeat: no-repeat;
-    background-size: 89%;
+    background-size: 106%;
     background-position: center;
   }
 }
