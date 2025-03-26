@@ -19,7 +19,8 @@ Zone.Identifier
 /public/css/*.map
 /public/build/
 /bootstrap/ssr/assets/
-
+/bootstrap/ssr
+/bootstrap/ssr
 # Node.js Specific
 /node_modules/
 

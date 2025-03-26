@@ -13,7 +13,7 @@ defineProps({
 const isClient = ref(false);
 
 onMounted(() => {
-  isClient.value = true; // Устанавливаем флаг только на клиенте
+  isClient.value = true;
 });
 </script>
 

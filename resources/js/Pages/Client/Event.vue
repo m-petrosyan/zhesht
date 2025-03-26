@@ -12,7 +12,7 @@ const openTickets = ref(false);
 </script>
 
 <template>
-  <GuestLayout>
+  <GuestLayout :title="tour.title" :description="tour.intro" :image="tour.banner.large">
     <section class="bg-main lg:px-8 px-6 pt-20 pb-20 min-h-[800px]">
       <div class="mt-20 lg:w-7/12 md:w-full mx-auto">
         <div class="lg:w-full mt-4">

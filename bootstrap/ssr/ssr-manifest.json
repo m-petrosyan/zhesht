@@ -14,34 +14,34 @@
     "/build/assets/AuthenticatedLayout-bYY-cP-6.js"
   ],
   "resources/js/Components/Footer/Footer.vue": [
-    "/build/assets/GuestLayout-Dzru-zd8.js"
+    "/build/assets/GuestLayout-BEv7UKmU.js"
   ],
   "resources/js/Components/Footer/SocialLinks.vue": [
-    "/build/assets/GuestLayout-Dzru-zd8.js"
+    "/build/assets/GuestLayout-BEv7UKmU.js"
   ],
   "resources/js/Components/Gallery/Carousel.vue": [
-    "/build/assets/Home-DujwPUQM.js",
-    "/build/assets/Home-DBulBGqa.css"
+    "/build/assets/Home-CzkyBFOw.js",
+    "/build/assets/Home-Rpvg8yDg.css"
   ],
   "resources/js/Components/Gallery/Carousel.vue?vue&type=style&index=0&lang.scss": [
-    "/build/assets/Home-DujwPUQM.js",
-    "/build/assets/Home-DBulBGqa.css"
+    "/build/assets/Home-CzkyBFOw.js",
+    "/build/assets/Home-Rpvg8yDg.css"
   ],
   "resources/js/Components/Icons/DeleteIcon.vue": [
     "/build/assets/CreateEdit-B_ym3ID2.js",
     "/build/assets/CreateEdit-BugkHHWV.css"
   ],
   "resources/js/Components/Icons/FacebookIcon.vue": [
-    "/build/assets/GuestLayout-Dzru-zd8.js"
+    "/build/assets/GuestLayout-BEv7UKmU.js"
   ],
   "resources/js/Components/Icons/InstagramIcon.vue": [
-    "/build/assets/GuestLayout-Dzru-zd8.js"
+    "/build/assets/GuestLayout-BEv7UKmU.js"
   ],
   "resources/js/Components/Icons/TelegramIcon.vue": [
-    "/build/assets/GuestLayout-Dzru-zd8.js"
+    "/build/assets/GuestLayout-BEv7UKmU.js"
   ],
   "resources/js/Components/Icons/YoutubeIcon.vue": [
-    "/build/assets/GuestLayout-Dzru-zd8.js"
+    "/build/assets/GuestLayout-BEv7UKmU.js"
   ],
   "resources/js/Components/InputError.vue": [
     "/build/assets/Login-DPX6tPvo.js"
@@ -53,7 +53,7 @@
     "/build/assets/AuthenticatedLayout-bYY-cP-6.js"
   ],
   "resources/js/Components/Nav/Navbar.vue": [
-    "/build/assets/GuestLayout-Dzru-zd8.js"
+    "/build/assets/GuestLayout-BEv7UKmU.js"
   ],
   "resources/js/Components/NavLink.vue": [
     "/build/assets/AuthenticatedLayout-bYY-cP-6.js"
@@ -101,28 +101,28 @@
     "/build/assets/AuthenticatedLayout-bYY-cP-6.js"
   ],
   "resources/js/Layouts/GuestLayout.vue": [
-    "/build/assets/GuestLayout-Dzru-zd8.js"
+    "/build/assets/GuestLayout-BEv7UKmU.js"
   ],
   "resources/js/Pages/Client/Event.vue": [
-    "/build/assets/Event-9sG6fsCJ.js"
+    "/build/assets/Event-C4j4IphB.js"
   ],
   "resources/js/Pages/Client/Home.vue": [
-    "/build/assets/Home-DujwPUQM.js",
-    "/build/assets/Home-DBulBGqa.css"
+    "/build/assets/Home-CzkyBFOw.js",
+    "/build/assets/Home-Rpvg8yDg.css"
   ],
-  "resources/js/Pages/Client/Home.vue?vue&type=style&index=0&scoped=d0239fe1&lang.scss": [
-    "/build/assets/Home-DujwPUQM.js",
-    "/build/assets/Home-DBulBGqa.css"
+  "resources/js/Pages/Client/Home.vue?vue&type=style&index=0&scoped=9d2dfa4c&lang.scss": [
+    "/build/assets/Home-CzkyBFOw.js",
+    "/build/assets/Home-Rpvg8yDg.css"
   ],
   "resources/js/Pages/Client/Login.vue": [
     "/build/assets/Login-DPX6tPvo.js"
   ],
   "resources/js/Pages/Client/PastList.vue": [
-    "/build/assets/PastList-DwiEzW50.js",
+    "/build/assets/PastList-D0XOAhOI.js",
     "/build/assets/PastList-CixhCo17.css"
   ],
   "resources/js/Pages/Client/PastList.vue?vue&type=style&index=0&scoped=20810308&lang.css": [
-    "/build/assets/PastList-DwiEzW50.js",
+    "/build/assets/PastList-D0XOAhOI.js",
     "/build/assets/PastList-CixhCo17.css"
   ],
   "resources/js/Pages/Dashboard/Dashboard.vue": [
