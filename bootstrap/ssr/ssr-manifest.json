@@ -19,6 +19,14 @@
   "resources/js/Components/Footer/SocialLinks.vue": [
     "/build/assets/GuestLayout-Dzru-zd8.js"
   ],
+  "resources/js/Components/Gallery/Carousel.vue": [
+    "/build/assets/Home-DujwPUQM.js",
+    "/build/assets/Home-DBulBGqa.css"
+  ],
+  "resources/js/Components/Gallery/Carousel.vue?vue&type=style&index=0&lang.scss": [
+    "/build/assets/Home-DujwPUQM.js",
+    "/build/assets/Home-DBulBGqa.css"
+  ],
   "resources/js/Components/Icons/DeleteIcon.vue": [
     "/build/assets/CreateEdit-B_ym3ID2.js",
     "/build/assets/CreateEdit-BugkHHWV.css"
@@ -99,12 +107,12 @@
     "/build/assets/Event-9sG6fsCJ.js"
   ],
   "resources/js/Pages/Client/Home.vue": [
-    "/build/assets/Home-BJeXTqHh.js",
-    "/build/assets/Home-DsYktVeG.css"
+    "/build/assets/Home-DujwPUQM.js",
+    "/build/assets/Home-DBulBGqa.css"
   ],
-  "resources/js/Pages/Client/Home.vue?vue&type=style&index=0&scoped=e0c9e498&lang.scss": [
-    "/build/assets/Home-BJeXTqHh.js",
-    "/build/assets/Home-DsYktVeG.css"
+  "resources/js/Pages/Client/Home.vue?vue&type=style&index=0&scoped=d0239fe1&lang.scss": [
+    "/build/assets/Home-DujwPUQM.js",
+    "/build/assets/Home-DBulBGqa.css"
   ],
   "resources/js/Pages/Client/Login.vue": [
     "/build/assets/Login-DPX6tPvo.js"

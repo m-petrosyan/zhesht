@@ -1,16 +1,25 @@
 <script setup>
+import Carousel from '@/Components/Gallery/Carousel.vue';
 import GuestLayout from '@/Layouts/GuestLayout.vue';
 import {Link} from '@inertiajs/vue3';
 import {formatDateTime} from '@/Helpers/dateFormatHelper.js';
+import {onMounted, ref} from "vue";
 
 defineProps({
   upcomingTours: {required: true},
   sliderTours: {required: true},
 });
+
+const isClient = ref(false);
+
+onMounted(() => {
+  isClient.value = true; // Устанавливаем флаг только на клиенте
+});
 </script>
 
 <template>
   <GuestLayout>
+    <Carousel v-if="isClient" :sliderTours/>
     <section class="bg-main lg:px-8 px-6 pt-20 pb-20">
       <div class="flex flex-col gap-y-20 lg:w-3/5 md:w-full mx-auto">
         <div class="border-b-4 border-black pb-10">
@@ -25,12 +34,12 @@ defineProps({
         <Link v-for="item in upcomingTours" :key="item.id"
               :href="route('event.show',item.slug)"
               class="flex lg:flex-row flex-col sm:gap-x-10 md:gap-x-4 lg:gap-y-0 gap-y-10 lg:w-full sm:w-2/3 mx-auto">
-          <div class="lg:w-3/6 w-full flex flex-col md:flex-row gap-x-6 lg:gap-x-12">
-            <div class="lg:w-1/6">
+          <div class="lg:w-3/6 w-full flex flex-col md:flex-row gap-x-6">
+            <div class="lg:w-5/12">
               <div :style="{ backgroundImage: `url(${item.banner.thumb})` }"
-                   class="event-image mx-auto relative w-52 h-52 bg-cover bg-no-repeat bg-center z-10"/>
+                   class="event-image mx-auto relative lg:w-full lg:h-full h-52 w-52  bg-cover bg-no-repeat bg-center z-10"/>
             </div>
-            <div class="lg:w-2/6">
+            <div class="lg:w-7/12">
               <h2 class="text-3xl font-bold md:text-start text-center">{{ item.title }}</h2>
               <div class="mt-4">
                 <template v-for="event in item.events" :key="event.id">
@@ -68,12 +77,9 @@ defineProps({
     height: 100%;
     width: 100%;
     background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
   }
 }
 
-.past {
-  .event-image:before {
-    background-image: url("/images/framepast.png");
-  }
-}
 </style>
