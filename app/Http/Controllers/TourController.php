@@ -12,14 +12,12 @@ class TourController extends Controller
     public function index(): Response
     {
         $upcomingTours = TourRepository::getUpcomingTours();
-//        $pastEvents = EventRepository::getPastEvents();
         $sliderTours = TourRepository::getSliderTours();
 
         return Inertia::render(
             'Client/Home',
             [
                 'upcomingTours' => $upcomingTours,
-//                'pastEvents' => $pastEvents,
                 'sliderTours' => $sliderTours,
             ]
         );

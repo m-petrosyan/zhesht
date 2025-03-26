@@ -1,5 +1,4 @@
 <script setup>
-import Carousel from '@/Components/Gallery/Carousel.vue';
 import GuestLayout from '@/Layouts/GuestLayout.vue';
 import {Link} from '@inertiajs/vue3';
 import {formatDateTime} from '@/Helpers/dateFormatHelper.js';
@@ -7,13 +6,11 @@ import {formatDateTime} from '@/Helpers/dateFormatHelper.js';
 defineProps({
   upcomingTours: {required: true},
   sliderTours: {required: true},
-  // pastEvents: {required: true},
 });
 </script>
 
 <template>
   <GuestLayout>
-    <Carousel :sliderTours/>
     <section class="bg-main lg:px-8 px-6 pt-20 pb-20">
       <div class="flex flex-col gap-y-20 lg:w-3/5 md:w-full mx-auto">
         <div class="border-b-4 border-black pb-10">
@@ -29,11 +26,11 @@ defineProps({
               :href="route('event.show',item.slug)"
               class="flex lg:flex-row flex-col sm:gap-x-10 md:gap-x-4 lg:gap-y-0 gap-y-10 lg:w-full sm:w-2/3 mx-auto">
           <div class="lg:w-3/6 w-full flex flex-col md:flex-row gap-x-6 lg:gap-x-12">
-            <div class="lg:w-1/3">
+            <div class="lg:w-1/6">
               <div :style="{ backgroundImage: `url(${item.banner.thumb})` }"
                    class="event-image mx-auto relative w-52 h-52 bg-cover bg-no-repeat bg-center z-10"/>
             </div>
-            <div class="lg:w-2/3">
+            <div class="lg:w-2/6">
               <h2 class="text-3xl font-bold md:text-start text-center">{{ item.title }}</h2>
               <div class="mt-4">
                 <template v-for="event in item.events" :key="event.id">
@@ -56,7 +53,6 @@ defineProps({
         </Link>
       </div>
     </section>
-    <!--    <PastShows :pastEvents/>-->
   </GuestLayout>
 </template>
 

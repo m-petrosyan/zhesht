@@ -25,7 +25,7 @@ var e = String.prototype.replace, r = /%20/g, n = "RFC3986", o = { default: n, f
   return e.call(t4, r, "+");
 }, RFC3986: function(t4) {
   return String(t4);
-} }, RFC1738: "RFC1738", RFC3986: n }, i = Object.prototype.hasOwnProperty, u = Array.isArray, a = function() {
+} }, RFC1738: "RFC1738" }, i = Object.prototype.hasOwnProperty, u = Array.isArray, a = function() {
   for (var t4 = [], e2 = 0; e2 < 256; ++e2) t4.push("%" + ((e2 < 16 ? "0" : "") + e2.toString(16)).toUpperCase());
   return t4;
 }(), s = function(t4, e2) {
@@ -263,7 +263,7 @@ class N extends String {
       "function" == typeof i2.filter ? n2 = (0, i2.filter)("", n2) : p(i2.filter) && (r2 = i2.filter);
       var u2 = [];
       if ("object" != typeof n2 || null === n2) return "";
-      var a2 = l[e3.arrayFormat in l ? e3.arrayFormat : "indices" in e3 ? e3.indices ? "indices" : "repeat" : "indices"];
+      var a2 = l[e3 && e3.arrayFormat in l ? e3.arrayFormat : e3 && "indices" in e3 ? e3.indices ? "indices" : "repeat" : "indices"];
       r2 || (r2 = Object.keys(n2)), i2.sort && r2.sort(i2.sort);
       for (var s2 = 0; s2 < r2.length; ++s2) {
         var f2 = r2[s2];
@@ -351,7 +351,7 @@ createServer(
     title: (title) => `${title} - ${appName}`,
     resolve: (name) => resolvePageComponent(
       `./Pages/${name}.vue`,
-      /* @__PURE__ */ Object.assign({ "./Pages/Client/EventList.vue": () => import("./assets/EventList-w15ti8So.js"), "./Pages/Client/Home.vue": () => import("./assets/Home-CgLkPh0_.js"), "./Pages/Client/Login.vue": () => import("./assets/Login-DPX6tPvo.js"), "./Pages/Client/PastList.vue": () => import("./assets/PastList-DyrG43AE.js"), "./Pages/Dashboard/Dashboard.vue": () => import("./assets/Dashboard-iERTLNCp.js"), "./Pages/Dashboard/Events/CreateEdit.vue": () => import("./assets/CreateEdit-CH7kQy2P.js"), "./Pages/Dashboard/Events/Index.vue": () => import("./assets/Index-S7o94-H4.js"), "./Pages/Dashboard/Subscribers/Index.vue": () => import("./assets/Index-Dob0UGTO.js") })
+      /* @__PURE__ */ Object.assign({ "./Pages/Client/Event.vue": () => import("./assets/Event-9sG6fsCJ.js"), "./Pages/Client/Home.vue": () => import("./assets/Home-BJeXTqHh.js"), "./Pages/Client/Login.vue": () => import("./assets/Login-DPX6tPvo.js"), "./Pages/Client/PastList.vue": () => import("./assets/PastList-DwiEzW50.js"), "./Pages/Dashboard/Dashboard.vue": () => import("./assets/Dashboard-B2vGOO-a.js"), "./Pages/Dashboard/Events/CreateEdit.vue": () => import("./assets/CreateEdit-B_ym3ID2.js"), "./Pages/Dashboard/Events/Index.vue": () => import("./assets/Index-BoXqjh84.js"), "./Pages/Dashboard/Subscribers/Index.vue": () => import("./assets/Index-BTjKx_vv.js") })
     ),
     setup({ App, props, plugin }) {
       return createSSRApp({ render: () => h$1(App, props) }).use(plugin).use(k, {

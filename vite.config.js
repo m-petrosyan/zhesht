@@ -18,4 +18,7 @@ export default defineConfig({
             },
         }),
     ],
+    ssr: {
+        noExternal: ['@splidejs/vue-splide', 'splide']
+    },
 });

@@ -22,7 +22,7 @@ const submit = () => {
 
 <template>
   <div class="w-full bg-black text-white px-10 lg:px-0" id="footer">
-    <div class="lg:w-3/5 md:w-full mx-auto py-10">
+    <div class="lg:w-3/5 md:w-full mx-auto pt-10 pb-6">
       <div class="flex lg:flex-row flex-col gap-y-10 items-center justify-between lg:gap-x-0 gap-x-10">
         <div class="flex-col text-center text-balance">
           <h3 class="text-3xl">Subscribe to new events</h3>
@@ -46,6 +46,11 @@ const submit = () => {
         </div>
         <SocialLinks/>
       </div>
+    </div>
+    <div class="flex justify-center md:justify-end pr-3 pb-1">
+      <a href="https://t.me/mpetrosyan1">
+        <small>Developed by Miqayel Petrosyan</small>
+      </a>
     </div>
   </div>
 </template>
