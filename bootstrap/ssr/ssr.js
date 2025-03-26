@@ -351,7 +351,7 @@ createServer(
     title: (title) => `${title} - ${appName}`,
     resolve: (name) => resolvePageComponent(
       `./Pages/${name}.vue`,
-      /* @__PURE__ */ Object.assign({ "./Pages/Client/Event.vue": () => import("./assets/Event-9sG6fsCJ.js"), "./Pages/Client/Home.vue": () => import("./assets/Home-DujwPUQM.js"), "./Pages/Client/Login.vue": () => import("./assets/Login-DPX6tPvo.js"), "./Pages/Client/PastList.vue": () => import("./assets/PastList-DwiEzW50.js"), "./Pages/Dashboard/Dashboard.vue": () => import("./assets/Dashboard-B2vGOO-a.js"), "./Pages/Dashboard/Events/CreateEdit.vue": () => import("./assets/CreateEdit-B_ym3ID2.js"), "./Pages/Dashboard/Events/Index.vue": () => import("./assets/Index-BoXqjh84.js"), "./Pages/Dashboard/Subscribers/Index.vue": () => import("./assets/Index-BTjKx_vv.js") })
+      /* @__PURE__ */ Object.assign({ "./Pages/Client/Event.vue": () => import("./assets/Event-C4j4IphB.js"), "./Pages/Client/Home.vue": () => import("./assets/Home-CzkyBFOw.js"), "./Pages/Client/Login.vue": () => import("./assets/Login-DPX6tPvo.js"), "./Pages/Client/PastList.vue": () => import("./assets/PastList-D0XOAhOI.js"), "./Pages/Dashboard/Dashboard.vue": () => import("./assets/Dashboard-B2vGOO-a.js"), "./Pages/Dashboard/Events/CreateEdit.vue": () => import("./assets/CreateEdit-B_ym3ID2.js"), "./Pages/Dashboard/Events/Index.vue": () => import("./assets/Index-BoXqjh84.js"), "./Pages/Dashboard/Subscribers/Index.vue": () => import("./assets/Index-BTjKx_vv.js") })
     ),
     setup({ App, props, plugin }) {
       return createSSRApp({ render: () => h$1(App, props) }).use(plugin).use(k, {
